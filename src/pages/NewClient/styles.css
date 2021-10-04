@@ -45,3 +45,8 @@
     align-items: center;
     justify-content: center;
 }
+.newClientTitle{
+    color: black;
+    font-size: 24px;
+    font-weight: 400;
+}

@@ -5,8 +5,15 @@
     border: none;
     margin: 30px;
     cursor: pointer;
-    
-
+}
+.btn-white-pink{
+    list-style: none;
+    background-color: white;
+    color:#DA0175;
+    border: solid 2px #DA0175;
+    width:166px ;
+    margin: 30px;
+    cursor: pointer; 
 }
 .button-align{
     display: flex;
@@ -26,4 +33,11 @@
     transform: scale(1.1);
     background-color: #f87cbf;
     cursor: pointer;
+}
+.btn-white-pink:hover{
+    transform: scale(1.1);
+    background-color: #f87cbf;
+    cursor: pointer;
+    border: solid 2px #f87cbf;
+    color: white;
 }

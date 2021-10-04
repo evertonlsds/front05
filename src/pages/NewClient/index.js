@@ -49,7 +49,7 @@ function NewClient(){
     <div className="container-main">
       <SideBar />
       <div className="clientContainerContent">
-        <h1>/ / ADICIONAR CLIENTE</h1>
+        <h1 className="newClientTitle">/ / ADICIONAR CLIENTE</h1>
         <div className="newClientFormDiv">
           <form className="formNewClient" onSubmit={handleSubmit(newClient)}>
             <div className="inputDiv">
@@ -145,7 +145,7 @@ function NewClient(){
               </div>
             </div>
             <div className="buttonsDiv">
-              <button className="cancelButton" type="reset">Cancelar</button>
+              <button className="btn-white-pink" type="reset">Cancelar</button>
               <button className="btn-pink" type="submit">Adiconar Cliente</button>
             </div>
             <Snackbar open={error}

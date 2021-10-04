@@ -2,7 +2,7 @@
 .sidebarMenu{
 display: flex;
 flex-direction: column;
-padding-top: 80px;
+padding-top: 0;
 background-color: #263238;
 min-width: 200px;
 width: 20%;
