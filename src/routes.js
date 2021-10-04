@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home'
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import NewClient from './pages/NewClient';
 
 
 export const AuthContext = createContext();
@@ -43,6 +44,7 @@ function Routes() {
                 <Switch>
                     <Route path="/" exact component={SignIn} />
                     <Route path="/cadastro" component={SignUp} />
+                    <Route path="/newClient" component={NewClient} />
                     <ProtectedRoutes>
                         <Route path="/home" component={Home} />
                     </ProtectedRoutes>
