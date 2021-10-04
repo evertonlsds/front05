@@ -2,7 +2,7 @@ import './styles.css'
 import '../../styles/form.css'
 
 import Logo from '../../images/logo.svg'
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar, CircularProgress, Backdrop} from '@mui/material';
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,12 +15,14 @@ function SignUp() {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
+  const [carregando, setCarregando] = useState(false);
   const { setOpen } = useContext(AuthContext);
 
 
   const history = useHistory();
 
   async function cadastro(dados) {
+    setCarregando(true);
 
     const response = await fetch("https://api-desafio-05.herokuapp.com/usuarios", {
       method: 'POST',
@@ -31,9 +33,11 @@ function SignUp() {
 
     if (!response.ok) {
       setError(resposta);
+      setCarregando(false);
       return;
     }
     setOpen(true);
+    setCarregando(false);
     history.push("/");
   }
 
@@ -99,6 +103,9 @@ function SignUp() {
       <div className="footer-signIn light-label  ">
         <p>Já possui uma conta?  <a href="/">Acesse agora!</a></p>
       </div>
+      <Backdrop open={carregando}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   )
 }
