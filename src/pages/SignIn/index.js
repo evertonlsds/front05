@@ -66,7 +66,7 @@ function SignIn() {
           <img src={Logo} alt="logo" />
         </div>
         <div>
-          <div className="flex-column ">
+          <div className="flex-column">
             <label htmlFor="email">Email</label>
             <input id="email" 
             maxLength="33" 

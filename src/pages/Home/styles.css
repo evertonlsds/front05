@@ -135,7 +135,7 @@
   align-items: center;
   margin: 0 0 10% 0;
 }
-.title-card{
+.title-card {
   width: 400px;
   height: 80px;
   display: flex;
@@ -147,4 +147,21 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
-
+.icon-usuario {
+  align-self: flex-start;
+  cursor: pointer;
+  margin-left: 180px;
+  margin-top: 32px
+}
+.btn-usermenu {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+}
+.row-menu {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin: 10px;
+  cursor: pointer;
+}

@@ -3,7 +3,7 @@ import {
     BrowserRouter as Router,
     Route,
     Switch,
-    Redirect
+    Redirect,
 } from 'react-router-dom';
 
 import Home from './pages/Home'
@@ -34,7 +34,7 @@ function Routes() {
 
 
     function logOut() {
-        setToken('')
+        setToken('');
         setPerfil('');
     }
 
