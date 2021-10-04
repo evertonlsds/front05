@@ -6,7 +6,7 @@ import { useHistory } from 'react-router';
 import Logo from'../../images/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import React, { useContext, context } from 'react';
+import React, { useContext } from 'react';
 import { AuthContext } from '../../routes.js';
 
 
