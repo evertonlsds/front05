@@ -1,7 +1,7 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
-import CardHome from '../../images/card-home.svg';
 import UsersCard from '../../images/users.svg';
+import Money from '../../images/money.svg';
 
 function Main() {
   return (
@@ -10,34 +10,35 @@ function Main() {
       <div className="homeContent">
         <div className="card-1">
           <div className="title-card">
-          <img src={CardHome} alt="card"/>
-            <div className="title-icon">
-              <img src={UsersCard} alt="icon"/>
-              </div>
-              </div>
-              <div className="rectangle1-card1">
-                <p>em dia</p>
-              </div>
-              <div className="rectangle2-card1">
-                <p>em dia</p>
-              </div>
+            <img src={UsersCard} alt="users" />
+            <span>Clientes</span>
+          </div>
+          <div className="rectangle1-card1">
+            <p className="content-padding">Em dia</p>
+            <h1 className="content-padding">0</h1>
+          </div>
+          <div className="rectangle2-card1">
+            <p className="content-padding">Inadimplentes</p>
+            <h1 className="content-padding">0</h1>
+          </div>
         </div>
         <div className="card-2">
-          <div className="title-card2">
-          <img src={CardHome} alt="card"/>
-            <div className="title-icon">
-              <img src={UsersCard} alt="icon"/>
-              </div>
-              </div>
-              <div className="rectangle1-card2">
-                <p>em dia</p>
-              </div>
-              <div className="rectangle2-card2">
-                <p>em dia</p>
-              </div>
-              <div className="rectangle3-card2">
-                <p>em dia</p>
-              </div>
+          <div className="title-card">
+            <img src={Money} alt="users" />
+            <span>Cobranças</span>
+          </div>
+          <div className="rectangle1-card2">
+            <p className="content-padding">Previstas</p>
+            <h1 className="content-padding">0</h1>
+          </div>
+          <div className="rectangle2-card2">
+            <p className="content-padding">Vencidas</p>
+            <h1 className="content-padding">0</h1>
+          </div>
+          <div className="rectangle3-card2">
+            <p className="content-padding">Pagas</p>
+            <h1 className="content-padding">0</h1>
+          </div> 
         </div>
       </div>
     </div>
