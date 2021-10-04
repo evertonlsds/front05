@@ -15,7 +15,9 @@ align-items: center;
 color: white;
 margin: 20px auto 0 25%;
 gap: 20px;
+cursor: pointer;
 }
+
 .buttonDiv{
 margin: auto auto 200px auto;
 }

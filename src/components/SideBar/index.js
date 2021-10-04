@@ -15,11 +15,11 @@ export default function SideBar(){
     return(
       <div className="sidebarMenu">
         <img className="logo"src={Logo} alt="logo"/>
-        <div className="menuOption">
+        <div className="menuOption" onClick={() => history.push("/Home")}>
           <img src={Home} alt="homeLogo" />
           <span>HOME</span>
         </div>
-        <div className="menuOption">
+        <div className="menuOption" >
           <img src={Money} alt="billingsLogo" />
           <span>COBRANÇAS</span>
         </div>
