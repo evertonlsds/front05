@@ -50,17 +50,28 @@ function SignUp() {
         <div>
           <div className="flex-column ">
             <label htmlFor="nome">Nome</label>
-            <input id="nome" type="text" {...register("nome", { required: true })} />
-            {errors.nome?.type === 'required' && <span className="error">Campo obrigatório!</span>}
+            <input 
+            id="nome" 
+            type="text"
+            className={errors.nome?.type === 'required' && "input-error"}
+            placeholder={errors.nome ? "Campo obrigatório!" : ""}
+            {...register("nome", { required: true })} />
             <span className="input-line"></span>
             <label htmlFor="email">Email</label>
-            <input id="email" type="text" placeholder={errors.email ? "" : "exemplo@gmail.com"} {...register("email", { required: true })} />
-            {errors.email?.type === 'required' && <span className="error error2">Campo obrigatório!</span>}
+            <input id="email" 
+            type="text" 
+            className={errors.email?.type === 'required' && "input-error"}
+            placeholder={errors.email?.type ==='required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
+            {...register("email", { required: true })} />
             <span className="input-line"></span>
             <div className="flex-column light-label input-password">
               <label htmlFor="password">Senha</label>
-              <input id="password" maxLength="23" type={showPassword ? 'text' : 'password'} {...register("senha", { required: true })} />
-              {errors.senha?.type === 'required' && <span className="error">Campo obrigatório!</span>}
+              <input id="password" 
+              maxLength="23" 
+              type={showPassword ? 'text' : 'password'}
+              className={errors.senha?.type === 'required' && "input-error"}
+              placeholder={errors.senha ? "Campo obrigatório!" : ""}
+              {...register("senha", { required: true })} />
               <FontAwesomeIcon
                 icon={showPassword ? faEye : faEyeSlash}
                 className="eye-password"

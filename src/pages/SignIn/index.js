@@ -64,21 +64,26 @@ function SignIn() {
             <label htmlFor="email">Email</label>
             <input id="email" 
             maxLength="33" 
-            type="text" 
-            placeholder={errors.email ? "" : "exemplo@gmail.com"} {...register('email', { required: true })} />
+            type="text"
+            className={errors.email?.type === 'required' && "input-error"}
+            placeholder={errors.email?.type ==='required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
+            {...register('email', { required: true })} />
             <span className="input-line"></span>
-            {errors.email?.type === 'required' && <span className="error">Campo obrigatório!</span>}
           </div>
           <div className="flex-column light-label input-password">
             <label htmlFor="password">Senha</label>
-            <input id="password" maxLength="23" type={showPassword ? 'text' : 'password'} {...register("senha", { required: true })} />
+            <input id="password" 
+            maxLength="23" 
+            type={showPassword ? 'text' : 'password'}
+            className={errors.senha?.type === 'required' && "input-error"}
+            placeholder={errors.senha ? "Campo obrigatório!" : ""}
+            {...register("senha", { required: true })} />
             <FontAwesomeIcon
               icon={showPassword ? faEye : faEyeSlash}
               className="eye-password"
               onClick={() => setShowPassword(!showPassword)}
             />
             <span className="input-line"></span>
-            {errors.senha?.type === 'required' && <span className="error">Campo obrigatório!</span>}
           </div>
           <div className="button-align">
             <button className="btn-pink" onClick={handleSubmit(onSubmit)}>Entrar</button>
