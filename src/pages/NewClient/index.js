@@ -7,13 +7,17 @@ function NewClient(){
 
   const { handleSubmit, register, formState: { errors } } = useForm();
 
+  async function newClient (dados) {
+
+  }
+
   return(
     <div className="container-main">
       <SideBar />
       <div className="clientContainerContent">
         <h1>/ / ADICIONAR CLIENTE</h1>
         <div className="newClientFormDiv">
-          <form className="formNewClient">
+          <form className="formNewClient" onSubmit={handleSubmit(newClient)}>
             <div className="inputDiv">
               <label htmlFor="nome">Nome</label>
               <input 
@@ -114,7 +118,7 @@ function NewClient(){
             </div>
             <div className="buttonsDiv">
               <button className="cancelButton" type="reset">Cancelar</button>
-              <button className="btn-pink" type="reset">Adiconar Cliente</button>
+              <button className="btn-pink" type="submit">Adiconar Cliente</button>
             </div>
           </form>
         </div>
