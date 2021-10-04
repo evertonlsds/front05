@@ -1,9 +1,8 @@
-.container-main{
+.container-main {
   display: flex;
-  
 }
 
-.sidebarMenu{
+.sidebarMenu {
   display: flex;
   flex-direction: column;
   padding-top: 80px;
@@ -11,18 +10,17 @@
   min-width: 200px;
   width: 20%;
   height: 100vh;
-  
 }
-.homeContent{
+
+.homeContent {
   background-color: #E5E5E5;
   width: 80%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-
 }
+
 .menuOption{
   display: flex;
   align-items: center;
@@ -30,15 +28,16 @@
   margin: 20px auto 0 25%;
   gap: 20px;
 }
-.buttonDiv{
+
+.buttonDiv {
  margin: auto auto 200px auto;
 }
 
-.logoSideBar{
+.logoSideBar {
   margin-bottom: 50px;
-  
 }
-.card-1{
+
+.card-1 {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,13 +49,15 @@
     margin-bottom: 98px;
     margin-right: 40px;
 }
-.title-icon{
+
+.title-icon {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 40px;
 }
-.rectangle1-card1{
+
+.rectangle1-card1 {
   background-color: #ffffff;
   border-radius:8px;
   border:2px solid #4EC06E; 
@@ -67,12 +68,13 @@
   justify-content: space-between;
   align-items: center;
   margin: 10% 0;
-  
 }
-.content-padding{
+
+.content-padding {
   padding: 0 10px;
 }
-.rectangle2-card1{
+
+.rectangle2-card1 {
   background-color: #ffffff;
   border-radius:8px;
   border:2px solid rgba(255, 77, 77, 1);
@@ -83,9 +85,9 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10%;
-  
 }
-.card-2{
+
+.card-2 {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,7 +98,8 @@
   padding:  1px;
   --margin-top: 200px
 }
-.rectangle1-card2{
+
+.rectangle1-card2 {
   background-color: #ffffff;
   border-radius:8px;
   border: 2px solid #5197B5; 
@@ -107,11 +110,9 @@
   justify-content: space-between;
   align-items: center;
   margin: 10% 0;
-  
-  
-  
 }
-.rectangle2-card2{
+
+.rectangle2-card2 {
   background-color: #ffffff;
   border-radius:8px;
   border:2px solid rgba(255, 77, 77, 1);
@@ -123,7 +124,8 @@
   align-items: center;
   margin-bottom: 10%;
 }
-.rectangle3-card2{
+
+.rectangle3-card2 {
   background-color: #ffffff;
   border-radius:8px;
   border:2px solid #4EC06E; 
@@ -135,6 +137,7 @@
   align-items: center;
   margin: 0 0 10% 0;
 }
+
 .title-card {
   width: 400px;
   height: 80px;
@@ -146,22 +149,4 @@
   color: white;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
-}
-.icon-usuario {
-  align-self: flex-start;
-  cursor: pointer;
-  margin-left: 180px;
-  margin-top: 32px
-}
-.btn-usermenu {
-  all: unset;
-  cursor: pointer;
-  text-align: center;
-}
-.row-menu {
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-  margin: 10px;
-  cursor: pointer;
 }
