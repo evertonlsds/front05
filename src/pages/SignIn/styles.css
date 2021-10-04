@@ -1,0 +1,25 @@
+.form-sign-in{
+    justify-content: space-between;
+    width: 300px;
+    height: 500px;
+
+}
+
+link{
+    color:#DA0175 ;
+}
+
+.signUp{
+    display: flex;
+    align-items: flex-end;
+}
+
+.footer-signIn{
+    font-size: 14px;
+}
+
+.footer-signIn a{
+    color: #DA0175;
+    
+    
+}

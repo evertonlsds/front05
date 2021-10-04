@@ -1,0 +1,80 @@
+body{
+    background-color: #E5E5E5;
+}
+
+
+
+
+.container-form{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius:16px;
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
+    padding: 0px 71px;
+}
+
+.formSingUp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius:16px;
+    box-shadow: 0px 0px 32px rgba(0, 0, 0, 0.1);
+    padding: 50px 71px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    
+}
+
+.logo-signUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+input{
+    font-size: 16px;
+    margin-bottom: px;
+}
+
+a{
+    font-size: 16px;
+}
+
+button{
+    margin-bottom: 79px;
+}
+
+.input-password{
+    position: relative;
+}
+
+
+.eye-password {
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    cursor: pointer;
+    color: #BEBEBE; 
+    font-size: 22px;
+    
+}

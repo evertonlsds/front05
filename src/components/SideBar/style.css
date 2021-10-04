@@ -1,0 +1,26 @@
+
+.sidebarMenu{
+display: flex;
+flex-direction: column;
+padding-top: 80px;
+background-color: #263238;
+min-width: 200px;
+width: 20%;
+height: 100vh;
+}
+
+.menuOption{
+display: flex;
+align-items: center;
+color: white;
+margin: 20px auto 0 25%;
+gap: 20px;
+}
+.buttonDiv{
+margin: auto auto 200px auto;
+}
+
+.logo{
+    margin-bottom: 40px;
+    margin-top: auto;
+}

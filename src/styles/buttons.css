@@ -1,0 +1,29 @@
+.btn-pink{
+    background-color: #DA0175;
+    color:#f7f7f7;
+    width:166px ;
+    border: none;
+    margin: 30px;
+    cursor: pointer;
+    
+
+}
+.button-align{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    
+
+}
+
+.button-align-signUp{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-pink:hover{
+    transform: scale(1.1);
+    background-color: #f87cbf;
+    cursor: pointer;
+}
