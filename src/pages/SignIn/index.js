@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../routes.js';
-import { Alert, Snackbar } from '@mui/material';
+import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 
 
 
@@ -18,9 +18,12 @@ function SignIn() {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { logIn, open, setOpen } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const [carregando, setCarregando] = useState(false);
   const history = useHistory();
 
   async function onSubmit(data) {
+
+    setCarregando(true);
 
     const response = await fetch("https://api-desafio-05.herokuapp.com/login", {
       method: 'POST',
@@ -33,13 +36,16 @@ function SignIn() {
     const dados = await response.json();
 
     if (!response.ok) {
-      setError(dados)
+      setError(dados);
+      setCarregando(false);
       return
     }
 
     const { token, usuario } = dados;
 
     logIn(token, usuario);
+
+    setCarregando(false);
 
     history.push('/home')
   }
@@ -113,6 +119,9 @@ function SignIn() {
       <div className="footer-signIn light-label  ">
         <p>Não tem uma conta?  <a href="/cadastro">Cadastre-se!</a></p>
       </div>
+      <Backdrop open={carregando}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div >
   )
 }
