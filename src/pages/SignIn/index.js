@@ -16,7 +16,7 @@ function SignIn() {
   //const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { logIn } = useContext(AuthContext);
+  const { logIn, open, setOpen } = useContext(AuthContext);
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -46,6 +46,7 @@ function SignIn() {
 
   function handleAlertClose() {
     setError('');
+    setOpen(false);
   }
 
   return (
@@ -90,6 +91,16 @@ function SignIn() {
               severity="error"
               variant="filled">
               {error}
+            </Alert>
+          </Snackbar>
+          <Snackbar open={open}
+            autoHideDuration={8000}
+            onClose={handleAlertClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <Alert onClose={handleAlertClose}
+              severity="success"
+              variant="filled">
+              Cadastro concluído com sucesso!
             </Alert>
           </Snackbar>
         </div>
