@@ -1,14 +1,48 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
+import { useState, useContext} from 'react';
 import { useForm } from 'react-hook-form';
+import { AuthContext } from '../../routes.js';
+import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 
 
 function NewClient(){
 
   const { handleSubmit, register, formState: { errors } } = useForm();
+  const [error, setError] = useState('');
+  const [carregando, setCarregando] = useState(false);
+  const { token, open, setOpen } = useContext(AuthContext);
 
   async function newClient (dados) {
+    setCarregando(true);
 
+    const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
+      method: 'POST',
+      headers: { 
+      'Content-Type': "application/json", 
+      "charset": "utf-8",
+      'Authorization': `Bearer ${token} `
+      },
+
+      body: JSON.stringify(dados)
+    });
+    console.log(token);
+    console.log(dados);
+    const resposta = await response.json();
+
+    if (!response.ok) {
+      setError(resposta);
+      setCarregando(false);
+      return;
+    }
+    
+    setOpen(true);
+    setCarregando(false);
+  }
+
+  function handleAlertClose() {
+    setError('');
+    setOpen(false);
   }
 
   return(
@@ -23,7 +57,7 @@ function NewClient(){
               <input 
               id="nome" 
               type="text"
-              className={errors.nome?.type === 'required' ? "input-error" : "inputNewClient"}
+              className={errors.nome?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
               placeholder={errors.nome ? "Campo obrigatório!" : ""}
               {...register("nome", { required: true })} />
             </div>
@@ -32,7 +66,7 @@ function NewClient(){
               <input 
               id="email" 
               type="text"
-              className={errors.email?.type === 'required' ? "input-error" : "inputNewClient"}
+              className={errors.email?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
               placeholder={errors.email ? "Campo obrigatório!" : ""}
               {...register("email", { required: true })} />
             </div>
@@ -42,7 +76,7 @@ function NewClient(){
                 <input 
                 id="cpf" 
                 type="text"
-                className={errors.cpf?.type === 'required' ? "input-error" : "inputNewClient"}
+                className={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
                 placeholder={errors.cpf ? "Campo obrigatório!" : ""}
                 {...register("cpf", { required: true })} />
               </div>
@@ -51,7 +85,7 @@ function NewClient(){
                 <input 
                 id="telefone" 
                 type="text"
-                className={errors.telefone?.type === 'required' ? "input-error" : "inputNewClient"}
+                className={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
                 placeholder={errors.telefone ? "Campo obrigatório!" : ""}
                 {...register("telefone", { required: true })} />
               </div>
@@ -62,18 +96,16 @@ function NewClient(){
                 <input 
                 id="cep" 
                 type="text"
-                className={errors.cep?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.cep ? "Campo obrigatório!" : ""}
-                {...register("cep", { required: true })} />
+                className= "inputNewClient"
+                {...register("cep")} />
               </div>
               <div className="inputDiv">
                 <label htmlFor="logradouro">Logradouro</label>
                 <input 
                 id="logradouro" 
                 type="text"
-                className={errors.logradouro?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.logradouro ? "Campo obrigatório!" : ""}
-                {...register("logradouro", { required: true })} />
+                className= "inputNewClient"
+                {...register("logradouro")} />
               </div>
             </div>
             <div className="dualInput">
@@ -82,18 +114,16 @@ function NewClient(){
                 <input 
                 id="bairro" 
                 type="text"
-                className={errors.bairro?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.bairro ? "Campo obrigatório!" : ""}
-                {...register("bairro", { required: true })} />
+                className= "inputNewClient"
+                {...register("bairro")} />
               </div>
               <div className="inputDiv">
                 <label htmlFor="cidade">Cidade</label>
                 <input 
                 id="cidade" 
                 type="text"
-                className={errors.cidade?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.cidade ? "Campo obrigatório!" : ""}
-                {...register("cidade", { required: true })} />
+                className= "inputNewClient"
+                {...register("cidade")} />
               </div>
             </div>
             <div className="dualInput">
@@ -102,26 +132,47 @@ function NewClient(){
                 <input 
                 id="complemento" 
                 type="text"
-                className={errors.complemento?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.complemento ? "Campo obrigatório!" : ""}
-                {...register("complemento", { required: true })} />
+                className= "inputNewClient"
+                {...register("complemento")} />
               </div>
               <div className="inputDiv">
-                <label htmlFor="ref">Ponto de Referência</label>
+                <label htmlFor="referencia">Ponto de Referência</label>
                 <input 
-                id="ref" 
+                id="referencia" 
                 type="text"
-                className={errors.ref?.type === 'required' ? "input-error" : "inputNewClient"}
-                placeholder={errors.ref ? "Campo obrigatório!" : ""}
-                {...register("ref", { required: true })} />
+                className= "inputNewClient"
+                {...register("refencia")} />
               </div>
             </div>
             <div className="buttonsDiv">
               <button className="cancelButton" type="reset">Cancelar</button>
               <button className="btn-pink" type="submit">Adiconar Cliente</button>
             </div>
+            <Snackbar open={error}
+            autoHideDuration={5000}
+            onClose={handleAlertClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <Alert onClose={handleAlertClose}
+              severity="error"
+              variant="filled">
+              {error}
+            </Alert>
+          </Snackbar>
+          <Snackbar open={open}
+            autoHideDuration={8000}
+            onClose={handleAlertClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <Alert onClose={handleAlertClose}
+              severity="success"
+              variant="filled">
+              Cliente cadastrado com sucesso!
+            </Alert>
+          </Snackbar>
           </form>
         </div>
+        <Backdrop open={carregando}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       </div>
     </div>
   )
