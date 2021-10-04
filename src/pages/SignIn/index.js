@@ -36,7 +36,6 @@ function SignIn() {
       setError(dados)
       return
     }
-    console.log(dados);
 
     const { token, usuario } = dados;
 
@@ -62,9 +61,12 @@ function SignIn() {
         <div>
           <div className="flex-column ">
             <label htmlFor="email">Email</label>
-            <input id="email" maxLength="33" type="text" placeholder="exemplo@gmail.com"{...register('email', { required: true })} />
+            <input id="email" 
+            maxLength="33" 
+            type="text" 
+            placeholder={errors.email ? "" : "exemplo@gmail.com"} {...register('email', { required: true })} />
             <span className="input-line"></span>
-            {errors.email?.type === 'required' && <span className="error">É preciso informar um email!</span>}
+            {errors.email?.type === 'required' && <span className="error">Campo obrigatório!</span>}
           </div>
           <div className="flex-column light-label input-password">
             <label htmlFor="password">Senha</label>
@@ -75,7 +77,7 @@ function SignIn() {
               onClick={() => setShowPassword(!showPassword)}
             />
             <span className="input-line"></span>
-            {errors.senha?.type === 'required' && <span className="error">É preciso informar uma senha!</span>}
+            {errors.senha?.type === 'required' && <span className="error">Campo obrigatório!</span>}
           </div>
           <div className="button-align">
             <button className="btn-pink" onClick={handleSubmit(onSubmit)}>Entrar</button>

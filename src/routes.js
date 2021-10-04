@@ -33,10 +33,11 @@ function Routes() {
 
     function logOut() {
         setToken('')
+        setPerfil('');
     }
 
     return (
-        <AuthContext.Provider value={{ token, logIn, logOut }}>
+        <AuthContext.Provider value={{ token, logIn, logOut, perfil }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={SignIn} />
