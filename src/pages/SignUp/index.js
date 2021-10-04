@@ -36,6 +36,7 @@ function SignUp() {
       setCarregando(false);
       return;
     }
+    
     setOpen(true);
     setCarregando(false);
     history.push("/");
