@@ -60,20 +60,29 @@
   background-color: #ffffff;
   border-radius:8px;
   border:2px solid #4EC06E; 
+  color: #4EC06E;
   width: 266px;
   height: 80px;
   display: flex;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10% 0;
   
+}
+.content-padding{
+  padding: 0 10px;
 }
 .rectangle2-card1{
   background-color: #ffffff;
   border-radius:8px;
-  border:2px solid rgba(255, 77, 77, 1); 
+  border:2px solid rgba(255, 77, 77, 1);
+  color: rgba(255, 77, 77, 1); 
   width: 266px;
   height: 80px;
   display: flex;
-  margin-bottom: 56px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10%;
   
 }
 .card-2{
@@ -91,10 +100,13 @@
   background-color: #ffffff;
   border-radius:8px;
   border: 2px solid #5197B5; 
+  color: #5197B5;
   width: 266px;
   height: 80px;
   display: flex;
-  margin-bottom: 16px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10% 0;
   
   
   
@@ -102,21 +114,37 @@
 .rectangle2-card2{
   background-color: #ffffff;
   border-radius:8px;
-  border:2px solid rgba(255, 77, 77, 1); 
+  border:2px solid rgba(255, 77, 77, 1);
+  color: rgba(255, 77, 77, 1); 
   width: 266px;
   height: 80px;
   display: flex;
-  margin-bottom: 16px;
-  
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10%;
 }
 .rectangle3-card2{
   background-color: #ffffff;
   border-radius:8px;
-  border: 2px solid #4EC06E; 
+  border:2px solid #4EC06E; 
+  color: #4EC06E;
   width: 266px;
   height: 80px;
   display: flex;
-  margin-bottom: 56px;
-  
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 10% 0;
+}
+.title-card{
+  width: 400px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: #374952;
+  color: white;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
 
