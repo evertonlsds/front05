@@ -5,11 +5,13 @@ import Money from '../../images/money.svg';
 import Usuario from '../../images/usuario.svg';
 import Logout from '../../images/log-out.svg';
 import EditIcon from '../../images/edit-icon.svg';
-import { useState} from 'react';
+import { AuthContext } from '../../routes.js';
+import { useState, useContext} from 'react';
 import { Popover } from '@mui/material';
 
 function Main() {
   const [openUserMenu, setOpenUserMenu] = useState(false);
+  const { logOut } = useContext(AuthContext);
 
   function handleCloseUserMenu () {
     setOpenUserMenu (false);
@@ -67,7 +69,7 @@ function Main() {
                 <img src={EditIcon} alt="edit" />
                 <button className='btn-usermenu'>Editar</button>
               </div>
-              <div className='row-menu'>
+              <div className='row-menu' onClick={() => logOut()}>
                 <img src={Logout} alt="logout" />
                 <button className='btn-usermenu'>Deslogar</button>
               </div>
