@@ -34,7 +34,7 @@ function Routes() {
 
 
     function logOut() {
-        setToken('')
+        setToken('');
         setPerfil('');
     }
 
