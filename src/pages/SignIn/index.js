@@ -36,9 +36,11 @@ function SignIn() {
       setError(dados)
       return
     }
-    const { token } = dados;
+    console.log(dados);
 
-    logIn(token);
+    const { token, usuario } = dados;
+
+    logIn(token, usuario);
 
     history.push('/home')
   }
@@ -82,7 +84,9 @@ function SignIn() {
             autoHideDuration={5000}
             onClose={handleAlertClose}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleAlertClose} severity="error" variant="filled">
+            <Alert onClose={handleAlertClose}
+              severity="error"
+              variant="filled">
               {error}
             </Alert>
           </Snackbar>
