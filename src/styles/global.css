@@ -36,8 +36,7 @@ label{
    height: 39px;
    border-radius: 20px;
    font-size: 14px;
-   
-   
+
    }
 
  input {
@@ -50,10 +49,9 @@ label{
 .input-line{
   height: 1px;
   width:100% ;
-  margin-bottom:45px;
+  margin-bottom: 45px;
   background-color:#4C4C4C ;
   transition: .3s ease-in-out;
-  
 }
 
 input::placeholder {

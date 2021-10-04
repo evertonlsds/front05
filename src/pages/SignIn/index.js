@@ -15,7 +15,7 @@ import { Alert, Snackbar } from '@mui/material';
 function SignIn() {
   //const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const { logIn } = useContext(AuthContext);
   const [error, setError] = useState("");
   const history = useHistory();
@@ -61,34 +61,37 @@ function SignIn() {
           <div className="flex-column ">
             <label htmlFor="email">Email</label>
             <input id="email" maxLength="33" type="text" placeholder="exemplo@gmail.com"{...register('email', { required: true })} />
-
             <span className="input-line"></span>
+            {errors.email?.type === 'required' && <span className="error">É preciso informar um email!</span>}
           </div>
           <div className="flex-column light-label input-password">
             <label htmlFor="password">Senha</label>
             <input id="password" maxLength="23" type={showPassword ? 'text' : 'password'} {...register("senha", { required: true })} />
-
             <FontAwesomeIcon
               icon={showPassword ? faEye : faEyeSlash}
               className="eye-password"
               onClick={() => setShowPassword(!showPassword)}
             />
             <span className="input-line"></span>
+            {errors.senha?.type === 'required' && <span className="error">É preciso informar uma senha!</span>}
           </div>
           <div className="button-align">
             <button className="btn-pink" onClick={handleSubmit(onSubmit)}>Entrar</button>
           </div>
-          <Snackbar open={error} autoHideDuration={5000} onClose={handleAlertClose}>
-            <Alert onClose={handleAlertClose} severity="error">
+          <Snackbar open={error}
+            autoHideDuration={5000}
+            onClose={handleAlertClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <Alert onClose={handleAlertClose} severity="error" variant="filled">
               {error}
             </Alert>
           </Snackbar>
         </div>
-      </form>
+      </form >
       <div className="footer-signIn light-label  ">
         <p>Não tem uma conta?  <a href="/cadastro">Cadastre-se!</a></p>
       </div>
-    </div>
+    </div >
   )
 }
 

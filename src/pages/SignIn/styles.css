@@ -23,3 +23,7 @@ link{
     
     
 }
+.error {
+    all: unset;
+    color: red;
+}
