@@ -44,8 +44,8 @@ function Routes() {
                 <Switch>
                     <Route path="/" exact component={SignIn} />
                     <Route path="/cadastro" component={SignUp} />
-                    <Route path="/newClient" component={NewClient} />
                     <ProtectedRoutes>
+                        <Route path="/newClient" component={NewClient} />
                         <Route path="/home" component={Home} />
                     </ProtectedRoutes>
                 </Switch>
