@@ -2,10 +2,12 @@ import './styles.css';
 import SideBar from '../../components/SideBar';
 import UsersCard from '../../images/users.svg';
 import Money from '../../images/money.svg';
+import ModalUser from '../../components/ModalUser';
 
 function Main() {
   return (
     <div className="container-main">
+      <ModalUser/>
       <SideBar />
       <div className="homeContent">
         <div className="card-1">
