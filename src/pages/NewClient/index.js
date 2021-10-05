@@ -1,17 +1,46 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../routes.js';
 import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
+import UserMenu from '../../components/UserMenu';
+import {getCityByCEP} from '../../service/viaCEP'
+
 
 
 function NewClient() {
-
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
   const { token, open, setOpen } = useContext(AuthContext);
+  const [cep, setCep] = useState("");
+  const [city, setCity] = useState("");
+  
+
+  async function loadCityByCEP(myCep){
+    const cityByCep = await getCityByCEP(myCep)
+    setCity(cityByCep)
+    
+    }
+
+    useEffect( ()=> {
+    if(cep.length < 9 && city.length > 0){
+      setCity("")
+    }
+
+    if(cep.indexOf('-')!== -1){
+      if(cep.length === 9){
+        loadCityByCEP(cep);
+      }
+      return
+    }
+
+    if (cep.length === 8){
+      loadCityByCEP(cep);
+    }
+    
+    },[cep])
 
   async function newClient(dados) {
     setCarregando(true);
@@ -48,9 +77,10 @@ function NewClient() {
   return (
     <div className="container-main">
       <SideBar />
+      <UserMenu/>
       <div className="clientContainerContent">
         <h1 className="newClientTitle">/ / ADICIONAR CLIENTE</h1>
-        <div className="newClientFormDiv">
+      <div className="newClientFormDiv">
           <form className="formNewClient" onSubmit={handleSubmit(newClient)}>
             <div className="inputDiv">
               <label htmlFor="nome">Nome</label>
@@ -96,8 +126,11 @@ function NewClient() {
                 <input
                   id="cep"
                   type="text"
+                  maxLength={9}
+                  value={cep}
+                  onChange={(e)=> setCep(e.target.value)}
                   className="inputNewClient"
-                  {...register("cep")} />
+                   />
               </div>
               <div className="inputDiv">
                 <label htmlFor="logradouro">Logradouro</label>
@@ -115,15 +148,17 @@ function NewClient() {
                   id="bairro"
                   type="text"
                   className="inputNewClient"
-                  {...register("bairro")} />
+                  {...register("bairro")}/>
               </div>
               <div className="inputDiv">
                 <label htmlFor="cidade">Cidade</label>
                 <input
                   id="cidade"
                   type="text"
+                  value={city}
+                  onChange={(e)=> setCity(e.target.value)}
                   className="inputNewClient"
-                  {...register("cidade")} />
+                   />
               </div>
             </div>
             <div className="dualInput">
@@ -170,9 +205,11 @@ function NewClient() {
             </Snackbar>
           </form>
         </div>
+            
         <Backdrop open={carregando}>
           <CircularProgress color="inherit" />
         </Backdrop>
+        
       </div>
     </div>
   )
