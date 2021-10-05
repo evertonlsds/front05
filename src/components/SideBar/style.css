@@ -7,6 +7,8 @@ background-color: #263238;
 min-width: 200px;
 width: 20%;
 height: 100vh;
+
+
 }
 
 .menuOption{
@@ -25,4 +27,5 @@ margin: auto auto 200px auto;
 .logo{
     margin-bottom: 40px;
     margin-top: auto;
+    
 }

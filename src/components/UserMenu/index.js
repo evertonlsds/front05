@@ -11,7 +11,6 @@ import { AuthContext } from '../../routes.js';
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = useState(false);
   const { logOut, setModalOpen } = useContext(AuthContext);
-
   function handleUserMenu(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -22,6 +21,7 @@ export default function UserMenu() {
         alt='usuario-menu'
         id='user-menu'
         className='icon-usuario'
+
         onClick={handleUserMenu} />
       <Popover
         id='menu-user'

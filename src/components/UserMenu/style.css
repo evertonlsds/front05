@@ -1,8 +1,10 @@
 .icon-usuario {
-    align-self: flex-start;
-    cursor: pointer;
-    margin-left: 180px;
-    margin-top: 32px
+    width: 40px;
+    height: auto;
+    position: absolute;
+    right: 30px;
+    top:30px;
+    cursor:pointer
   }
   .btn-usermenu {
     all: unset;
