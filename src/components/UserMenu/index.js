@@ -10,7 +10,7 @@ import { AuthContext } from '../../routes.js';
 
 export default function UserMenu(){
     const [openUserMenu, setOpenUserMenu] = useState(false);
-    const { logOut } = useContext(AuthContext);
+    const { logOut, setModalOpen } = useContext(AuthContext);
 
     function handleCloseUserMenu () {
         setOpenUserMenu (false);
@@ -32,7 +32,7 @@ export default function UserMenu(){
             <div className='flex-column user-menu'>
               <div className='row-menu'>
                 <img src={EditIcon} alt="edit" />
-                <button className='btn-usermenu'>Editar</button>
+                <button className='btn-usermenu' onClick={() => setModalOpen(true)}>Editar</button>
               </div>
               <div className='row-menu' onClick={() => logOut()}>
                 <img src={Logout} alt="logout" />

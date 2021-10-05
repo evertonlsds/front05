@@ -1,13 +1,23 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
+import ModalUser from '../../components/ModalUser';
 import UsersCard from '../../images/users.svg';
 import Money from '../../images/money.svg';
+import { AuthContext } from '../../routes.js';
+import { useContext } from 'react';
+import { Alert, Snackbar } from '@mui/material';
 
 function Main() {
+  const { updateProfileSuccess, setupdateProfileSuccess } = useContext (AuthContext);
+
+  function handleAlertClose () {
+    setupdateProfileSuccess(false)
+  }
 
   return (
     <div className="container-main">
+      <ModalUser/>
       <SideBar />
       <div className="homeContent">
         <div className="card-1">
@@ -43,6 +53,16 @@ function Main() {
           </div>
         </div>
         <UserMenu/>
+        <Snackbar open={updateProfileSuccess}
+            autoHideDuration={8000}
+            onClose={handleAlertClose}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+            <Alert onClose={handleAlertClose}
+              severity="success"
+              variant="filled">
+              Perfil atualizado  com sucesso!
+            </Alert>
+        </Snackbar>
       </div>
     </div>
   );

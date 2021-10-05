@@ -146,7 +146,7 @@ function NewClient(){
             </div>
             <div className="buttonsDiv">
               <button className="btn-white-pink" type="reset">Cancelar</button>
-              <button className="btn-pink" type="submit">Adiconar Cliente</button>
+              <button className="btn-pink" type="submit">Adicionar Cliente</button>
             </div>
             <Snackbar open={error}
             autoHideDuration={5000}
