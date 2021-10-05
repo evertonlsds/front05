@@ -4,7 +4,7 @@ async function getCityByCEP(cep){
         method:'GET'
     });
 
-    const { localidade,  erro} = await response.json();
+    const { localidade,  erro } = await response.json();
 
     if(erro ){
         return false;
@@ -19,5 +19,5 @@ async function getCityByCEP(cep){
 
 
 
-module.exports = { getCityByCEP}
+module.exports = { getCityByCEP }
 
