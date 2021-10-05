@@ -12,7 +12,7 @@ import { AuthContext } from '../../routes.js';
 
 
 function ModalUser() {
-  const { handleSubmit, register, formState: { errors } } = useForm({ defaultValues: null });
+  const { handleSubmit, register, formState: { errors } } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
