@@ -17,7 +17,7 @@ export default function UserMenu(){
       }
 
     return(
-        <>
+      <>
         <img src={Usuario}
         alt='usuario-menu'
         id='user-menu'
@@ -40,6 +40,6 @@ export default function UserMenu(){
               </div>
             </div>
         </Popover>
-        </>
+      </>
     )
 }

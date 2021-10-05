@@ -2,7 +2,7 @@ import './styles.css'
 import '../../styles/form.css'
 
 import Logo from '../../images/logo.svg'
-import { Alert, Snackbar, CircularProgress, Backdrop} from '@mui/material';
+import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -36,7 +36,7 @@ function SignUp() {
       setCarregando(false);
       return;
     }
-    
+
     setOpen(true);
     setCarregando(false);
     history.push("/");
@@ -55,28 +55,28 @@ function SignUp() {
         <div>
           <div className="flex-column ">
             <label htmlFor="nome">Nome</label>
-            <input 
-            id="nome" 
-            type="text"
-            className={errors.nome?.type === 'required' && "input-error"}
-            placeholder={errors.nome ? "Campo obrigatório!" : ""}
-            {...register("nome", { required: true })} />
+            <input
+              id="nome"
+              type="text"
+              className={errors.nome?.type === 'required' && "input-error"}
+              placeholder={errors.nome ? "Campo obrigatório!" : ""}
+              {...register("nome", { required: true })} />
             <span className="input-line"></span>
             <label htmlFor="email">Email</label>
-            <input id="email" 
-            type="text" 
-            className={errors.email?.type === 'required' && "input-error"}
-            placeholder={errors.email?.type ==='required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
-            {...register("email", { required: true })} />
+            <input id="email"
+              type="text"
+              className={errors.email?.type === 'required' && "input-error"}
+              placeholder={errors.email?.type === 'required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
+              {...register("email", { required: true })} />
             <span className="input-line"></span>
             <div className="flex-column light-label input-password">
               <label htmlFor="password">Senha</label>
-              <input id="password" 
-              maxLength="23" 
-              type={showPassword ? 'text' : 'password'}
-              className={errors.senha?.type === 'required' && "input-error"}
-              placeholder={errors.senha ? "Campo obrigatório!" : ""}
-              {...register("senha", { required: true })} />
+              <input id="password"
+                maxLength="23"
+                type={showPassword ? 'text' : 'password'}
+                className={errors.senha?.type === 'required' && "input-error"}
+                placeholder={errors.senha ? "Campo obrigatório!" : ""}
+                {...register("senha", { required: true })} />
               <FontAwesomeIcon
                 icon={showPassword ? faEye : faEyeSlash}
                 className="eye-password"
@@ -92,7 +92,7 @@ function SignUp() {
             autoHideDuration={5000}
             onClose={handleAlertClose}
             anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-            mouseEvent= {false}>
+            mouseEvent={false}>
             <Alert onClose={handleAlertClose}
               severity="error"
               variant="filled">

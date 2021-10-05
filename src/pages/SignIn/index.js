@@ -68,22 +68,22 @@ function SignIn() {
         <div>
           <div className="flex-column">
             <label htmlFor="email">Email</label>
-            <input id="email" 
-            maxLength="33" 
-            type="text"
-            className={errors.email?.type === 'required' && "input-error"}
-            placeholder={errors.email?.type ==='required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
-            {...register('email', { required: true })} />
+            <input id="email"
+              maxLength="33"
+              type="text"
+              className={errors.email?.type === 'required' && "input-error"}
+              placeholder={errors.email?.type === 'required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
+              {...register('email', { required: true })} />
             <span className="input-line"></span>
           </div>
           <div className="flex-column light-label input-password">
             <label htmlFor="password">Senha</label>
-            <input id="password" 
-            maxLength="23" 
-            type={showPassword ? 'text' : 'password'}
-            className={errors.senha?.type === 'required' && "input-error"}
-            placeholder={errors.senha ? "Campo obrigatório!" : ""}
-            {...register("senha", { required: true })} />
+            <input id="password"
+              maxLength="23"
+              type={showPassword ? 'text' : 'password'}
+              className={errors.senha?.type === 'required' && "input-error"}
+              placeholder={errors.senha ? "Campo obrigatório!" : ""}
+              {...register("senha", { required: true })} />
             <FontAwesomeIcon
               icon={showPassword ? faEye : faEyeSlash}
               className="eye-password"

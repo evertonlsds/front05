@@ -9,15 +9,15 @@ import { useContext } from 'react';
 import { Alert, Snackbar } from '@mui/material';
 
 function Main() {
-  const { updateProfileSuccess, setupdateProfileSuccess } = useContext (AuthContext);
+  const { updateProfileSuccess, setupdateProfileSuccess } = useContext(AuthContext);
 
-  function handleAlertClose () {
+  function handleAlertClose() {
     setupdateProfileSuccess(false)
   }
 
   return (
     <div className="container-main">
-      <ModalUser/>
+      <ModalUser />
       <SideBar />
       <div className="homeContent">
         <div className="card-1">
@@ -52,16 +52,16 @@ function Main() {
             <h1 className="content-padding">0</h1>
           </div>
         </div>
-        <UserMenu/>
+        <UserMenu />
         <Snackbar open={updateProfileSuccess}
-            autoHideDuration={8000}
-            onClose={handleAlertClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleAlertClose}
-              severity="success"
-              variant="filled">
-              Perfil atualizado  com sucesso!
-            </Alert>
+          autoHideDuration={8000}
+          onClose={handleAlertClose}
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert onClose={handleAlertClose}
+            severity="success"
+            variant="filled">
+            Perfil atualizado  com sucesso!
+          </Alert>
         </Snackbar>
       </div>
     </div>
