@@ -25,7 +25,7 @@ function NewClient() {
     }
 
     useEffect( ()=> {
-    if(cep.length < 9 && city.length > 0){
+    if (cep.length < 9 && city.length > 0){
       setCity("")
     }
 
@@ -40,7 +40,7 @@ function NewClient() {
       loadCityByCEP(cep);
     }
     
-    },[cep])
+    },[cep])// eslint-disable-line react-hooks/exhaustive-deps
 
   async function newClient(dados) {
     setCarregando(true);
