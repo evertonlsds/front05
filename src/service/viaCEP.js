@@ -1,4 +1,4 @@
-async function getCityByCEP(cep){
+export async function getCityByCEP(cep){
     try {
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/ `,{
         method:'GET'
@@ -19,5 +19,5 @@ async function getCityByCEP(cep){
 
 
 
-module.exports = { getCityByCEP }
+//module.exports = { getCityByCEP }
 
