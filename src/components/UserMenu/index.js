@@ -2,19 +2,17 @@ import './style.css';
 import Usuario from '../../images/usuario.svg';
 import Logout from '../../images/log-out.svg';
 import EditIcon from '../../images/edit-icon.svg';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext } from 'react';
 import { Popover } from '@mui/material';
 import { AuthContext } from '../../routes.js';
 
 
 
 export default function UserMenu() {
-  const [openUserMenu, setOpenUserMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(false);
   const { logOut, setModalOpen } = useContext(AuthContext);
-  const anchorEl = useRef();
-
-  function handleCloseUserMenu() {
-    setOpenUserMenu(false);
+  function handleUserMenu(event) {
+    setAnchorEl(event.currentTarget);
   }
 
   return (
@@ -23,13 +21,17 @@ export default function UserMenu() {
         alt='usuario-menu'
         id='user-menu'
         className='icon-usuario'
-        onClick={() => setOpenUserMenu(true)}
-        ref={anchorEl} />
+
+        onClick={handleUserMenu} />
       <Popover
         id='menu-user'
-        open={openUserMenu}
-        onClose={handleCloseUserMenu}
-        anchorEl={anchorEl}>
+        open={anchorEl}
+        onClose={() => setAnchorEl(false)}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}>
         <div className='flex-column user-menu'>
           <div className='row-menu'>
             <img src={EditIcon} alt="edit" />
