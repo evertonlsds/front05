@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../routes.js';
 import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 import UserMenu from '../../components/UserMenu';
-import {getCityByCEP} from '../../service/viaCEP'
+import {getCityByCEP} from '../../service/viaCEP';
 
 
 
