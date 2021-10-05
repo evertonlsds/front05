@@ -10,8 +10,9 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../routes.js';
 
 
+
 function ModalUser() {
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const { handleSubmit, register, formState: { errors } } = useForm({ defaultValues: null });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
@@ -19,7 +20,6 @@ function ModalUser() {
 
   async function atualizarPerfil(dados) {
     setCarregando(true);
-
     const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
       method: 'PUT',
       headers: {
