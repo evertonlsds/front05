@@ -41,7 +41,7 @@ function Routes() {
     }
 
     return (
-        <AuthContext.Provider value={{ token, logIn, logOut, perfil, open, setOpen, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
+        <AuthContext.Provider value={{ token, logIn, logOut, perfil, setPerfil, open, setOpen, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={SignIn} />
