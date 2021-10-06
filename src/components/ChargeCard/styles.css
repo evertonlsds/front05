@@ -1,17 +1,13 @@
-.main-clientcard {
+.main-chargecard {
     background-color: #FFFFFF;
     display: flex;
-    column-gap: 100px;
+    column-gap: 70px;
     border-radius: 8px;
     padding-left: 24px;
     align-items: center;
     cursor: pointer;
 }
-.client-details {
-    display: flex;
-    column-gap: 10px;
-}
-.clientcard-text {
+.chargecard-text {
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
@@ -21,7 +17,7 @@
     text-align: left;
     color: #4c4c4c
 }
-.client-name {
+.client-id {
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
@@ -31,7 +27,7 @@
     text-align: left;
     color: #4c4c4c
 }
-.clientcard-status {
+.chargecard-status {
     font-family: Montserrat;
     font-size: 16px;
     font-style: normal;
@@ -40,9 +36,9 @@
     letter-spacing: 0em;
     text-align: left;
 }
-.clientcard-status-red {
+.chargecard-status-red {
     color: #FF4D4D;
 }
-.clientcard-status-green {
+.chargecard-status-green {
     color: #4EC06E;
 }

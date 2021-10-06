@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import NewClient from './pages/NewClient';
 import Clients from './pages/Clients';
+import Charges from './pages/Charges';
 
 
 export const AuthContext = createContext();
@@ -49,6 +50,7 @@ function Routes() {
                     <Route path="/cadastro" component={SignUp} />
                     <ProtectedRoutes>
                         <Route path="/clients" component={Clients} />
+                        <Route path="/charges" component={Charges} />
                         <Route path="/newclient" component={NewClient} />
                         <Route path="/home" component={Home} />
                     </ProtectedRoutes>
