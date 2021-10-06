@@ -10,6 +10,7 @@ import Home from './pages/Home'
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import NewClient from './pages/NewClient';
+import Clients from './pages/Clients';
 
 
 export const AuthContext = createContext();
@@ -47,7 +48,8 @@ function Routes() {
                     <Route path="/" exact component={SignIn} />
                     <Route path="/cadastro" component={SignUp} />
                     <ProtectedRoutes>
-                        <Route path="/newClient" component={NewClient} />
+                        <Route path="/clients" component={Clients} />
+                        <Route path="/newclient" component={NewClient} />
                         <Route path="/home" component={Home} />
                     </ProtectedRoutes>
                 </Switch>

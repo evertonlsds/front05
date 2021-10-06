@@ -1,0 +1,47 @@
+.main-clientcard {
+    background-color: #FFFFFF;
+    display: flex;
+    column-gap: 100px;
+    border-radius: 8px;
+    padding-left: 24px;
+    align-items: center;
+}
+.client-details {
+    display: flex;
+    column-gap: 10px;
+}
+.clientcard-text {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #4c4c4c
+}
+.client-name {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    text-align: left;
+    color: #4c4c4c
+}
+.clientcard-status {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.clientcard-status-red {
+    color: #FF4D4D;
+}
+.clientcard-status-green {
+    color: #4EC06E;
+}
