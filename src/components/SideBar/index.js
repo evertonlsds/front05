@@ -23,7 +23,7 @@ export default function SideBar() {
         <img src={Money} alt="billingsLogo" />
         <span>COBRANÇAS</span>
       </div>
-      <div className="menuOption" onClick={() => history.push("/newClient")}>
+      <div className="menuOption" onClick={() => history.push("/clients")}>
         <img src={Users} alt="clientsLogo" />
         <span>CLIENTES</span>
       </div>
