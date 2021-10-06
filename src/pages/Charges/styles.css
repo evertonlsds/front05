@@ -4,17 +4,19 @@
 .cards-container {
     display: flex;
     flex-direction: column;
-    row-gap: 16px
+    row-gap: 16px;
+    padding-top: 200px
 }
+
 .container-legends {
     display: flex;
     background-color: #9DBBC3;
     border-radius: 8px;
     height: 32px;
-    column-gap: 75px;
+    column-gap: 90px;
     align-items: center;
     padding-left: 24px;
-    padding-right: 233px;
+    padding-right: 150px;
 }
 
 .legends {

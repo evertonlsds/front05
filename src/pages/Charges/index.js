@@ -14,8 +14,8 @@ export default function Charges() {
                 <div className='cards-container'>
                     <div className='container-legends'>
                         <p className='legends'> ID</p>
-                        <p className='legends'> Cliente</p>
-                        <p className='legends'> Descrição</p>
+                        <p className='legends' style={{ 'padding-right': '50px' }}> Cliente</p>
+                        <p className='legends' style={{ 'padding-right': '70px' }}> Descrição</p>
                         <p className='legends'> Valor</p>
                         <p className='legends'> Status</p>
                         <p className='legends'> Vencimento</p>
