@@ -11,7 +11,7 @@ export default function Charges() {
             <SideBar />
             <div className='main-charges'>
                 <UserMenu />
-                <div className='cards-container'>
+                <div className='cards-container2'>
                     <div className='container-legends'>
                         <p className='legends'> ID</p>
                         <p className='legends' style={{ 'padding-right': '50px' }}> Cliente</p>
