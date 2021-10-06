@@ -1,0 +1,29 @@
+.main-charges {
+    padding-left: 72px;
+}
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px
+}
+.container-legends {
+    display: flex;
+    background-color: #9DBBC3;
+    border-radius: 8px;
+    height: 32px;
+    column-gap: 75px;
+    align-items: center;
+    padding-left: 24px;
+    padding-right: 233px;
+}
+
+.legends {
+    font-family: Montserrat;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0.005em;
+    text-align: left;
+    color: #FFFFFF;
+}
