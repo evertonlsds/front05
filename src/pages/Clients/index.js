@@ -1,7 +1,7 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
-import ClientCard from '../../components/ClientCard';
+import ClientTable from '../../components/ClientTable';
 import { useHistory } from 'react-router';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../routes.js';
@@ -41,15 +41,7 @@ export default function Clients() {
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
                 </div>
-                <div className='cards-container'>
-                    <div className='container-legends'>
-                        <p className='legends' style={{ 'padding-right': '100px' }}> Cliente</p>
-                        <p className='legends'> Cobranças Feitas</p>
-                        <p className='legends'> Cobranças Recebidas</p>
-                        <p className='legends'> Status</p>
-                    </div>
-                    <ClientCard clients={clients} />
-                </div>
+                <ClientTable clients={clients} />
             </div>
         </div>
     )

@@ -11,7 +11,7 @@ export default function ClientCard({ clients }) {
         <>
             {clients && clients.map(client =>
                 <div className='main-clientcard'>
-                    <div className='flex-column'>
+                    <div className='flex-column client-profile'>
                         <h3 className='client-name'>{client.nome}</h3>
                         <div className='client-details'>
                             <img src={EmailIcon} alt='email-icon' />
