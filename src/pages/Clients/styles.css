@@ -11,12 +11,13 @@
     background-color: #9DBBC3;
     border-radius: 8px;
     height: 32px;
-    column-gap: 75px;
+    column-gap: 0px;
     align-items: center;
     padding-left: 24px;
-    padding-right: 233px;
 }
-
+.client-profile {
+    width: 140px;
+}
 .legends {
     font-family: Montserrat;
     font-size: 14px;
@@ -26,4 +27,5 @@
     letter-spacing: 0.005em;
     text-align: left;
     color: #FFFFFF;
+    width: 100px;
 }
