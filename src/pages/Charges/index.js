@@ -1,10 +1,35 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
-import ChargeCard from '../../components/ChargeCard';
+import ChargeTable from '../../components/ChargeTable';
+import { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../../routes.js';
 
 
 export default function Charges() {
+    const [charges, setCharges] = useState([]);
+    const { token } = useContext (AuthContext);
+
+    async function getCharges() {
+
+        const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
+            method: 'GET',
+            headers: {
+                'Content-Type': "application/json",
+                "charset": "utf-8",
+                'Authorization': `Bearer ${token} `
+            },
+        });
+
+        const resposta = await response.json();
+
+        setCharges(resposta);
+    }
+
+    useEffect(() => {
+        getCharges();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className='flex-row'>
@@ -12,16 +37,7 @@ export default function Charges() {
             <div className='main-charges'>
                 <UserMenu />
                 <div className='cards-container2'>
-                    <div className='container-legends'>
-                        <p className='legends'> ID</p>
-                        <p className='legends' style={{ 'padding-right': '50px' }}> Cliente</p>
-                        <p className='legends' style={{ 'padding-right': '70px' }}> Descrição</p>
-                        <p className='legends'> Valor</p>
-                        <p className='legends'> Status</p>
-                        <p className='legends'> Vencimento</p>
-                    </div>
-                    <ChargeCard />
-                    <ChargeCard />
+                    <ChargeTable charges={charges} />
                 </div>
             </div>
         </div>

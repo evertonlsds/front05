@@ -16,31 +16,31 @@ function NewClient() {
   const { token, open, setOpen } = useContext(AuthContext);
   const [cep, setCep] = useState("");
   const [city, setCity] = useState("");
-  
 
-  async function loadCityByCEP(myCep){
+
+  async function loadCityByCEP(myCep) {
     const cityByCep = await getCityByCEP(myCep)
     setCity(cityByCep)
-    
-    }
 
-    useEffect( ()=> {
-    if (cep.length < 9 && city.length > 0){
+  }
+
+  useEffect(() => {
+    if (cep.length < 9 && city.length > 0) {
       setCity("")
     }
 
-    if(cep.indexOf('-')!== -1){
-      if(cep.length === 9){
+    if (cep.indexOf('-') !== -1) {
+      if (cep.length === 9) {
         loadCityByCEP(cep);
       }
       return
     }
 
-    if (cep.length === 8){
+    if (cep.length === 8) {
       loadCityByCEP(cep);
     }
-    
-    },[cep])// eslint-disable-line react-hooks/exhaustive-deps
+
+  }, [cep])// eslint-disable-line react-hooks/exhaustive-deps
 
   async function newClient(dados) {
     setCarregando(true);
@@ -55,8 +55,6 @@ function NewClient() {
 
       body: JSON.stringify(dados)
     });
-    console.log(token);
-    console.log(dados);
     const resposta = await response.json();
 
     if (!response.ok) {
@@ -77,10 +75,10 @@ function NewClient() {
   return (
     <div className="container-main">
       <SideBar />
-      <UserMenu/>
+      <UserMenu />
       <div className="clientContainerContent">
         <h1 className="newClientTitle">/ / ADICIONAR CLIENTE</h1>
-      <div className="newClientFormDiv">
+        <div className="newClientFormDiv">
           <form className="formNewClient" onSubmit={handleSubmit(newClient)}>
             <div className="inputDiv">
               <label htmlFor="nome">Nome</label>
@@ -128,9 +126,9 @@ function NewClient() {
                   type="text"
                   maxLength={9}
                   value={cep}
-                  onChange={(e)=> setCep(e.target.value)}
+                  onChange={(e) => setCep(e.target.value)}
                   className="inputNewClient"
-                   />
+                />
               </div>
               <div className="inputDiv">
                 <label htmlFor="logradouro">Logradouro</label>
@@ -148,7 +146,7 @@ function NewClient() {
                   id="bairro"
                   type="text"
                   className="inputNewClient"
-                  {...register("bairro")}/>
+                  {...register("bairro")} />
               </div>
               <div className="inputDiv">
                 <label htmlFor="cidade">Cidade</label>
@@ -156,9 +154,9 @@ function NewClient() {
                   id="cidade"
                   type="text"
                   value={city}
-                  onChange={(e)=> setCity(e.target.value)}
+                  onChange={(e) => setCity(e.target.value)}
                   className="inputNewClient"
-                   />
+                />
               </div>
             </div>
             <div className="dualInput">
@@ -205,11 +203,11 @@ function NewClient() {
             </Snackbar>
           </form>
         </div>
-            
+
         <Backdrop open={carregando}>
           <CircularProgress color="inherit" />
         </Backdrop>
-        
+
       </div>
     </div>
   )

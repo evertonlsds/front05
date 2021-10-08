@@ -1,0 +1,25 @@
+.custom-select {
+    border: 1px solid #374952;
+    border-radius: 20px;
+    width: 512px;
+    height: 40px;
+}
+.select-text {
+    font-family: Montserrat;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 15px;
+    letter-spacing: 0.25px;
+    text-align: left;
+    color: #323232;
+}
+.custom-select-div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.label-select {
+    padding-left: 20px;
+    margin-bottom: 0;
+}

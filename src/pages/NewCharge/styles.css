@@ -1,0 +1,43 @@
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-input {
+    border: 1px solid #374952;
+    border-radius: 10px;
+    width: 512px;
+    height: 56px;
+}
+.container-main{
+    display: flex;
+    
+}
+
+.clientContainerContent{
+  background-color: #E5E5E5;
+  margin: 0 5%;
+  width: 80%;
+  display: flex;
+  flex-direction:column;
+  padding-top: 5%;
+}
+.new-charge-form {
+    width: 958px;
+    height: 556px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    padding-top: 5%;
+}
+
+.formNewClient{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
