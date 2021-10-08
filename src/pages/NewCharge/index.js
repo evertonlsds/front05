@@ -2,15 +2,13 @@ import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import { useForm } from 'react-hook-form';
-import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../routes.js';
+import { useState, useEffect } from 'react';
 import CustomSelect from '../../components/CustomSelect';
 
 
 export default function NewCharge() {
     const { handleSubmit, register, control, formState: { errors } } = useForm();
     const [clients, setClients] = useState([]);
-    const { token } = useContext(AuthContext);
 
     async function getClients(dados) {
 
@@ -19,7 +17,7 @@ export default function NewCharge() {
             headers: {
                 'Content-Type': "application/json",
                 "charset": "utf-8",
-                'Authorization': `Bearer ${token} `
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
             },
 
         });
