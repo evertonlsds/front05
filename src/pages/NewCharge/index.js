@@ -10,7 +10,7 @@ export default function NewCharge() {
     const { handleSubmit, register, control, formState: { errors } } = useForm();
     const [clients, setClients] = useState([]);
 
-    async function getClients(dados) {
+    async function getClients() {
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
