@@ -28,7 +28,7 @@ export default function SideBar() {
         <span>CLIENTES</span>
       </div>
       <div className="buttonDiv" >
-        <button className="btn-pink" type="submit">Criar cobrança</button>
+        <button className="btn-pink" onClick={() => history.push("/newcharge")}>Criar cobrança</button>
       </div>
     </div >
   )

@@ -33,11 +33,11 @@ export default function ClientTable({ clients }) {
                                 <TableCell className='linha' />
                             </TableRow>
                             <TableRow
-                                key={client.id}
+
                                 style={{ backgroundColor: '#FFFFFF' }}
                             >
                                 <TableCell scope="row">
-                                    <div className='flex-column client-profile'>
+                                    <div className='flex-column'>
                                         <h3 className='client-name'>{client.nome}</h3>
                                         <div className='client-details'>
                                             <img src={EmailIcon} alt='email-icon' />

@@ -12,6 +12,7 @@ import SignIn from './pages/SignIn';
 import NewClient from './pages/NewClient';
 import Clients from './pages/Clients';
 import Charges from './pages/Charges';
+import NewCharge from './pages/NewCharge';
 
 
 export const AuthContext = createContext();
@@ -52,6 +53,7 @@ function Routes() {
                         <Route path="/clients" component={Clients} />
                         <Route path="/charges" component={Charges} />
                         <Route path="/newclient" component={NewClient} />
+                        <Route path="/newcharge" component={NewCharge} />
                         <Route path="/home" component={Home} />
                     </ProtectedRoutes>
                 </Switch>
