@@ -21,7 +21,7 @@ export default function Charges() {
 
         const resposta = await response.json();
 
-        setCharges(resposta);
+        setCharges(resposta.cobrancasDoUsuario);
     }
 
     useEffect(() => {
