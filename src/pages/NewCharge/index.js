@@ -2,14 +2,12 @@ import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../routes.js';
 import CustomSelect from '../../components/CustomSelect';
 import CustomDatePicker from '../../components/CustomDatePicker';
 
 export default function NewCharge() {
-    const history = useHistory();
     const { handleSubmit, register, control, formState: { errors } } = useForm();
     const [clients, setClients] = useState([]);
     const { token } = useContext(AuthContext);
