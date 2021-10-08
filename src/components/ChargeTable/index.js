@@ -49,7 +49,7 @@ export default function ChargeTable({ charges }) {
                                     <p className='charge-row'>{charge.valor}</p>
                                 </TableCell>
                                 <TableCell align="left">
-                                    <p className='charge-status'> PENDENTE </p>
+                                    <p className='charge-status'> {charge.status} </p>
                                 </TableCell>
                                 <TableCell align="left">
                                     <p className='charge-row'>{charge.vencimento}</p>
