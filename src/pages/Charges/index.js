@@ -2,13 +2,11 @@ import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import ChargeTable from '../../components/ChargeTable';
-import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../routes.js';
+import { useState, useEffect } from 'react';
 
 
 export default function Charges() {
     const [charges, setCharges] = useState([]);
-    const { token } = useContext (AuthContext);
 
     async function getCharges() {
 
@@ -17,7 +15,7 @@ export default function Charges() {
             headers: {
                 'Content-Type': "application/json",
                 "charset": "utf-8",
-                'Authorization': `Bearer ${token} `
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
             },
         });
 

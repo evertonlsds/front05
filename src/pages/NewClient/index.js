@@ -13,7 +13,7 @@ function NewClient() {
   const { handleSubmit, register, formState: { errors } } = useForm();
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const { token, open, setOpen } = useContext(AuthContext);
+  const { open, setOpen } = useContext(AuthContext);
   const [cep, setCep] = useState("");
   const [city, setCity] = useState("");
 
@@ -50,7 +50,7 @@ function NewClient() {
       headers: {
         'Content-Type': "application/json",
         "charset": "utf-8",
-        'Authorization': `Bearer ${token} `
+        'Authorization': `Bearer ${localStorage.getItem('token')} `
       },
 
       body: JSON.stringify(dados)

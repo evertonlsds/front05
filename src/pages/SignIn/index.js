@@ -13,7 +13,6 @@ import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 
 
 function SignIn() {
-  //const classes = useStyles();
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const { logIn, open, setOpen } = useContext(AuthContext);

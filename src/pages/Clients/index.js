@@ -3,13 +3,12 @@ import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import ClientTable from '../../components/ClientTable';
 import { useHistory } from 'react-router';
-import { useState, useContext, useEffect } from 'react';
-import { AuthContext } from '../../routes.js';
+import { useState, useEffect } from 'react';
+
 
 export default function Clients() {
     const history = useHistory();
     const [clients, setClients] = useState([]);
-    const { token } = useContext(AuthContext);
 
     async function getClients() {
 
@@ -18,7 +17,7 @@ export default function Clients() {
             headers: {
                 'Content-Type': "application/json",
                 "charset": "utf-8",
-                'Authorization': `Bearer ${token} `
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
             },
         });
 
