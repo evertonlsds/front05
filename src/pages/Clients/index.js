@@ -23,7 +23,7 @@ export default function Clients() {
 
         const resposta = await response.json();
 
-        setClients(resposta);
+        setClients(resposta.clientesDoUsuario);
     }
 
     useEffect(() => {
