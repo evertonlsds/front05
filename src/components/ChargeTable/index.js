@@ -36,12 +36,24 @@ export default function ChargeTable({ charges }) {
 
                                 style={{ backgroundColor: '#FFFFFF' }}
                             >
-                                <TableCell align="left">{charge.id}</TableCell>
-                                <TableCell align="left">{charge.nome}</TableCell>
-                                <TableCell align="left">{charge.descricao}</TableCell>
-                                <TableCell align="left">{charge.valor}</TableCell>
-                                <TableCell align="left">{charge.nome}</TableCell>
-                                <TableCell align="left">{charge.vencimento}</TableCell>
+                                <TableCell align="left" >
+                                    <h3 className='charge-id'>#{charge.id}</h3>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <p className='charge-row'> {charge.nome} </p>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <p className='charge-row'>{charge.descricao}</p>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <p className='charge-row'>{charge.valor}</p>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <p className='charge-status'> {charge.status} </p>
+                                </TableCell>
+                                <TableCell align="left">
+                                    <p className='charge-row'>{charge.vencimento}</p>
+                                </TableCell>
                             </TableRow>
 
                         </>

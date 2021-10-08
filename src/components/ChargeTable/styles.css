@@ -29,34 +29,35 @@
     display: flex;
     column-gap: 10px;
 }
-.clientcard-text {
-    font-family: Montserrat;
+.charge-row {
+    font-family: 'Montserrat';
     font-size: 14px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: normal;
     line-height: 17px;
     letter-spacing: 0em;
     text-align: left;
     color: #4c4c4c
 }
-.client-name {
+.charge-id {
     font-family: Montserrat;
     font-size: 14px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: bold;
     line-height: 20px;
     letter-spacing: 0.005em;
-    text-align: left;
-    color: #4c4c4c
+    text-align: left;    
+    color: black;
+    padding-left: 24px;
 }
-.clientcard-status {
+.charge-status {
     font-family: Montserrat;
-    font-size: 16px;
     font-style: normal;
     font-weight: 600;
+    font-size: 16px;
     line-height: 15px;
-    letter-spacing: 0em;
     text-align: left;
+    text-transform: uppercase;
 }
 .clientcard-status-red {
     color: #FF4D4D;
@@ -83,6 +84,7 @@
 .MuiTableRow-root th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  padding-left: 46px;
 }
 
 .MuiTableRow-root th:last-child {
