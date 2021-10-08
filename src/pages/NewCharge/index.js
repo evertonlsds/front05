@@ -5,14 +5,14 @@ import { useForm } from 'react-hook-form';
 import { useState, useContext, useEffect } from 'react';
 import { AuthContext } from '../../routes.js';
 import CustomSelect from '../../components/CustomSelect';
-import CustomDatePicker from '../../components/CustomDatePicker';
+
 
 export default function NewCharge() {
     const { handleSubmit, register, control, formState: { errors } } = useForm();
     const [clients, setClients] = useState([]);
     const { token } = useContext(AuthContext);
 
-    async function getClients() {
+    async function getClients(dados) {
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -21,6 +21,7 @@ export default function NewCharge() {
                 "charset": "utf-8",
                 'Authorization': `Bearer ${token} `
             },
+
         });
 
         const resposta = await response.json();
@@ -43,6 +44,7 @@ export default function NewCharge() {
                 "charset": "utf-8",
                 'Authorization': `Bearer ${token} `
             },
+            body: JSON.stringify(dados)
         });
 
         const resposta = await response.json();
@@ -71,8 +73,33 @@ export default function NewCharge() {
                                 placeholder={errors.descricao ? "Campo obrigatório!" : ""}
                                 {...register("descricao", { required: true })} />
                         </div>
-                        <CustomDatePicker
-                            register={() => register('vencimento', { required: true })} />
+                        <div className="input-div">
+                            <label htmlFor="nome">Vencimento</label>
+                            <input
+                                id="status"
+                                type="date"
+                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
+                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
+                                {...register("vencimento", { required: true })} />
+                        </div>
+                        <div className="input-div">
+                            <label htmlFor="nome">Status</label>
+                            <input
+                                id="status"
+                                type="text"
+                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
+                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
+                                {...register("status", { required: true })} />
+                        </div>
+                        <div className="input-div">
+                            <label htmlFor="nome">Valor</label>
+                            <input
+                                id="descricao"
+                                type="text"
+                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
+                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
+                                {...register("valor", { required: true })} />
+                        </div>
                         <div className="buttonsDiv">
                             <button className="btn-white-pink" type="reset">Cancelar</button>
                             <button className="btn-pink" type="submit">Criar Cobrança</button>
