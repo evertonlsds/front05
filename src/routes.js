@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -18,33 +18,31 @@ import NewCharge from './pages/NewCharge';
 export const AuthContext = createContext();
 
 function ProtectedRoutes(props) {
-    const { token } = useContext(AuthContext);
 
     return (
-        <Route render={() => (token ? props.children : <Redirect to="/" />)} />
+        <Route render={() => (localStorage.getItem('token') ? props.children : <Redirect to="/" />)} />
     )
 }
 
 function Routes() {
-    const [token, setToken] = useState('');
     const [perfil, setPerfil] = useState('')
     const [open, setOpen] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [updateProfileSuccess, setupdateProfileSuccess] = useState(false);
 
     function logIn(newToken, newUser) {
-        setToken(newToken);
         setPerfil(newUser);
+        localStorage.setItem('token', newToken)
     }
 
 
     function logOut() {
-        setToken('');
         setPerfil('');
+        localStorage.removeItem('token');
     }
 
     return (
-        <AuthContext.Provider value={{ token, logIn, logOut, perfil, setPerfil, open, setOpen, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
+        <AuthContext.Provider value={{ logIn, logOut, perfil, setPerfil, open, setOpen, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={SignIn} />

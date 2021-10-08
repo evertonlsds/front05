@@ -16,7 +16,7 @@ function ModalUser() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const { setupdateProfileSuccess, modalOpen, setModalOpen, token, perfil, setPerfil } = useContext(AuthContext);
+  const { setupdateProfileSuccess, modalOpen, setModalOpen, perfil, setPerfil } = useContext(AuthContext);
 
   async function atualizarPerfil(dados) {
     setCarregando(true);
@@ -25,7 +25,7 @@ function ModalUser() {
       headers: {
         'Content-Type': "application/json",
         "charset": "utf-8",
-        'Authorization': `Bearer ${token} `
+        'Authorization': `Bearer ${localStorage.getItem('token')} `
       },
       body: JSON.stringify(dados)
     });

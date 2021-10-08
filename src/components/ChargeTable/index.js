@@ -22,7 +22,7 @@ export default function ChargeTable({ charges }) {
                     </TableRow>
                 </TableHead>
                 <TableBody className='clienttable-body'>
-                    {charges.map((charge) => (
+                    {charges && charges.map((charge) => (
                         <>
                             <TableRow>
                                 <TableCell className='linha' />

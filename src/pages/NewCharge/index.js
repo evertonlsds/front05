@@ -35,14 +35,13 @@ export default function NewCharge() {
     }, [])
 
     async function addCharge(dados) {
-        console.log(dados)
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json",
                 "charset": "utf-8",
-                'Authorization': `Bearer ${token} `
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
             },
             body: JSON.stringify(dados)
         });
