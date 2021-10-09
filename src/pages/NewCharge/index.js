@@ -4,6 +4,7 @@ import UserMenu from '../../components/UserMenu';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 import CustomSelect from '../../components/CustomSelect';
+import CustomDatePicker from '../../components/CustomDatePicker';
 
 
 export default function NewCharge() {
@@ -45,8 +46,8 @@ export default function NewCharge() {
         });
 
         const resposta = await response.json();
-
         console.log(resposta)
+
     }
 
     return (
@@ -72,12 +73,9 @@ export default function NewCharge() {
                         </div>
                         <div className="input-div">
                             <label htmlFor="nome">Vencimento</label>
-                            <input
-                                id="status"
-                                type="date"
-                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
-                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                {...register("vencimento", { required: true })} />
+                            <CustomDatePicker
+                                control={control}
+                            />
                         </div>
                         <div className="input-div">
                             <label htmlFor="nome">Status</label>
