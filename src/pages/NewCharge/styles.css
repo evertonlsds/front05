@@ -1,20 +1,17 @@
-
 .input-div {
     display: flex;
     flex-direction: column;
+    padding-top: 20px
 }
-
 .custom-input {
     border: 1px solid #374952;
-    border-radius: 10px;
+    border-radius: 8px;
     width: 512px;
     height: 56px;
 }
 .container-main{
     display: flex;
-    
 }
-
 .clientContainerContent{
   background-color: #E5E5E5;
   margin: 0 5%;
@@ -31,7 +28,7 @@
     align-items: center;
     background-color: #FFFFFF;
     border-radius: 20px;
-    padding-top: 5%;
+    row-gap: 35px
 }
 
 .formNewClient{
@@ -40,4 +37,14 @@
     align-items: center;
     justify-content: center;
 
+}
+.valor-input {
+    border: 1px solid #374952;
+    border-radius: 8px;
+    width: 184px;
+    height: 35px;
+}
+.valor-vencimento {
+    display: flex;
+    column-gap: 16px;
 }

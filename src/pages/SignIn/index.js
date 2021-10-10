@@ -8,16 +8,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../routes.js';
-import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
-
+import SuccessAlert from '../../components/SuccessAlert';
+import ErrorAlert from '../../components/ErrorAlert';
+import Loading from '../../components/ErrorAlert';
 
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { logIn, open, setOpen } = useContext(AuthContext);
+  const { logIn, openRegisterSuccess, setOpenRegisterSuccess } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const history = useHistory();
 
   async function onSubmit(data) {
@@ -33,10 +35,12 @@ function SignIn() {
     });
 
     const dados = await response.json();
+    setCarregando(false);
+
 
     if (!response.ok) {
       setError(dados);
-      setCarregando(false);
+      setOpenErrorAlert(true);
       return
     }
 
@@ -44,14 +48,8 @@ function SignIn() {
 
     logIn(token, usuario);
 
-    setCarregando(false);
 
     history.push('/home')
-  }
-
-  function handleAlertClose() {
-    setError('');
-    setOpen(false);
   }
 
   return (
@@ -70,7 +68,7 @@ function SignIn() {
             <input id="email"
               maxLength="33"
               type="text"
-              className={errors.email?.type === 'required' && "input-error"}
+              className={errors.email?.type === 'required' ? "input-error" : ""}
               placeholder={errors.email?.type === 'required' ? "Campo obrigatório!" : "exemplo@gmail.com"}
               {...register('email', { required: true })} />
             <span className="input-line"></span>
@@ -80,7 +78,7 @@ function SignIn() {
             <input id="password"
               maxLength="23"
               type={showPassword ? 'text' : 'password'}
-              className={errors.senha?.type === 'required' && "input-error"}
+              className={errors.senha?.type === 'required' ? "input-error" : ""}
               placeholder={errors.senha ? "Campo obrigatório!" : ""}
               {...register("senha", { required: true })} />
             <FontAwesomeIcon
@@ -93,34 +91,21 @@ function SignIn() {
           <div className="button-align">
             <button className="btn-pink" onClick={handleSubmit(onSubmit)}>Entrar</button>
           </div>
-          <Snackbar open={error}
-            autoHideDuration={5000}
-            onClose={handleAlertClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleAlertClose}
-              severity="error"
-              variant="filled">
-              {error}
-            </Alert>
-          </Snackbar>
-          <Snackbar open={open}
-            autoHideDuration={8000}
-            onClose={handleAlertClose}
-            anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-            <Alert onClose={handleAlertClose}
-              severity="success"
-              variant="filled">
-              Cadastro concluído com sucesso!
-            </Alert>
-          </Snackbar>
+          <ErrorAlert
+            openErrorAlert={openErrorAlert}
+            setOpenErrorAlert={setOpenErrorAlert}
+            error={error} />
+          <SuccessAlert
+            openSuccessAlert={openRegisterSuccess}
+            setOpenSuccessAlert={setOpenRegisterSuccess}
+            message="Cadastro concluído com sucesso!" />
+          <Loading carregando={carregando} />
         </div>
       </form >
       <div className="footer-signIn light-label  ">
         <p>Não tem uma conta?  <a href="/cadastro">Cadastre-se!</a></p>
       </div>
-      <Backdrop open={carregando}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
+
     </div >
   )
 }

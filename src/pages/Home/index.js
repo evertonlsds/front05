@@ -74,11 +74,11 @@ function Main() {
           </div>
           <div className="rectangle1-card1">
             <p className="content-padding">Em dia</p>
-            <h1 className="content-padding">{clientesEmDia}</h1>
+            <h1 className="content-padding">{clientesEmDia ? clientesEmDia : 0}</h1>
           </div>
           <div className="rectangle2-card1">
             <p className="content-padding">Inadimplentes</p>
-            <h1 className="content-padding">{clientesInadimplentes}</h1>
+            <h1 className="content-padding">{clientesInadimplentes ? clientesInadimplentes : 0}</h1>
           </div>
         </div>
         <div className="card-2">
@@ -88,11 +88,11 @@ function Main() {
           </div>
           <div className="rectangle1-card2">
             <p className="content-padding">Previstas</p>
-            <h1 className="content-padding">{cobrancasPendentes}</h1>
+            <h1 className="content-padding">{cobrancasPendentes ? cobrancasPendentes : 0}</h1>
           </div>
           <div className="rectangle2-card2">
             <p className="content-padding">Vencidas</p>
-            <h1 className="content-padding">{cobrancasVencidas}</h1>
+            <h1 className="content-padding">{cobrancasVencidas ? cobrancasVencidas : 0}</h1>
           </div>
           <div className="rectangle3-card2">
             <p className="content-padding">Pagas</p>
