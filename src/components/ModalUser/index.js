@@ -2,12 +2,13 @@ import './styles.css';
 import '../../styles/modal.css';
 import '../../styles/form.css'
 import CloseIcon from '../../images/close.svg'
-import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
 import { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../routes.js';
+import Loading from '../Loading';
+import ErrorAlert from '../ErrorAlert';
 
 
 
@@ -17,6 +18,7 @@ function ModalUser() {
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
   const { setupdateProfileSuccess, modalOpen, setModalOpen, perfil, setPerfil } = useContext(AuthContext);
+  const [openErrorAlert, setOpenErrorAlert] = useState(false);
 
   async function atualizarPerfil(dados) {
     setCarregando(true);
@@ -30,21 +32,18 @@ function ModalUser() {
       body: JSON.stringify(dados)
     });
     const resposta = await response.json();
+    setCarregando(false);
 
     if (!response.ok) {
       setError(resposta);
-      setCarregando(false);
+      setOpenErrorAlert(true);
       return;
     }
     setupdateProfileSuccess(true);
-    setCarregando(false);
     setModalOpen(false);
     setPerfil(resposta);
   }
 
-  function handleAlertClose() {
-    setError('');
-  }
   return (
     <>
       {modalOpen &&
@@ -52,7 +51,7 @@ function ModalUser() {
           <div className="modal-content">
             <form className=" formSingUp" onSubmit={handleSubmit(atualizarPerfil)}>
               <div className=" mb-lg">
-                <img src={CloseIcon} alt="fechar" onClick={() => setModalOpen(false)} />
+                <img src={CloseIcon} className='close-icon' alt="fechar" onClick={() => setModalOpen(false)} />
                 <h1> / / EDITAR USUÁRIO </h1>
               </div>
               <div>
@@ -103,23 +102,14 @@ function ModalUser() {
                 <div className="button-align">
                   <button className="btn-pink" type="submit">Editar conta</button>
                 </div>
-                <Snackbar open={error}
-                  autoHideDuration={5000}
-                  onClose={handleAlertClose}
-                  anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                  mouseEvent={false}>
-                  <Alert onClose={handleAlertClose}
-                    severity="error"
-                    variant="filled">
-                    {error}
-                  </Alert>
-                </Snackbar>
+                <ErrorAlert
+                  openErrorAlert={openErrorAlert}
+                  setOpenErrorAlert={setOpenErrorAlert}
+                  error={error} />
               </div>
             </form>
           </div>
-          <Backdrop open={carregando}>
-            <CircularProgress color="inherit" />
-          </Backdrop>
+          <Loading carregando={carregando} />
         </div>
       }
     </>

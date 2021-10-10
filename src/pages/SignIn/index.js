@@ -10,7 +10,7 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../routes.js';
 import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
-import Loading from '../../components/ErrorAlert';
+import { Backdrop, CircularProgress } from '@mui/material';
 
 
 function SignIn() {
@@ -99,7 +99,9 @@ function SignIn() {
             openSuccessAlert={openRegisterSuccess}
             setOpenSuccessAlert={setOpenRegisterSuccess}
             message="Cadastro concluído com sucesso!" />
-          <Loading carregando={carregando} />
+          <Backdrop open={carregando}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       </form >
       <div className="footer-signIn light-label  ">
