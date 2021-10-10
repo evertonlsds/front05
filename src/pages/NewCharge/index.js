@@ -3,8 +3,9 @@ import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
-import CustomSelect from '../../components/CustomSelect';
 import CustomDatePicker from '../../components/CustomDatePicker';
+import SelectStatus from '../../components/SelectStatus';
+import SelectClient from '../../components/SelectClient';
 
 
 export default function NewCharge() {
@@ -34,6 +35,7 @@ export default function NewCharge() {
     }, [])
 
     async function addCharge(dados) {
+        console.log(dados);
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'POST',
@@ -58,10 +60,12 @@ export default function NewCharge() {
                 <div className="clientContainerContent">
                     <h1 className="newClientTitle">/ / CRIAR COBRANÇA</h1>
                     <form className="new-charge-form" onSubmit={handleSubmit(addCharge)}>
-                        <CustomSelect clients={clients}
-                            control={control}
-                            id="cliente"
-                            register={() => register('cliente_id', { required: true })} />
+                        <div className="input-div">
+                            <label htmlFor="cliente">Cliente</label>
+                            <SelectClient clients={clients}
+                                control={control}
+                                id="cliente" />
+                        </div>
                         <div className="input-div">
                             <label htmlFor="nome">Descrição</label>
                             <input
@@ -72,21 +76,16 @@ export default function NewCharge() {
                                 {...register("descricao", { required: true })} />
                         </div>
                         <div className="input-div">
-                            <label htmlFor="nome">Vencimento</label>
+                            <label htmlFor="nome">Status</label>
+                            <SelectStatus
+                                control={control} />
+                        </div>
+                        <div className="input-div">
+                            <label htmlFor="vencimento">Vencimento</label>
                             <CustomDatePicker
                                 control={control}
                             />
-                        </div>
-                        <div className="input-div">
-                            <label htmlFor="nome">Status</label>
-                            <input
-                                id="status"
-                                type="text"
-                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
-                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                {...register("status", { required: true })} />
-                        </div>
-                        <div className="input-div">
+                            {errors.vencimento?.type === 'required' && <span> Escolha uma data! </span>}
                             <label htmlFor="nome">Valor</label>
                             <input
                                 id="descricao"
