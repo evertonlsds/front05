@@ -13,7 +13,7 @@ export default function SelectClient(props) {
             control={props.control}
             rules={{ required: true }}
             render={({ field: { value, onChange, ref } }) => (
-                <div class="select-status">
+                <div className="select-status">
                     <select
                         name='cliente_id'
                         id='cliente_id'
@@ -22,7 +22,7 @@ export default function SelectClient(props) {
                         onChange={onChange}
                         placeholder='Nome da cliente'>
                         <option selected="selected" style={{ "display": "none" }}>Selecione a cliente</option>
-                        {clients && clients.map((client) => (<option value={client.id}>{client.nome}</option>))}
+                        {clients && clients.map((client) => (<option value={client.id} key={client.id}>{client.nome}</option>))}
                     </select>
                 </div>)} />
     );

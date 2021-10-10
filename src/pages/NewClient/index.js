@@ -1,19 +1,21 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../routes.js';
-import { Alert, Snackbar, CircularProgress, Backdrop } from '@mui/material';
+import SuccessAlert from '../../components/SuccessAlert';
+import ErrorAlert from '../../components/ErrorAlert';
 import UserMenu from '../../components/UserMenu';
 import { getCityByCEP } from '../../service/viaCEP';
+import Loading from '../../components/Loading';
 
 
 
 function NewClient() {
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const { handleSubmit, register, formState: { errors }, reset } = useForm();
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const { open, setOpen } = useContext(AuthContext);
+  const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
+  const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const [cep, setCep] = useState("");
   const [city, setCity] = useState("");
 
@@ -57,19 +59,17 @@ function NewClient() {
     });
     const resposta = await response.json();
 
+    setCarregando(false);
+
     if (!response.ok) {
       setError(resposta);
-      setCarregando(false);
+      setOpenErrorAlert(true);
       return;
     }
 
-    setOpen(true);
+    setOpenSuccessAlert(true);
     setCarregando(false);
-  }
-
-  function handleAlertClose() {
-    setError('');
-    setOpen(false);
+    reset();
   }
 
   return (
@@ -178,36 +178,20 @@ function NewClient() {
               </div>
             </div>
             <div className="buttonsDiv">
-              <button className="btn-white-pink" type="reset">Cancelar</button>
+              <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
               <button className="btn-pink" type="submit">Adicionar Cliente</button>
             </div>
-            <Snackbar open={error}
-              autoHideDuration={5000}
-              onClose={handleAlertClose}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-              <Alert onClose={handleAlertClose}
-                severity="error"
-                variant="filled">
-                {error}
-              </Alert>
-            </Snackbar>
-            <Snackbar open={open}
-              autoHideDuration={8000}
-              onClose={handleAlertClose}
-              anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-              <Alert onClose={handleAlertClose}
-                severity="success"
-                variant="filled">
-                Cliente cadastrado com sucesso!
-              </Alert>
-            </Snackbar>
+            <SuccessAlert
+              openSuccessAlert={openSuccessAlert}
+              setOpenSuccessAlert={setOpenSuccessAlert}
+              message="Cliente cadastrado com sucesso!" />
+            <ErrorAlert
+              openErrorAlert={openErrorAlert}
+              setOpenErrorAlert={setOpenErrorAlert}
+              error={error} />
           </form>
         </div>
-
-        <Backdrop open={carregando}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-
+        <Loading carregando={carregando} />
       </div>
     </div>
   )

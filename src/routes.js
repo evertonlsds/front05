@@ -26,7 +26,7 @@ function ProtectedRoutes(props) {
 
 function Routes() {
     const [perfil, setPerfil] = useState('')
-    const [open, setOpen] = useState(false);
+    const [openRegisterSuccess, setOpenRegisterSuccess] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [updateProfileSuccess, setupdateProfileSuccess] = useState(false);
 
@@ -42,7 +42,7 @@ function Routes() {
     }
 
     return (
-        <AuthContext.Provider value={{ logIn, logOut, perfil, setPerfil, open, setOpen, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
+        <AuthContext.Provider value={{ logIn, logOut, perfil, setPerfil, openRegisterSuccess, setOpenRegisterSuccess, modalOpen, setModalOpen, updateProfileSuccess, setupdateProfileSuccess }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={SignIn} />

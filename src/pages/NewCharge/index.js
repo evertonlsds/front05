@@ -6,11 +6,18 @@ import { useState, useEffect } from 'react';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
 import SelectClient from '../../components/SelectClient';
+import Loading from '../../components/Loading';
+import SuccessAlert from '../../components/SuccessAlert';
+import ErrorAlert from '../../components/ErrorAlert';
 
 
 export default function NewCharge() {
-    const { handleSubmit, register, control, formState: { errors } } = useForm();
+    const { handleSubmit, register, control, formState: { errors }, reset } = useForm();
     const [clients, setClients] = useState([]);
+    const [carregando, setCarregando] = useState(false);
+    const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
+    const [openErrorAlert, setOpenErrorAlert] = useState(false);
+    const [error, setError] = useState(false);
 
     async function getClients() {
 
@@ -35,8 +42,7 @@ export default function NewCharge() {
     }, [])
 
     async function addCharge(dados) {
-        console.log(dados);
-
+        setCarregando(true);
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'POST',
             headers: {
@@ -47,9 +53,18 @@ export default function NewCharge() {
             body: JSON.stringify(dados)
         });
 
-        const resposta = await response.json();
-        console.log(resposta)
+        setCarregando(false);
 
+        const resposta = await response.json();
+
+        if (!response.ok) {
+            setOpenErrorAlert(true)
+            setError(resposta);
+            return;
+        }
+
+        setOpenSuccessAlert(true);
+        reset();
     }
 
     return (
@@ -99,11 +114,20 @@ export default function NewCharge() {
                             </div>
                         </div>
                         <div className="flex-row">
-                            <button className="btn-white-pink" type="reset">Cancelar</button>
+                            <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
                             <button className="btn-pink" type="submit">Criar Cobrança</button>
                         </div>
                     </form>
                 </div>
+                <Loading carregando={carregando} />
+                <SuccessAlert
+                    openSuccessAlert={openSuccessAlert}
+                    setOpenSuccessAlert={setOpenSuccessAlert}
+                    message="Cobrança cadastrada com sucesso!" />
+                <ErrorAlert
+                    openErrorAlert={openErrorAlert}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    error={error} />
             </div>
         </div>
     )

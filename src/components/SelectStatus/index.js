@@ -11,7 +11,7 @@ export default function SelectStatus(props) {
         <Controller name='status'
             control={props.control}
             render={({ field: { value, onChange, ref } }) => (
-                <div class="select-status">
+                <div className="select-status">
                     <select
                         name='status'
                         id='status'
