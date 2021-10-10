@@ -27,6 +27,7 @@ export default function CustomDatePicker(props) {
                 selected={value}
                 value={value}
                 locale={pt}
+                startDate={new Date()}
                 onChange={onChange}
                 popperPlacement="top-start"
                 customInput={<ExampleCustomInput />}
