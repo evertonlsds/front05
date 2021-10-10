@@ -4,11 +4,13 @@ import UserMenu from '../../components/UserMenu';
 import ClientTable from '../../components/ClientTable';
 import { useHistory } from 'react-router';
 import { useState, useEffect } from 'react';
+import ModalClient from '../../components/ModalClient';
 
 
 export default function Clients() {
     const history = useHistory();
     const [clients, setClients] = useState([]);
+    const [openModalClient, setOpenModalClient] = useState(true)
 
     async function getClients() {
 
@@ -38,9 +40,11 @@ export default function Clients() {
                 <UserMenu />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
+                    <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} />
                 </div>
                 <ClientTable clients={clients} />
             </div>
+
         </div>
     )
 }
