@@ -72,7 +72,7 @@ export default function NewCharge() {
                                 id="descricao"
                                 type="textfield"
                                 className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
-                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
+                                placeholder={errors.descricao ? "Campo obrigatório!" : "Referente ao pagamento da compra online"}
                                 {...register("descricao", { required: true })} />
                         </div>
                         <div className="input-div">
@@ -80,21 +80,25 @@ export default function NewCharge() {
                             <SelectStatus
                                 control={control} />
                         </div>
-                        <div className="input-div">
-                            <label htmlFor="vencimento">Vencimento</label>
-                            <CustomDatePicker
-                                control={control}
-                            />
-                            {errors.vencimento?.type === 'required' && <span> Escolha uma data! </span>}
-                            <label htmlFor="nome">Valor</label>
-                            <input
-                                id="descricao"
-                                type="text"
-                                className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
-                                placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                {...register("valor", { required: true })} />
+                        <div className="valor-vencimento">
+                            <div className='flex-column'>
+                                <label htmlFor="valor">Valor</label>
+                                <input
+                                    id="valor"
+                                    type="text"
+                                    className={errors.descricao?.type === 'required' ? "input-error valor-input" : "valor-input"}
+                                    placeholder={errors.descricao ? "Campo obrigatório!" : ""}
+                                    {...register("valor", { required: true })} />
+                            </div>
+                            <div className='flex-column'>
+                                <label htmlFor="vencimento">Vencimento</label>
+                                <CustomDatePicker
+                                    control={control}
+                                />
+                                {errors.vencimento?.type === 'required' && <span> Escolha uma data! </span>}
+                            </div>
                         </div>
-                        <div className="buttonsDiv">
+                        <div className="flex-row">
                             <button className="btn-white-pink" type="reset">Cancelar</button>
                             <button className="btn-pink" type="submit">Criar Cobrança</button>
                         </div>
