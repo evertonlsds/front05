@@ -11,7 +11,7 @@ import Loading from '../../components/Loading';
 
 
 function NewClient() {
-  const { handleSubmit, register, formState: { errors }, reset } = useForm();
+  const { handleSubmit, register, formState: { errors, isValid }, reset } = useForm({mode: "onChange"});
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
@@ -179,7 +179,7 @@ function NewClient() {
             </div>
             <div className="buttonsDiv">
               <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
-              <button className="btn-pink" type="submit">Adicionar Cliente</button>
+              <button className={isValid ? "btn-pink" : "btn-disabled"} disabled={!isValid} type="submit">Adicionar Cliente</button>
             </div>
             <SuccessAlert
               openSuccessAlert={openSuccessAlert}

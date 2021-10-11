@@ -12,7 +12,7 @@ import ErrorAlert from '../../components/ErrorAlert';
 
 
 function SignUp() {
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const { handleSubmit, register, formState: { errors, isValid} } = useForm({mode: "onChange"});
   const [showPassword, setShowPassword] = useState(false);
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
   const [error, setError] = useState('');
@@ -84,7 +84,7 @@ function SignUp() {
             </div>
           </div>
           <div className="button-align">
-            <button className="btn-pink" type="submit">Criar conta</button>
+            <button className={isValid ? "btn-pink" : "btn-disabled"} type="submit" disabled={!isValid}>Criar conta</button>
           </div>
           <ErrorAlert
             openErrorAlert={openErrorAlert}

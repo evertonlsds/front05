@@ -15,6 +15,13 @@
     margin: 30px;
     cursor: pointer; 
 }
+.btn-disabled{
+    background-color: #ffbadf;
+    color: #d6d6d6;
+    width: 166px;
+    border: none;
+    margin: 30px;
+}
 .button-align{
     display: flex;
     align-items: center;

@@ -12,7 +12,7 @@ import ErrorAlert from '../../components/ErrorAlert';
 
 
 export default function NewCharge() {
-    const { handleSubmit, register, control, formState: { errors }, reset } = useForm();
+    const { handleSubmit, register, control, formState: { errors, isValid }, reset } = useForm({mode: "onChange"});
     const [clients, setClients] = useState([]);
     const [carregando, setCarregando] = useState(false);
     const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
@@ -115,7 +115,7 @@ export default function NewCharge() {
                         </div>
                         <div className="flex-row">
                             <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
-                            <button className="btn-pink" type="submit">Criar Cobrança</button>
+                            <button className={isValid ? "btn-pink" : "btn-disabled"} disabled={!isValid} type="submit">Criar Cobrança</button>
                         </div>
                     </form>
                 </div>

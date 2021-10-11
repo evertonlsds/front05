@@ -15,7 +15,7 @@ import { Backdrop, CircularProgress } from '@mui/material';
 
 function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors, isValid} } = useForm({mode: "onChange"});
   const { logIn, openRegisterSuccess, setOpenRegisterSuccess } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [carregando, setCarregando] = useState(false);
@@ -89,7 +89,7 @@ function SignIn() {
             <span className="input-line"></span>
           </div>
           <div className="button-align">
-            <button className="btn-pink" onClick={handleSubmit(onSubmit)}>Entrar</button>
+            <button className={isValid ? "btn-pink" : "btn-disabled"} disabled={!isValid} onClick={handleSubmit(onSubmit)}>Entrar</button>
           </div>
           <ErrorAlert
             openErrorAlert={openErrorAlert}
