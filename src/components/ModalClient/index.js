@@ -7,31 +7,26 @@ import PhoneIcon from '../../images/phone-icon.svg'
 import Line from '../../images/line.svg'
 import ChargeCard from '../ChargeCard';
 
-
-
-
-
 function ModalClient({ openModalClient, setOpenModalClient }) {
 
-    async function obterCliente(id) {
+    // async function obterCliente(id) {
 
-        const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
-            method: 'PUT',
-            headers: {
-                'Content-Type': "application/json",
-                "charset": "utf-8",
-                'Authorization': `Bearer ${localStorage.getItem('token')} `
-            },
-            body: JSON.stringify()
-        });
-        const resposta = await response.json();
+    //     const response = await fetch(`https://api-desafio-05.herokuapp.com/clientes/${id}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': "application/json",
+    //             "charset": "utf-8",
+    //             'Authorization': `Bearer ${localStorage.getItem('token')} `
+    //         },
+    //         body: JSON.stringify()
+    //     });
+    //     const resposta = await response.json();
 
-        if (!response.ok) {
+    //     if (!response.ok) {
+    //         return;
+    //     }
 
-            return;
-        }
-
-    }
+    // }
 
     return (
         <>

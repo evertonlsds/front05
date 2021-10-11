@@ -10,7 +10,8 @@ import ModalClient from '../../components/ModalClient';
 export default function Clients() {
     const history = useHistory();
     const [clients, setClients] = useState([]);
-    const [openModalClient, setOpenModalClient] = useState(true)
+    const [openModalClient, setOpenModalClient] = useState(false);
+    const [selectedClientID, setSelectedClientID] = useState([]);
 
     async function getClients() {
 
@@ -42,7 +43,7 @@ export default function Clients() {
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} />
                 </div>
-                <ClientTable clients={clients} />
+                <ClientTable clients={clients} setOpenModalClient={setOpenModalClient} setSelectedClientID={setSelectedClientID} selectedClientID={selectedClientID} />
             </div>
 
         </div>
