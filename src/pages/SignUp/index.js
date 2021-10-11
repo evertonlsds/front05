@@ -84,7 +84,7 @@ function SignUp() {
             </div>
           </div>
           <div className="button-align">
-            <button className={isValid ? "btn-pink" : "btn-disabled"} type="submit" disabled={!isValid}>Criar conta</button>
+            <button className={isValid ? "btn-pink" : "btn-disabled"} disabled={!isValid} type="submit">Criar conta</button>
           </div>
           <ErrorAlert
             openErrorAlert={openErrorAlert}

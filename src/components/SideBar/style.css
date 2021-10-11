@@ -6,7 +6,7 @@ padding-top: 0;
 background-color: #263238;
 min-width: 200px;
 width: 20%;
-height: 100vh;
+height: 100rem;
 
 
 }
@@ -21,7 +21,7 @@ cursor: pointer;
 }
 
 .buttonDiv{
-margin: auto auto 200px auto;
+margin: 300px auto auto auto;
 }
 
 .logo{
