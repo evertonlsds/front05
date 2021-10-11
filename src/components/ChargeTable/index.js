@@ -1,4 +1,5 @@
 import './styles.css';
+import { Fragment } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,7 +24,7 @@ export default function ChargeTable({ charges }) {
                 </TableHead>
                 <TableBody className='clienttable-body'>
                     {charges && charges.map((charge) => (
-                        <>
+                        <Fragment key={charge.id}>
                             <TableRow>
                                 <TableCell className='linha' />
                                 <TableCell className='linha' />
@@ -56,7 +57,7 @@ export default function ChargeTable({ charges }) {
                                 </TableCell>
                             </TableRow>
 
-                        </>
+                        </Fragment>
                     ))}
                 </TableBody>
             </Table>

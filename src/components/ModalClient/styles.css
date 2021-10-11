@@ -11,8 +11,8 @@
     justify-content: center;
 }
 .modal-content {
-    width: 958px;
-    height: 533px;
+    min-width: 958px;
+    min-height: 533px;
     background-color: #FFFFFF;
     border-radius: 16px;
     padding-left: 62px;
@@ -72,4 +72,9 @@
 }
 .main-content {
     display: flex;
+}
+.client-charges {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
 }

@@ -41,7 +41,7 @@ export default function Clients() {
                 <UserMenu />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
-                    <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} />
+                    <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
                 <ClientTable clients={clients} setOpenModalClient={setOpenModalClient} setSelectedClientID={setSelectedClientID} selectedClientID={selectedClientID} />
             </div>

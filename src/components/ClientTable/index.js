@@ -8,13 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import EmailIcon from '../../images/email-icon.svg'
 import PhoneIcon from '../../images/phone-icon.svg'
 import EditIcon from '../../images/edit-icon.svg';
+import { Fragment } from 'react';
 
 export default function ClientTable({ clients, setOpenModalClient, setSelectedClientID, selectedClientID }) {
 
     function handleModalOpen(client) {
         setOpenModalClient(true);
         setSelectedClientID(client);
-        console.log(selectedClientID)
     }
 
     return (
@@ -31,7 +31,7 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                 </TableHead>
                 <TableBody className='clienttable-body'>
                     {clients.map((client) => (
-                        <>
+                        <Fragment key={client.id}>
                             <TableRow>
                                 <TableCell className='linha' />
                                 <TableCell className='linha' />
@@ -41,8 +41,9 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                             </TableRow>
                             <TableRow
                                 style={{ backgroundColor: '#FFFFFF', "cursor": "pointer" }}
-                                onClick={(e) => handleModalOpen(client.id)}
-                                id={client.id}>
+                                data-id={client.id}
+                                onClick={() => handleModalOpen(client.id)}
+                                key={client.id}>
                                 <TableCell scope="row">
                                     <div className='flex-column'>
                                         <h3 className='client-name'>{client.nome}</h3>
@@ -67,8 +68,7 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                                     <img src={EditIcon} alt='edit-icon' style={{ 'cursor': 'pointer' }} />
                                 </TableCell>
                             </TableRow>
-
-                        </>
+                        </Fragment>
                     ))}
                 </TableBody>
             </Table>
