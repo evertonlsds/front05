@@ -9,7 +9,14 @@ import EmailIcon from '../../images/email-icon.svg'
 import PhoneIcon from '../../images/phone-icon.svg'
 import EditIcon from '../../images/edit-icon.svg';
 
-export default function ClientTable({ clients }) {
+export default function ClientTable({ clients, setOpenModalClient, setSelectedClientID, selectedClientID }) {
+
+    function handleModalOpen(client) {
+        setOpenModalClient(true);
+        setSelectedClientID(client);
+        console.log(selectedClientID)
+    }
+
     return (
         <TableContainer>
             <Table sx={{ minWidth: 1050 }} size="small" aria-label="clients table">
@@ -33,9 +40,9 @@ export default function ClientTable({ clients }) {
                                 <TableCell className='linha' />
                             </TableRow>
                             <TableRow
-
-                                style={{ backgroundColor: '#FFFFFF' }}
-                            >
+                                style={{ backgroundColor: '#FFFFFF', "cursor": "pointer" }}
+                                onClick={(e) => handleModalOpen(client.id)}
+                                id={client.id}>
                                 <TableCell scope="row">
                                     <div className='flex-column'>
                                         <h3 className='client-name'>{client.nome}</h3>
