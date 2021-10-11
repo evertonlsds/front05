@@ -42,7 +42,8 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                             <TableRow
                                 style={{ backgroundColor: '#FFFFFF', "cursor": "pointer" }}
                                 data-id={client.id}
-                                onClick={() => handleModalOpen(client.id)}
+                                id={client.id}
+                                onClick={(e) => handleModalOpen(client.id)}
                                 key={client.id}>
                                 <TableCell scope="row">
                                     <div className='flex-column'>
