@@ -3,12 +3,16 @@ import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import ClientTable from '../../components/ClientTable';
 import { useHistory } from 'react-router';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../routes.js';
 import ModalClient from '../../components/ModalClient';
+import ModalUser from '../../components/ModalUser';
+import SuccessAlert from '../../components/SuccessAlert';
 
 
 export default function Clients() {
     const history = useHistory();
+    const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
     const [clients, setClients] = useState([]);
     const [openModalClient, setOpenModalClient] = useState(false);
     const [selectedClientID, setSelectedClientID] = useState([]);
@@ -39,6 +43,11 @@ export default function Clients() {
             <SideBar />
             <div className='main-clients'>
                 <UserMenu />
+                <ModalUser />
+                <SuccessAlert
+                    openSuccessAlert={updateProfileSuccess}
+                    setOpenSuccessAlert={setUpdateProfileSuccess}
+                    message="Perfil atualizado com sucesso!" />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />

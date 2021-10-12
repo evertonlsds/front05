@@ -1,12 +1,16 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
+import ModalUser from '../../components/ModalUser';
 import ChargeTable from '../../components/ChargeTable';
-import { useState, useEffect } from 'react';
+import SuccessAlert from '../../components/SuccessAlert';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../routes.js';
 
 
 export default function Charges() {
     const [charges, setCharges] = useState([]);
+    const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
 
     async function getCharges() {
 
@@ -34,6 +38,11 @@ export default function Charges() {
             <SideBar />
             <div className='main-charges'>
                 <UserMenu />
+                <ModalUser />
+                <SuccessAlert
+                    openSuccessAlert={updateProfileSuccess}
+                    setOpenSuccessAlert={setUpdateProfileSuccess}
+                    message="Perfil atualizado com sucesso!" />
                 <div className='cards-container2'>
                     <ChargeTable charges={charges} />
                 </div>

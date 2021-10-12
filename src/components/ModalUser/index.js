@@ -17,7 +17,7 @@ function ModalUser() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
-  const { setupdateProfileSuccess, modalOpen, setModalOpen, perfil, setPerfil } = useContext(AuthContext);
+  const { setUpdateProfileSuccess, modalOpen, setModalOpen, perfil, setPerfil } = useContext(AuthContext);
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
 
   async function atualizarPerfil(dados) {
@@ -39,7 +39,7 @@ function ModalUser() {
       setOpenErrorAlert(true);
       return;
     }
-    setupdateProfileSuccess(true);
+    setUpdateProfileSuccess(true);
     setModalOpen(false);
     setPerfil(resposta);
   }
