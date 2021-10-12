@@ -11,6 +11,7 @@ import Loading from '../../components/Loading';
 import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
 import ModalUser from '../../components/ModalUser';
+import InputValor from '../../components/InputValor';
 
 
 export default function NewCharge() {
@@ -107,12 +108,8 @@ export default function NewCharge() {
                         <div className="valor-vencimento">
                             <div className='flex-column'>
                                 <label htmlFor="valor">Valor</label>
-                                <input
-                                    id="valor"
-                                    type="text"
-                                    className={errors.descricao?.type === 'required' ? "input-error valor-input" : "valor-input"}
-                                    placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                    {...register("valor", { required: true })} />
+                                <InputValor
+                                    control={control} />
                             </div>
                             <div className='flex-column'>
                                 <label htmlFor="vencimento">Vencimento</label>
