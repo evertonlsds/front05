@@ -19,9 +19,8 @@ export default function SelectClient(props) {
                         id='cliente_id'
                         value={value}
                         ref={ref}
-                        onChange={onChange}
-                        placeholder='Nome da cliente'>
-                        <option selected="selected" style={{ "display": "none" }}>Selecione a cliente</option>
+                        onChange={onChange}>
+                        <option style={{ "display": "none" }}>Selecione a cliente</option>
                         {clients && clients.map((client) => (<option value={client.id} key={client.id}>{client.nome}</option>))}
                     </select>
                 </div>)} />

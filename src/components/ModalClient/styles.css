@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: center;
 }
-.modal-content {
+.modal-content-client {
     min-width: 958px;
     min-height: 533px;
     background-color: #FFFFFF;
