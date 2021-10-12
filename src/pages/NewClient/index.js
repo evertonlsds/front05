@@ -50,6 +50,7 @@ function NewClient() {
 
   async function newClient(dados) {
     setCarregando(true);
+    console.log(dados);
 
     const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
       method: 'POST',
@@ -113,8 +114,11 @@ function NewClient() {
                 <InputMasked control={control}
                   mask="999.999.999-99"
                   name="cpf"
+                  defaultValue='00000000000'
                   class={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.cpf ? "Campo obrigatório!" : ""} />
+                  placeholder={errors.cpf ? "Campo obrigatório!" : "000.000.000-00"}
+                  rules={{ required: true }} 
+                />
               </div>
               <div className="inputDiv">
                 <label htmlFor="telefone">Telefone</label>
@@ -122,7 +126,8 @@ function NewClient() {
                   mask="(999) 9999-9999"
                   name="telefone"
                   class={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.telefone ? "Campo obrigatório!" : ""} />
+                  placeholder={errors.telefone ? "Campo obrigatório!" : "(DDD) 0000-0000"}
+                  rules={{ required: true }} />
               </div>
             </div>
             <div className="dualInput">

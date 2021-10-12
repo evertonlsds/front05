@@ -10,9 +10,28 @@ import { AuthContext } from '../../routes.js';
 
 export default function UserMenu() {
   const [anchorEl, setAnchorEl] = useState(false);
-  const { logOut, setModalOpen } = useContext(AuthContext);
+  const { logOut, setModalOpen, setPerfil } = useContext(AuthContext);
+
+  async function getProfile () {
+    const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
+      method: 'GET',
+      headers: {
+        'Content-Type': "application/json",
+        "charset": "utf-8",
+        'Authorization': `Bearer ${localStorage.getItem('token')} `
+      },
+    });
+    const resposta = await response.json();
+    setPerfil (resposta);
+
+  }
   function handleUserMenu(event) {
     setAnchorEl(event.currentTarget);
+  }
+
+  function handleModalOpen() {
+    getProfile();
+    setModalOpen(true);
   }
 
   return (
@@ -21,7 +40,6 @@ export default function UserMenu() {
         alt='usuario-menu'
         id='user-menu'
         className='icon-usuario'
-
         onClick={handleUserMenu} />
       <Popover
         id='menu-user'
@@ -35,7 +53,7 @@ export default function UserMenu() {
         <div className='flex-column user-menu'>
           <div className='row-menu'>
             <img src={EditIcon} alt="edit" />
-            <button className='btn-usermenu' onClick={() => setModalOpen(true)}>Editar</button>
+            <button className='btn-usermenu' onClick={() => handleModalOpen()}>Editar</button>
           </div>
           <div className='row-menu' onClick={() => logOut()}>
             <img src={Logout} alt="logout" />
