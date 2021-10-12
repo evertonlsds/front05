@@ -42,7 +42,7 @@ function ModalClient({ openModalClient, setOpenModalClient, selectedClientID }) 
         <>
             {openModalClient &&
                 <div className="modal-container">
-                    <div className="modal-content">
+                    <div className="modal-content-client">
                         <div className="first-row">
                             <div className="client-profile">
                                 <h3 className='client-name-modal'>{selectedClient.nome}</h3>
@@ -89,7 +89,7 @@ function ModalClient({ openModalClient, setOpenModalClient, selectedClientID }) 
                             </div>
                             <img src={Line} alt='line' />
                             <div className='client-charges'>
-                                {selectedClient.cobrancas.map((cobranca) => (<ChargeCard cobranca={cobranca} />))}
+                                {selectedClient.cobrancas && selectedClient.cobrancas.map((cobranca) => (<ChargeCard cobranca={cobranca} />))}
                             </div>
                         </div>
                     </div>
