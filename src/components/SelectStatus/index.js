@@ -18,8 +18,8 @@ export default function SelectStatus(props) {
                         value={value}
                         ref={ref}
                         onChange={onChange}>
-                        <option value='Pendente'>Pendente</option>
-                        <option value='Pago'>Pago</option>
+                        <option value='PENDENTE'>Pendente</option>
+                        <option value='PAGO'>Pago</option>
                     </select>
                 </div>)} />
     );
