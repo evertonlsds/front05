@@ -9,11 +9,12 @@ import UserMenu from '../../components/UserMenu';
 import { getCityByCEP } from '../../service/viaCEP';
 import Loading from '../../components/Loading';
 import ModalUser from '../../components/ModalUser';
+import InputMasked from '../../components/InputMasked';
 
 
 
 function NewClient() {
-  const { handleSubmit, register, formState: { errors, isValid }, reset } = useForm({ mode: "onChange" });
+  const { handleSubmit, register, formState: { errors, isValid }, reset, control } = useForm({ mode: "onChange" });
   const [error, setError] = useState('');
   const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
   const [carregando, setCarregando] = useState(false);
@@ -109,21 +110,19 @@ function NewClient() {
             <div className="dualInput">
               <div className="inputDiv">
                 <label htmlFor="cpf">CPF</label>
-                <input
-                  id="cpf"
-                  type="text"
-                  className={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.cpf ? "Campo obrigatório!" : ""}
-                  {...register("cpf", { required: true })} />
+                <InputMasked control={control}
+                  mask="999.999.999-99"
+                  name="cpf"
+                  class={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
+                  placeholder={errors.cpf ? "Campo obrigatório!" : ""} />
               </div>
               <div className="inputDiv">
                 <label htmlFor="telefone">Telefone</label>
-                <input
-                  id="telefone"
-                  type="text"
-                  className={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.telefone ? "Campo obrigatório!" : ""}
-                  {...register("telefone", { required: true })} />
+                <InputMasked control={control}
+                  mask="(999) 9999-9999"
+                  name="telefone"
+                  class={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
+                  placeholder={errors.telefone ? "Campo obrigatório!" : ""} />
               </div>
             </div>
             <div className="dualInput">

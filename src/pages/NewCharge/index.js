@@ -11,6 +11,7 @@ import Loading from '../../components/Loading';
 import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
 import ModalUser from '../../components/ModalUser';
+import InputValor from '../../components/InputValor';
 
 
 export default function NewCharge() {
@@ -46,6 +47,7 @@ export default function NewCharge() {
 
     async function addCharge(dados) {
         setCarregando(true);
+        console.log(dados)
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'POST',
             headers: {
@@ -106,19 +108,14 @@ export default function NewCharge() {
                         <div className="valor-vencimento">
                             <div className='flex-column'>
                                 <label htmlFor="valor">Valor</label>
-                                <input
-                                    id="valor"
-                                    type="text"
-                                    className={errors.descricao?.type === 'required' ? "input-error valor-input" : "valor-input"}
-                                    placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                    {...register("valor", { required: true })} />
+                                <InputValor
+                                    control={control} />
                             </div>
                             <div className='flex-column'>
                                 <label htmlFor="vencimento">Vencimento</label>
                                 <CustomDatePicker
                                     control={control}
                                 />
-                                {errors.vencimento?.type === 'required' && <span> Escolha uma data! </span>}
                             </div>
                         </div>
                         <div className="flex-row">

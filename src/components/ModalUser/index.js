@@ -9,11 +9,12 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../routes.js';
 import Loading from '../Loading';
 import ErrorAlert from '../ErrorAlert';
+import InputMasked from '../InputMasked';
 
 
 
 function ModalUser() {
-  const { handleSubmit, register, formState: { errors } } = useForm();
+  const { handleSubmit, register, formState: { errors }, control } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
@@ -60,7 +61,7 @@ function ModalUser() {
                   <input
                     id="nome"
                     type="text"
-                    className={errors.nome?.type === 'required' && "input-error"}
+                    className={errors.nome?.type === 'required' ? "input-error" : ""}
                     placeholder={perfil.nome}
                     {...register("nome")} />
                   <span className="input-line"></span>
@@ -91,11 +92,7 @@ function ModalUser() {
                       {...register("telefone")} />
                     <span className="input-line"></span>
                     <label htmlFor="cpf">CPF</label>
-                    <input
-                      id="cpf"
-                      type="number"
-                      placeholder={perfil.cpf}
-                      {...register("cpf")} />
+                    <InputMasked control={control} mask="999.999.999-99" name="cpf" />
                     <span className="input-line"></span>
                   </div>
                 </div>

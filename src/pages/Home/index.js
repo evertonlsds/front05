@@ -14,6 +14,7 @@ function Main() {
   const [clientesInadimplentes, setClientesInadimplentes] = useState([]);
   const [cobrancasPendentes, setCobrancasPendentes] = useState([]);
   const [cobrancasVencidas, setCobrancasVencidas] = useState([]);
+  const [cobrancasPagas, setCobrancasPagas] = useState([]);
 
   async function getClients() {
 
@@ -47,6 +48,7 @@ function Main() {
 
     setCobrancasPendentes(resposta.cobrancasPendentes);
     setCobrancasVencidas(resposta.cobrancasVencidas);
+    setCobrancasPagas(resposta.cobrancasPagas);
   }
 
   useEffect(() => {
@@ -92,7 +94,7 @@ function Main() {
           </div>
           <div className="rectangle3-card2">
             <p className="content-padding">Pagas</p>
-            <h1 className="content-padding">0</h1>
+            <h1 className="content-padding">{cobrancasPagas ? cobrancasPagas : 0}</h1>
           </div>
         </div>
         <UserMenu />

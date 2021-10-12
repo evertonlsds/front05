@@ -1,4 +1,5 @@
 .datepicker {
+    margin-bottom: 0;
     cursor: pointer;
     background-color: #FFFFFF;
     display: flex;
@@ -16,6 +17,7 @@
     letter-spacing: 0.25px;
     text-align: left;
 }
-.react-datepicker__input-container {
+.react-datepicker-wrapper .react-datepicker__input-container {
     height: 40px;
+    position: initial
 }

@@ -9,6 +9,17 @@ import TableRow from '@mui/material/TableRow';
 
 
 export default function ChargeTable({ charges }) {
+    function chargeStatusColor(status) {
+        if (status === "PENDENTE") {
+            return 'charge-status charge-status-blue'
+        }
+        if (status === "PAGO") {
+            return 'charge-status charge-status-green'
+        }
+        if (status === "VENCIDA") {
+            return 'charge-status charge-status-red'
+        }
+    }
     return (
         <TableContainer>
             <Table sx={{ minWidth: 1050 }} size="small" aria-label="clients table">
@@ -47,10 +58,10 @@ export default function ChargeTable({ charges }) {
                                     <p className='charge-row'>{charge.descricao}</p>
                                 </TableCell>
                                 <TableCell align="left">
-                                    <p className='charge-row'>{charge.valor}</p>
+                                    <p className='charge-row'>R$ {charge.valor}</p>
                                 </TableCell>
                                 <TableCell align="left">
-                                    <p className={charge.status === "PENDENTE" ? 'charge-status charge-status-blue' : 'charge-status charge-status-red'}> {charge.status} </p>
+                                    <p className={chargeStatusColor(charge.status)}> {charge.status} </p>
                                 </TableCell>
                                 <TableCell align="left">
                                     <p className='charge-row'>{charge.vencimento}</p>
@@ -61,6 +72,6 @@ export default function ChargeTable({ charges }) {
                     ))}
                 </TableBody>
             </Table>
-        </TableContainer>
+        </TableContainer >
     );
 }
