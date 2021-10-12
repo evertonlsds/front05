@@ -10,10 +10,11 @@ export default function InputMasked(props) {
             onChange={props.onChange}
             control={props.control}
             name={props.name}
-            rules={{ required: true }}
+            rules={props.rules}
             render={({ field: { onChange, onBlur, value, ref } }) => <InputMask
                 mask={props.mask}
                 value={value}
+                alwaysShowMask={false}
                 onChange={onChange}>
                 {(inputProps) => <input {...inputProps}
                     onChange={onChange}
@@ -23,6 +24,6 @@ export default function InputMasked(props) {
                     type="text" />}
             </InputMask>}
         >
-        </Controller>
+        </Controller >
     );
 }

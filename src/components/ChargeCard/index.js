@@ -3,7 +3,17 @@ import './styles.css';
 
 
 export default function ChargeCard({ cobranca }) {
-
+    function chargeStatusColor(status) {
+        if (status === "PENDENTE") {
+            return 'charge-status charge-status-blue'
+        }
+        if (status === "PAGO") {
+            return 'charge-status charge-status-green'
+        }
+        if (status === "VENCIDA") {
+            return 'charge-status charge-status-red'
+        }
+    }
 
     return (
         <div className='main-chargecard'>
@@ -16,7 +26,7 @@ export default function ChargeCard({ cobranca }) {
             </div>
             <div className='charge-info'>
                 <p className='chargecard-text'>{cobranca.vencimento}</p>
-                <p className='chargecard-status chargecard-status-green'>{cobranca.status}</p>
+                <p className={chargeStatusColor(cobranca.status)}>{cobranca.status}</p>
             </div>
         </div>
     )

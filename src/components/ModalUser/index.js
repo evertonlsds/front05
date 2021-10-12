@@ -14,7 +14,7 @@ import InputMasked from '../InputMasked';
 
 
 function ModalUser() {
-  const { handleSubmit, register, formState: { errors }, control } = useForm();
+  const { handleSubmit, register, formState: { errors }, control, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [carregando, setCarregando] = useState(false);
@@ -22,6 +22,7 @@ function ModalUser() {
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
 
   async function atualizarPerfil(dados) {
+    console.log(dados)
     setCarregando(true);
     const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
       method: 'PUT',
@@ -43,6 +44,7 @@ function ModalUser() {
     setUpdateProfileSuccess(true);
     setModalOpen(false);
     setPerfil(resposta);
+    reset();
   }
 
   return (
@@ -85,14 +87,16 @@ function ModalUser() {
                     />
                     <span className="input-line"></span>
                     <label htmlFor="phone">Telefone</label>
-                    <input
-                      id="phone"
-                      type="number"
-                      placeholder={perfil.telefone}
-                      {...register("telefone")} />
+                    <InputMasked control={control}
+                      mask="(999) 9999-9999"
+                      name="telefone"
+                      placeholder={perfil.telefone} />
                     <span className="input-line"></span>
                     <label htmlFor="cpf">CPF</label>
-                    <InputMasked control={control} mask="999.999.999-99" name="cpf" />
+                    <InputMasked control={control} 
+                    mask="999.999.999-99" 
+                    name="cpf" 
+                    placeholder={perfil.cpf}/>
                     <span className="input-line"></span>
                   </div>
                 </div>
