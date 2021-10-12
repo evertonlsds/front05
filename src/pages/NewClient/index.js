@@ -1,18 +1,21 @@
 import './styles.css';
 import SideBar from '../../components/SideBar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../routes.js';
 import { useForm } from 'react-hook-form';
 import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
 import UserMenu from '../../components/UserMenu';
 import { getCityByCEP } from '../../service/viaCEP';
 import Loading from '../../components/Loading';
+import ModalUser from '../../components/ModalUser';
 
 
 
 function NewClient() {
-  const { handleSubmit, register, formState: { errors, isValid }, reset } = useForm({mode: "onChange"});
+  const { handleSubmit, register, formState: { errors, isValid }, reset } = useForm({ mode: "onChange" });
   const [error, setError] = useState('');
+  const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
   const [carregando, setCarregando] = useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
@@ -76,6 +79,11 @@ function NewClient() {
     <div className="container-main">
       <SideBar />
       <UserMenu />
+      <ModalUser />
+      <SuccessAlert
+        openSuccessAlert={updateProfileSuccess}
+        setOpenSuccessAlert={setUpdateProfileSuccess}
+        message="Perfil atualizado com sucesso!" />
       <div className="clientContainerContent">
         <h1 className="newClientTitle">/ / ADICIONAR CLIENTE</h1>
         <div className="newClientFormDiv">

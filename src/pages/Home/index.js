@@ -6,10 +6,10 @@ import UsersCard from '../../images/users.svg';
 import Money from '../../images/money.svg';
 import { AuthContext } from '../../routes.js';
 import { useContext, useEffect, useState } from 'react';
-import { Alert, Snackbar } from '@mui/material';
+import SuccessAlert from '../../components/SuccessAlert';
 
 function Main() {
-  const { updateProfileSuccess, setupdateProfileSuccess } = useContext(AuthContext);
+  const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
   const [clientesEmDia, setClientesEmDia] = useState([]);
   const [clientesInadimplentes, setClientesInadimplentes] = useState([]);
   const [cobrancasPendentes, setCobrancasPendentes] = useState([]);
@@ -58,10 +58,6 @@ function Main() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleAlertClose() {
-    setupdateProfileSuccess(false)
-  }
-
   return (
     <div className="container-main">
       <ModalUser />
@@ -100,16 +96,10 @@ function Main() {
           </div>
         </div>
         <UserMenu />
-        <Snackbar open={updateProfileSuccess}
-          autoHideDuration={8000}
-          onClose={handleAlertClose}
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-          <Alert onClose={handleAlertClose}
-            severity="success"
-            variant="filled">
-            Perfil atualizado  com sucesso!
-          </Alert>
-        </Snackbar>
+        <SuccessAlert
+          openSuccessAlert={updateProfileSuccess}
+          setOpenSuccessAlert={setUpdateProfileSuccess}
+          message="Perfil atualizado com sucesso!" />
       </div>
     </div>
   );

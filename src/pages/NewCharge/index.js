@@ -2,17 +2,20 @@ import './styles.css';
 import SideBar from '../../components/SideBar';
 import UserMenu from '../../components/UserMenu';
 import { useForm } from 'react-hook-form';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../routes.js';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
 import SelectClient from '../../components/SelectClient';
 import Loading from '../../components/Loading';
 import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
+import ModalUser from '../../components/ModalUser';
 
 
 export default function NewCharge() {
-    const { handleSubmit, register, control, formState: { errors, isValid }, reset } = useForm({mode: "onChange"});
+    const { handleSubmit, register, control, formState: { errors, isValid }, reset } = useForm({ mode: "onChange" });
+    const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
     const [clients, setClients] = useState([]);
     const [carregando, setCarregando] = useState(false);
     const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
@@ -72,6 +75,11 @@ export default function NewCharge() {
             <SideBar />
             <div className='main-clients'>
                 <UserMenu />
+                <ModalUser />
+                <SuccessAlert
+                    openSuccessAlert={updateProfileSuccess}
+                    setOpenSuccessAlert={setUpdateProfileSuccess}
+                    message="Perfil atualizado com sucesso!" />
                 <div className="clientContainerContent">
                     <h1 className="newClientTitle">/ / CRIAR COBRANÇA</h1>
                     <form className="new-charge-form" onSubmit={handleSubmit(addCharge)}>
