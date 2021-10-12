@@ -59,8 +59,8 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                                         </div>
                                     </div>
                                 </TableCell>
-                                <TableCell align="left"><p className='clientcard-text'>{client.cobrancasFeitas}</p></TableCell>
-                                <TableCell align="left"><p className='clientcard-text'>{client.cobrancasPagas}</p></TableCell>
+                                <TableCell align="left"><p className='clientcard-text'>R$ {client.cobrancasFeitas}</p></TableCell>
+                                <TableCell align="left"><p className='clientcard-text'>R$ {client.cobrancasPagas}</p></TableCell>
                                 <TableCell align="left" >
                                     <p className={client.status === "EM DIA" ? 'clientcard-status clientcard-status-green' : 'clientcard-status clientcard-status-red'}>
                                         {client.status}
