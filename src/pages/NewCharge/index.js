@@ -118,7 +118,6 @@ export default function NewCharge() {
                                 <CustomDatePicker
                                     control={control}
                                 />
-                                {errors.vencimento?.type === 'required' && <span> Escolha uma data! </span>}
                             </div>
                         </div>
                         <div className="flex-row">
