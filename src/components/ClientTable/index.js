@@ -10,10 +10,14 @@ import PhoneIcon from '../../images/phone-icon.svg'
 import EditIcon from '../../images/edit-icon.svg';
 import { Fragment } from 'react';
 
-export default function ClientTable({ clients, setOpenModalClient, setSelectedClientID, selectedClientID }) {
+export default function ClientTable({ clients, setOpenModalClient, setOpenModalEditClient, setSelectedClientID, selectedClientID }) {
 
-    function handleModalOpen(client) {
+    function handleModalClientOpen(client) {
         setOpenModalClient(true);
+        setSelectedClientID(client);
+    }
+    function handleModalEditClientOpen(client) {
+        setOpenModalEditClient(true);
         setSelectedClientID(client);
     }
 
@@ -48,7 +52,7 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                             >
                                 <TableCell scope="row">
                                     <div className='flex-column'>
-                                        <h3 className='client-name' onClick={(e) => handleModalOpen(client.id)}>{client.nome}</h3>
+                                        <h3 className='client-name' onClick={(e) => handleModalClientOpen(client.id)}>{client.nome}</h3>
                                         <div className='client-details'>
                                             <img src={EmailIcon} alt='email-icon' />
                                             <p className='clientcard-text'>{client.email}</p>
@@ -67,7 +71,7 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                                     </p>
                                 </TableCell>
                                 <TableCell align="left">
-                                    <img src={EditIcon} alt='edit-icon' style={{ 'cursor': 'pointer' }} />
+                                    <img src={EditIcon} alt='edit-icon' style={{ 'cursor': 'pointer' }} onClick={(e) => handleModalEditClientOpen(client.id)} />
                                 </TableCell>
                             </TableRow>
                         </Fragment>

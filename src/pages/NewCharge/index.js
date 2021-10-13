@@ -21,7 +21,7 @@ export default function NewCharge() {
     const [carregando, setCarregando] = useState(false);
     const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
-    const [error, setError] = useState(false);
+    const [error, setError] = useState('');
 
     async function getClients() {
 
