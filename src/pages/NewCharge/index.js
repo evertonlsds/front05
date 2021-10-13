@@ -74,7 +74,7 @@ export default function NewCharge() {
 
     return (
         <div className="container-main">
-            <SideBar />
+            <SideBar page='charges' />
             <div className='main-clients'>
                 <UserMenu />
                 <ModalUser />

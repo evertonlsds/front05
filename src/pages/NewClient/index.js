@@ -78,7 +78,7 @@ function NewClient() {
 
   return (
     <div className="container-main">
-      <SideBar />
+      <SideBar page='clients' />
       <UserMenu />
       <ModalUser />
       <SuccessAlert
