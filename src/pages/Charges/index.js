@@ -35,7 +35,7 @@ export default function Charges() {
 
     return (
         <div className='flex-row'>
-            <SideBar />
+            <SideBar page='charges' />
             <div className='main-charges'>
                 <UserMenu />
                 <ModalUser />
