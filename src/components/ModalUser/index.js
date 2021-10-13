@@ -88,7 +88,7 @@ function ModalUser() {
                     <span className="input-line"></span>
                     <label htmlFor="phone">Telefone</label>
                     <InputMasked control={control}
-                      mask="(999) 9999-9999"
+                      mask="(999) 99999-9999"
                       name="telefone"
                       placeholder={perfil.telefone} />
                     <span className="input-line"></span>
