@@ -40,7 +40,7 @@ export default function Clients() {
 
     return (
         <div className='flex-row'>
-            <SideBar />
+            <SideBar page='clients' />
             <div className='main-clients'>
                 <UserMenu />
                 <ModalUser />

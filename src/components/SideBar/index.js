@@ -8,22 +8,22 @@ import { useHistory } from 'react-router';
 
 
 
-export default function SideBar() {
+export default function SideBar(props) {
 
   const history = useHistory();
 
   return (
     <div className="sidebarMenu">
       <img className="logo" src={Logo} alt="logo" />
-      <div className="menuOption" onClick={() => history.push("/Home")}>
+      <div className={props.page === 'home' ? "menuOption menuOption-selected" : 'menuOption'} onClick={() => history.push("/Home")}>
         <img src={Home} alt="homeLogo" />
         <span>HOME</span>
       </div>
-      <div className="menuOption" onClick={() => history.push("/charges")} >
+      <div className={props.page === 'charges' ? "menuOption menuOption-selected" : 'menuOption'} onClick={() => history.push("/charges")} >
         <img src={Money} alt="chargesLogo" />
         <span>COBRANÇAS</span>
       </div>
-      <div className="menuOption" onClick={() => history.push("/clients")}>
+      <div className={props.page === 'clients' ? "menuOption menuOption-selected" : 'menuOption'} onClick={() => history.push("/clients")}>
         <img src={Users} alt="clientsLogo" />
         <span>CLIENTES</span>
       </div>

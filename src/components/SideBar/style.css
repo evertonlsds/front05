@@ -1,5 +1,4 @@
-
-.sidebarMenu{
+.sidebarMenu {
 display: flex;
 flex-direction: column;
 padding-top: 0;
@@ -7,17 +6,25 @@ background-color: #263238;
 min-width: 200px;
 width: 20%;
 height: 100rem;
-
-
 }
 
-.menuOption{
+.menuOption {
 display: flex;
 align-items: center;
 color: white;
-margin: 20px auto 0 25%;
+margin: 0; 
+padding-left: 15%;
+padding-top: 5%;
+padding-bottom: 5%;
 gap: 20px;
 cursor: pointer;
+font-family: Montserrat;
+font-size: 14px;
+font-style: normal;
+font-weight: 700;
+line-height: 15px;
+letter-spacing: 0em;
+text-align: left;
 }
 
 .buttonDiv{
@@ -27,5 +34,7 @@ margin: 300px auto auto auto;
 .logo{
     margin-bottom: 40px;
     margin-top: auto;
-    
+}
+.menuOption-selected {
+    background-color: #374952;
 }

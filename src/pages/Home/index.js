@@ -63,7 +63,7 @@ function Main() {
   return (
     <div className="container-main">
       <ModalUser />
-      <SideBar />
+      <SideBar page='home' />
       <div className="homeContent">
         <div className="card-1">
           <div className="title-card">

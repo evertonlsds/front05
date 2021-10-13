@@ -1,8 +1,5 @@
 .container-main{
     display: flex;
-    
-    
-    
 }
 .clientContainerContent{
   background-color: #E5E5E5;
@@ -37,7 +34,7 @@
     margin-bottom: 40px;
     width: 94%;
     font-family: Montserrat;
-    font-size: 12px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 400;
     line-height: 15px;
