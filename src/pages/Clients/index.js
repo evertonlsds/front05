@@ -8,7 +8,8 @@ import { AuthContext } from '../../routes.js';
 import ModalClient from '../../components/ModalClient';
 import ModalUser from '../../components/ModalUser';
 import SuccessAlert from '../../components/SuccessAlert';
-import  ModalEditClient from '../../components/ModalEditClient';
+import ModalEditClient from '../../components/ModalEditClient';
+import ErrorAlert from '../../components/ErrorAlert';
 
 
 export default function Clients() {
@@ -16,7 +17,11 @@ export default function Clients() {
     const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
     const [clients, setClients] = useState([]);
     const [openModalClient, setOpenModalClient] = useState(false);
+    const [openModalEditClient, setOpenModalEditClient] = useState(false);
     const [selectedClientID, setSelectedClientID] = useState([]);
+    const [updateClientSuccess, setUpdateClientSuccess] = useState(false);
+    const [openErrorAlert, setOpenErrorAlert] = useState(false);
+    const [error, setError] = useState('');
 
     async function getClients() {
 
@@ -43,18 +48,36 @@ export default function Clients() {
         <div className='flex-row'>
             <SideBar page='clients' />
             <div className='main-clients'>
-                < ModalEditClient/>
+                <ModalEditClient
+                    openModalEditClient={openModalEditClient}
+                    setOpenModalEditClient={setOpenModalEditClient}
+                    selectedClientID={selectedClientID}
+                    setUpdateClientSuccess={setUpdateClientSuccess}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    setError={setError} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
                     openSuccessAlert={updateProfileSuccess}
                     setOpenSuccessAlert={setUpdateProfileSuccess}
                     message="Perfil atualizado com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={updateClientSuccess}
+                    setOpenSuccessAlert={setUpdateClientSuccess}
+                    message="Cliente atualizado com sucesso!" />
+                <ErrorAlert
+                    openErrorAlert={openErrorAlert}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    error={error} />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                <ClientTable clients={clients} setOpenModalClient={setOpenModalClient} setSelectedClientID={setSelectedClientID} selectedClientID={selectedClientID} />
+                <ClientTable clients={clients}
+                    setOpenModalClient={setOpenModalClient}
+                    setOpenModalEditClient={setOpenModalEditClient}
+                    setSelectedClientID={setSelectedClientID}
+                    selectedClientID={selectedClientID} />
             </div>
 
         </div>
