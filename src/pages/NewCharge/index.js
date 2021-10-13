@@ -99,6 +99,7 @@ export default function NewCharge() {
                                 className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
                                 placeholder={errors.descricao ? "Campo obrigatório!" : "Referente ao pagamento da compra online"}
                                 {...register("descricao", { required: true })} />
+                            <span className='description-alert'>A descrição informada será impressa no boleto.</span>
                         </div>
                         <div className="input-div">
                             <label htmlFor="nome">Status</label>
