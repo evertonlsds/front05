@@ -20,6 +20,7 @@ function NewClient() {
   const [carregando, setCarregando] = useState(false);
   const [openSuccessAlert, setOpenSuccessAlert] = useState(false);
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
+  // eslint-disable-next-line
   const [cep, setCep] = useState("");
   const [city, setCity] = useState("");
 
@@ -122,10 +123,10 @@ function NewClient() {
               <div className="inputDiv">
                 <label htmlFor="telefone">Telefone</label>
                 <InputMasked control={control}
-                  mask="(999) 9999-9999"
+                  mask="(999) 99999-9999"
                   name="telefone"
                   class={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.telefone ? "Campo obrigatório!" : "(DDD) 0000-0000"}
+                  placeholder={errors.telefone ? "Campo obrigatório!" : "(DDD) 00000-0000"}
                   rules={{ required: true }} />
               </div>
             </div>
@@ -136,9 +137,10 @@ function NewClient() {
                   id="cep"
                   type="text"
                   maxLength={9}
-                  value={cep}
-                  onChange={(e) => setCep(e.target.value)}
+                  //value={cep}
+                  // onChange={(e) => setCep(e.target.value)}
                   className="inputNewClient"
+                  {...register("cep")}
                 />
               </div>
               <div className="inputDiv">
@@ -164,9 +166,10 @@ function NewClient() {
                 <input
                   id="cidade"
                   type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
+                  // value={city}
+                  // onChange={(e) => setCity(e.target.value)}
                   className="inputNewClient"
+                  {...register("cidade")}
                 />
               </div>
             </div>
@@ -185,7 +188,7 @@ function NewClient() {
                   id="referencia"
                   type="text"
                   className="inputNewClient"
-                  {...register("refencia")} />
+                  {...register("referencia")} />
               </div>
             </div>
             <div className="buttonsDiv">
