@@ -72,17 +72,13 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
       {openModalEditClient &&
         <div className="modalEditClient">
           <div className="modalContatEditClient">
-          
-                    <img src={CloseIcon}
+                  <img src={CloseIcon}
                     alt="close"
                     className="closeIcon"
                     onClick={() => setOpenModalEditClient(false)}
                     />
-                  
-            <div className="editClientFormDiv">
+                  <div className="editClientFormDiv">
               <form className="formEditClient" onSubmit={handleSubmit(updateClient)}>
-                
-
                 <div className="inputDivEditClient">
                   <label htmlFor="nome">Nome </label>
                   <input
@@ -191,11 +187,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
             <Loading carregando={carregando} />
             </div>
           </div>
-         
-          
-        
-
-      }
+        }
     </>
   )
 }
