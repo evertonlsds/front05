@@ -47,7 +47,8 @@
     line-height: 20px;
     letter-spacing: 0.005em;
     text-align: left;
-    color: #4c4c4c
+    color: #4c4c4c;
+    cursor: pointer;
 }
 .clientcard-status {
     font-family: Montserrat;

@@ -47,7 +47,7 @@ export default function NewCharge() {
 
     async function addCharge(dados) {
         setCarregando(true);
-        console.log(dados)
+
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'POST',
             headers: {

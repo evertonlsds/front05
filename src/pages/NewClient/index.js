@@ -50,7 +50,6 @@ function NewClient() {
 
   async function newClient(dados) {
     setCarregando(true);
-    console.log(dados);
 
     const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
       method: 'POST',
@@ -117,7 +116,7 @@ function NewClient() {
                   defaultValue='00000000000'
                   class={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
                   placeholder={errors.cpf ? "Campo obrigatório!" : "000.000.000-00"}
-                  rules={{ required: true }} 
+                  rules={{ required: true }}
                 />
               </div>
               <div className="inputDiv">

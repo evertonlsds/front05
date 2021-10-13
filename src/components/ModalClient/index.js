@@ -26,7 +26,6 @@ function ModalClient({ openModalClient, setOpenModalClient, selectedClientID }) 
         const resposta = await response.json();
 
         setSelectedClient(resposta);
-        console.log(selectedClient)
 
         if (!response.ok) {
             return;
