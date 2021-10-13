@@ -43,6 +43,9 @@ export default function Clients() {
         getClients();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    useEffect(() => {
+        getClients();
+    }, [updateClientSuccess])
 
     return (
         <div className='flex-row'>

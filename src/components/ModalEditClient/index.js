@@ -57,6 +57,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
       setError(resposta);
       return;
     }
+    reset();
     setUpdateClientSuccess(true);
     setOpenModalEditClient(false);
   };
