@@ -14,7 +14,6 @@ export default function InputMasked(props) {
             render={({ field: { onChange, onBlur, value, ref } }) => <InputMask
                 mask={props.mask}
                 value={value}
-                alwaysShowMask={false}
                 onChange={onChange}>
                 {(inputProps) => <input {...inputProps}
                     onChange={onChange}
