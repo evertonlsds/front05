@@ -22,7 +22,7 @@ function ModalUser() {
   const [openErrorAlert, setOpenErrorAlert] = useState(false);
 
   async function atualizarPerfil(dados) {
-    console.log(dados)
+
     setCarregando(true);
     const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
       method: 'PUT',
@@ -93,10 +93,10 @@ function ModalUser() {
                       placeholder={perfil.telefone} />
                     <span className="input-line"></span>
                     <label htmlFor="cpf">CPF</label>
-                    <InputMasked control={control} 
-                    mask="999.999.999-99" 
-                    name="cpf" 
-                    placeholder={perfil.cpf}/>
+                    <InputMasked control={control}
+                      mask="999.999.999-99"
+                      name="cpf"
+                      placeholder={perfil.cpf} />
                     <span className="input-line"></span>
                   </div>
                 </div>

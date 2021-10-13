@@ -40,15 +40,15 @@ export default function ClientTable({ clients, setOpenModalClient, setSelectedCl
                                 <TableCell className='linha' />
                             </TableRow>
                             <TableRow
-                                style={{ backgroundColor: '#FFFFFF', "cursor": "pointer" }}
+                                style={{ backgroundColor: '#FFFFFF' }}
                                 data-id={client.id}
                                 value={client.id}
                                 id={client.id}
-                                onClick={(e) => handleModalOpen(client.id)}
+
                             >
                                 <TableCell scope="row">
                                     <div className='flex-column'>
-                                        <h3 className='client-name'>{client.nome}</h3>
+                                        <h3 className='client-name' onClick={(e) => handleModalOpen(client.id)}>{client.nome}</h3>
                                         <div className='client-details'>
                                             <img src={EmailIcon} alt='email-icon' />
                                             <p className='clientcard-text'>{client.email}</p>
