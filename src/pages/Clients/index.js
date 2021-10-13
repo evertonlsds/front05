@@ -8,6 +8,7 @@ import { AuthContext } from '../../routes.js';
 import ModalClient from '../../components/ModalClient';
 import ModalUser from '../../components/ModalUser';
 import SuccessAlert from '../../components/SuccessAlert';
+import  ModalEditClient from '../../components/ModalEditClient';
 
 
 export default function Clients() {
@@ -42,6 +43,7 @@ export default function Clients() {
         <div className='flex-row'>
             <SideBar page='clients' />
             <div className='main-clients'>
+                < ModalEditClient/>
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
