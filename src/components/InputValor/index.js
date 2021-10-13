@@ -1,26 +1,27 @@
-import InputMask from 'react-input-mask';
+import NumberFormat from 'react-number-format';
 import { Controller } from 'react-hook-form';
 
 export default function InputValor(props) {
 
     return (
         <Controller
-            className='valor-input'
-            value={props.value}
-            onChange={props.onChange}
-            control={props.control}
+            render={({ field }) => (
+                <NumberFormat
+                    thousandSeparator={false} {...field}
+                    onChange={field.onChange}
+                    decimalScale={2}
+                    fixedDecimalScale={true}
+                    decimalSeparator=","
+                    onBlur={field.onBlur}
+                    prefix="R$"
+                    type='text'
+                    className="valor-input" />
+            )}
             name="valor"
             rules={{ required: true }}
-            render={({ field: { onChange, onBlur, value, ref } }) => <InputMask
-                mask="R$ 9999,99"
-                value={value}
-                onChange={onChange}>
-                {(inputProps) => <input {...inputProps}
-                    className='valor-input'
-                    type="text" />}
-            </InputMask>}
-        >
-        </Controller>
+            control={props.control}
+
+        />
     );
 }
 
