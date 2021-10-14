@@ -36,13 +36,21 @@ export default function Reports() {
     }
     function handleClientsClick() {
         setReport('clients');
-        setOpenMenuReport(false)
+        setOpenMenuReport(false);
         setLabel(clientStatus);
+        if (!clientStatus) {
+            setClientStatus('EM DIA');
+            setLabel('EM DIA');
+        }
     }
     function handleChargesClick() {
         setReport('charges');
         setOpenMenuReport(false);
         setLabel(chargeStatus);
+        if (!chargeStatus) {
+            setChargeStatus('PENDENTE')
+            setLabel('PENDENTES')
+        }
     }
     function handleOpenMenuStatus(event) {
         setAnchorMenuStatus(event.currentTarget)
