@@ -114,7 +114,6 @@ function NewClient() {
                 <InputMasked control={control}
                   mask="999.999.999-99"
                   name="cpf"
-                  defaultValue='00000000000'
                   class={errors.cpf?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
                   placeholder={errors.cpf ? "Campo obrigatório!" : "000.000.000-00"}
                   rules={{ required: true }}

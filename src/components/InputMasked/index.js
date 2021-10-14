@@ -17,6 +17,7 @@ export default function InputMasked(props) {
                 value={value}
                 onChange={onChange}>
                 {(inputProps) => <input {...inputProps}
+                    defaultValue={props.defaultValue}
                     onChange={onChange}
                     placeholder={props.placeholder}
                     className={props.class}

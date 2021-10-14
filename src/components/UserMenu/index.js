@@ -33,6 +33,7 @@ export default function UserMenu() {
 
   function handleModalOpen() {
     getProfile();
+    setOpen(false);
     setModalOpen(true);
   }
 
