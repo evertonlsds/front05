@@ -15,7 +15,7 @@ import { Popover } from '@mui/material';
 
 
 export default function Reports() {
-    const { updateProfileSuccess, setUpdateProfileSuccess, report, setReport } = useContext(AuthContext);
+    const { updateProfileSuccess, setUpdateProfileSuccess, report, setReport, clientStatus, setClientStatus, chargeStatus, setChargeStatus } = useContext(AuthContext);
     const [clients, setClients] = useState([]);
     const [openModalClient, setOpenModalClient] = useState(false);
     const [openModalEditClient, setOpenModalEditClient] = useState(false);
@@ -26,6 +26,9 @@ export default function Reports() {
     const [charges, setCharges] = useState([]);
     const [openMenuReport, setOpenMenuReport] = useState(false);
     const [anchorMenuReport, setAnchorMenuReport] = useState(null);
+    const [openMenuStatus, setOpenMenuStatus] = useState(false);
+    const [anchorMenuStatus, setAnchorMenuStatus] = useState(null);
+    const [label, setLabel] = useState('');
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -33,11 +36,65 @@ export default function Reports() {
     }
     function handleClientsClick() {
         setReport('clients');
-        setOpenMenuReport(false);
+        setOpenMenuReport(false)
+        setLabel(clientStatus);
     }
     function handleChargesClick() {
         setReport('charges');
         setOpenMenuReport(false);
+        setLabel(chargeStatus);
+    }
+    function handleOpenMenuStatus(event) {
+        setAnchorMenuStatus(event.currentTarget)
+        setOpenMenuStatus(true);
+    }
+    function handleEmDiaClick() {
+        setClientStatus('EM DIA');
+        setOpenMenuStatus(false);
+        setLabel("EM DIA");
+        getClients();
+    }
+    function handleInadimplenteClick() {
+        setClientStatus('INADIMPLENTE');
+        setOpenMenuStatus(false);
+        setLabel("INADIMPLENTES")
+        getClients();
+    }
+    function handlePendentesClick() {
+        setChargeStatus('PENDENTE');
+        setOpenMenuStatus(false);
+        setLabel("PENDENTES");
+    }
+    function handleVencidasClick() {
+        setChargeStatus('VENCIDA');
+        setOpenMenuStatus(false);
+        setLabel("VENCIDAS");
+    }
+    function handlePagasClick() {
+        setChargeStatus('PAGO');
+        setOpenMenuStatus(false);
+        setLabel("PAGAS");
+    }
+    function setStatusLabel() {
+        if (report === 'clients') {
+            if (clientStatus === 'EM DIA') {
+                setLabel("EM DIA");
+            }
+            if (clientStatus === "INADIMPLENTE") {
+                setLabel("INADIMPLENTES");
+            }
+        }
+        if (report === 'charges') {
+            if (chargeStatus === "PAGO") {
+                setLabel("PAGAS");
+            }
+            if (chargeStatus === "VENCIDA") {
+                setLabel("VENCIDAS");
+            }
+            if (chargeStatus === "PENDENTE") {
+                setLabel("PENDENTES");
+            }
+        }
     }
 
     async function getClients() {
@@ -53,10 +110,15 @@ export default function Reports() {
 
         const resposta = await response.json();
 
-        setClients(resposta.clientesDoUsuario);
+        const clientesFiltrados = resposta.clientesDoUsuario.filter(client => client.status === clientStatus);
+
+        setClients(clientesFiltrados);
 
         if (!report) {
             setReport('clients')
+        }
+        if (!label) {
+            setStatusLabel();
         }
     }
 
@@ -68,7 +130,7 @@ export default function Reports() {
     useEffect(() => {
         getClients();
         // eslint-disable-next-line
-    }, [updateClientSuccess])
+    }, [clients])
 
     async function getCharges() {
 
@@ -83,13 +145,20 @@ export default function Reports() {
 
         const resposta = await response.json();
 
-        setCharges(resposta.cobrancasDoUsuario);
+        const cobrancasFiltradas = resposta.cobrancasDoUsuario.filter(cobranca => cobranca.status === chargeStatus);
+
+        setCharges(cobrancasFiltradas);
     }
 
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    useEffect(() => {
+        getCharges();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [charges])
 
     return (
         <div className='flex-row'>
@@ -138,21 +207,53 @@ export default function Reports() {
                             </div>
                         </Popover>
                         <img src={Arrow} alt='arrow' />
-                        <h2 className='reports-label'>EM DIA</h2>
+                        <h2 className='reports-label' onClick={(e) => handleOpenMenuStatus(e)}>{label}</h2>
+                        <Popover
+                            id='menu-user'
+                            open={openMenuStatus}
+                            onClose={() => setOpenMenuStatus(false)}
+                            anchorEl={anchorMenuStatus}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}>
+                            <div className='report-menu-box'>
+                                {report === 'clients' ?
+                                    <>
+                                        <div className='row-menu-filter' onClick={() => handleEmDiaClick()}>
+                                            <p className={clientStatus === 'EM DIA' ? 'report-menu pink' : 'report-menu'}>EM DIA</p>
+                                        </div>
+                                        <div className='row-menu-filter' onClick={() => handleInadimplenteClick()}>
+                                            <p className={clientStatus === 'INADIMPLENTE' ? 'report-menu pink' : 'report-menu'}>INADIMPLENTE</p>
+                                        </div> </> :
+                                    <>
+                                        <div className='row-menu-filter' onClick={() => handlePendentesClick()}>
+                                            <p className={chargeStatus === 'PENDENTE' ? 'report-menu pink' : 'report-menu'}>PENDENTES</p>
+                                        </div>
+                                        <div className='row-menu-filter' onClick={() => handleVencidasClick()}>
+                                            <p className={chargeStatus === 'VENCIDA' ? 'report-menu pink' : 'report-menu'}>VENCIDAS</p>
+                                        </div>
+                                        <div className='row-menu-filter' onClick={() => handlePagasClick()}>
+                                            <p className={chargeStatus === 'PAGO' ? 'report-menu pink' : 'report-menu'}>PAGAS</p>
+                                        </div> </>}
+                            </div>
+                        </Popover>
                     </div>
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                {report === 'clients' && <ClientTable clients={clients}
-                    setOpenModalClient={setOpenModalClient}
-                    setOpenModalEditClient={setOpenModalEditClient}
-                    setSelectedClientID={setSelectedClientID}
-                    selectedClientID={selectedClientID} />}
+                {
+                    report === 'clients' && <ClientTable clients={clients}
+                        setOpenModalClient={setOpenModalClient}
+                        setOpenModalEditClient={setOpenModalEditClient}
+                        setSelectedClientID={setSelectedClientID}
+                        selectedClientID={selectedClientID} />
+                }
 
-                {report === 'charges' &&
+                {
+                    report === 'charges' &&
                     <ChargeTable charges={charges} />
                 }
             </div>
-
-        </div>
+        </div >
     )
 }
