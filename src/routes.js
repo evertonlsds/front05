@@ -30,7 +30,9 @@ function Routes() {
     const [openRegisterSuccess, setOpenRegisterSuccess] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [updateProfileSuccess, setUpdateProfileSuccess] = useState(false);
-    const [report, setReport] = useState('')
+    const [report, setReport] = useState('');
+    const [clientStatus, setClientStatus] = useState('')
+    const [chargeStatus, setChargeStatus] = useState('');
 
     function logIn(newToken, newUser) {
         setPerfil(newUser);
@@ -44,7 +46,7 @@ function Routes() {
     }
 
     return (
-        <AuthContext.Provider value={{ logIn, logOut, perfil, setPerfil, openRegisterSuccess, setOpenRegisterSuccess, modalOpen, setModalOpen, updateProfileSuccess, setUpdateProfileSuccess, report, setReport }}>
+        <AuthContext.Provider value={{ logIn, logOut, perfil, setPerfil, openRegisterSuccess, setOpenRegisterSuccess, modalOpen, setModalOpen, updateProfileSuccess, setUpdateProfileSuccess, report, setReport, clientStatus, setClientStatus, chargeStatus, setChargeStatus }}>
             <Router>
                 <Switch>
                     <Route path="/" exact component={SignIn} />
