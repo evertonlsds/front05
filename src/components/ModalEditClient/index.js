@@ -11,7 +11,6 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
   const [selectedClient, setSelectedClient] = useState([]);
   const [carregando, setCarregando] = useState(false)
 
-
   async function getClient() {
 
     const response = await fetch(`https://api-desafio-05.herokuapp.com/clientes/${selectedClientID}`, {
@@ -86,7 +85,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                     id="nome"
                     type="text"
                     className={errors.nome?.type === 'required' ? "input-error inputEditClient" : "inputEditClient"}
-                    placeholder={selectedClient.nome}
+                    defaultValue={selectedClient.nome}
                     {...register("nome")} />
                 </div>
                 <div className="inputDivEditClient">
