@@ -6,6 +6,7 @@ import ChargeTable from '../../components/ChargeTable';
 import SuccessAlert from '../../components/SuccessAlert';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../routes.js';
+import ModalChargeEdit from '../../components/ModalChargeEdit';
 
 
 export default function Charges() {
@@ -37,6 +38,7 @@ export default function Charges() {
         <div className='flex-row'>
             <SideBar page='charges' />
             <div className='main-charges'>
+            <ModalChargeEdit/>
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert

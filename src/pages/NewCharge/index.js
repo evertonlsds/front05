@@ -12,7 +12,7 @@ import SuccessAlert from '../../components/SuccessAlert';
 import ErrorAlert from '../../components/ErrorAlert';
 import ModalUser from '../../components/ModalUser';
 import InputValor from '../../components/InputValor';
-import ModalChargeEdit from '../../components/ModalChargeEdit';
+
 
 
 export default function NewCharge() {
@@ -77,7 +77,6 @@ export default function NewCharge() {
         <div className="container-main">
             <SideBar page='charges' />
             <div className='main-clients'>
-                <ModalChargeEdit/>
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
