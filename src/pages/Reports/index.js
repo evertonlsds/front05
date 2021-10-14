@@ -118,7 +118,7 @@ export default function Reports() {
                     error={error} />
                 <div>
                     <div className='label-div'>
-                        <h2 className='reports-label' onClick={(e) => handleOpenMenuReport(e)}>CLIENTES</h2>
+                        <h2 className='reports-label' onClick={(e) => handleOpenMenuReport(e)}>{report === 'clients' ? 'CLIENTES' : 'COBRANÇAS'}</h2>
                         <Popover
                             id='menu-user'
                             open={openMenuReport}
