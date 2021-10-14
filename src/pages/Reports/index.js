@@ -11,6 +11,7 @@ import ModalEditClient from '../../components/ModalEditClient';
 import ErrorAlert from '../../components/ErrorAlert';
 import ChargeTable from '../../components/ChargeTable';
 import Arrow from '../../images/arrow.svg'
+import { Popover } from '@mui/material';
 
 
 export default function Reports() {
@@ -23,6 +24,21 @@ export default function Reports() {
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
     const [charges, setCharges] = useState([]);
+    const [openMenuReport, setOpenMenuReport] = useState(false);
+    const [anchorMenuReport, setAnchorMenuReport] = useState(null);
+
+    function handleOpenMenuReport(event) {
+        setAnchorMenuReport(event.currentTarget)
+        setOpenMenuReport(true);
+    }
+    function handleClientsClick() {
+        setReport('clients');
+        setOpenMenuReport(false);
+    }
+    function handleChargesClick() {
+        setReport('charges');
+        setOpenMenuReport(false);
+    }
 
     async function getClients() {
 
@@ -102,7 +118,25 @@ export default function Reports() {
                     error={error} />
                 <div>
                     <div className='label-div'>
-                        <h2 className='reports-label'>CLIENTES</h2>
+                        <h2 className='reports-label' onClick={(e) => handleOpenMenuReport(e)}>{report === 'clients' ? 'CLIENTES' : 'COBRANÇAS'}</h2>
+                        <Popover
+                            id='menu-user'
+                            open={openMenuReport}
+                            onClose={() => setOpenMenuReport(false)}
+                            anchorEl={anchorMenuReport}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}>
+                            <div className='report-menu-box'>
+                                <div className='row-menu-filter' onClick={() => handleClientsClick()}>
+                                    <p className={report === 'clients' ? 'report-menu pink' : 'report-menu'}>Clientes</p>
+                                </div>
+                                <div className='row-menu-filter' onClick={() => handleChargesClick()}>
+                                    <p className={report === 'charges' ? 'report-menu pink' : 'report-menu'}>Cobranças</p>
+                                </div>
+                            </div>
+                        </Popover>
                         <img src={Arrow} alt='arrow' />
                         <h2 className='reports-label'>EM DIA</h2>
                     </div>
@@ -114,9 +148,9 @@ export default function Reports() {
                     setSelectedClientID={setSelectedClientID}
                     selectedClientID={selectedClientID} />}
 
-                {report === 'charges' && <div className='cards-container2'>
+                {report === 'charges' &&
                     <ChargeTable charges={charges} />
-                </div>}
+                }
             </div>
 
         </div>
