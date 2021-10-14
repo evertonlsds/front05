@@ -64,13 +64,13 @@ function ModalUser() {
                     id="nome"
                     type="text"
                     className={errors.nome?.type === 'required' ? "input-error" : ""}
-                    placeholder={perfil.nome}
+                    defaultValue={perfil.nome}
                     {...register("nome")} />
                   <span className="input-line"></span>
                   <label htmlFor="email">Email</label>
                   <input id="email"
                     type="text"
-                    placeholder={perfil.email}
+                    defaultValue={perfil.email}
                     {...register("email")} />
                   <span className="input-line"></span>
                   <div className="flex-column light-label input-password">
@@ -90,13 +90,13 @@ function ModalUser() {
                     <InputMasked control={control}
                       mask="(999) 99999-9999"
                       name="telefone"
-                      placeholder={perfil.telefone} />
+                      defaultValue={perfil.telefone} />
                     <span className="input-line"></span>
                     <label htmlFor="cpf">CPF</label>
                     <InputMasked control={control}
                       mask="999.999.999-99"
                       name="cpf"
-                      placeholder={perfil.cpf} />
+                      defaultValue={perfil.cpf} />
                     <span className="input-line"></span>
                   </div>
                 </div>
