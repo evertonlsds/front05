@@ -9,10 +9,11 @@ import { AuthContext } from '../../routes.js';
 
 
 export default function UserMenu() {
-  const [anchorEl, setAnchorEl] = useState(false);
+  const [anchorEl, setAnchorEl] = useState('');
   const { logOut, setModalOpen, setPerfil } = useContext(AuthContext);
+  const [open, setOpen] = useState(false);
 
-  async function getProfile () {
+  async function getProfile() {
     const response = await fetch("https://api-desafio-05.herokuapp.com/perfil", {
       method: 'GET',
       headers: {
@@ -22,15 +23,17 @@ export default function UserMenu() {
       },
     });
     const resposta = await response.json();
-    setPerfil (resposta);
+    setPerfil(resposta);
 
   }
   function handleUserMenu(event) {
     setAnchorEl(event.currentTarget);
+    setOpen(true)
   }
 
   function handleModalOpen() {
     getProfile();
+    setOpen(false);
     setModalOpen(true);
   }
 
@@ -40,11 +43,11 @@ export default function UserMenu() {
         alt='usuario-menu'
         id='user-menu'
         className='icon-usuario'
-        onClick={handleUserMenu} />
+        onClick={(e) => handleUserMenu(e)} />
       <Popover
         id='menu-user'
-        open={anchorEl}
-        onClose={() => setAnchorEl(false)}
+        open={open}
+        onClose={() => setOpen(false)}
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: 'bottom',
