@@ -12,8 +12,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
   const [carregando, setCarregando] = useState(false)
 
   async function getClient() {
-    reset();
-
+    reset()
     const response = await fetch(`https://api-desafio-05.herokuapp.com/clientes/${selectedClientID}`, {
       method: 'GET',
       headers: {
@@ -32,7 +31,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
       setOpenErrorAlert(true);
       return;
     }
-
+    reset();
   }
 
   async function updateClient(dados) {
@@ -61,15 +60,17 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
     setOpenModalEditClient(false);
   };
   useEffect(() => {
-    getClient();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedClientID])
+    buscaCliente();
+  }, [openModalEditClient])
   useEffect(() => {
     reset();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [openModalEditClient])
+  }, [selectedClientID])
 
-
+  async function buscaCliente() {
+    await getClient();
+    document.getElementById('form-edit-client')reset();
+  }
   return (
     <>
       {openModalEditClient &&
@@ -81,7 +82,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
               onClick={() => setOpenModalEditClient(false)}
             />
             <div className="editClientFormDiv">
-              <form className="formEditClient" onSubmit={handleSubmit(updateClient)}>
+              <form className="formEditClient" onSubmit={handleSubmit(updateClient)} id='form-edit-client'>
                 <div className="inputDivEditClient">
                   <label htmlFor="nome">Nome </label>
                   <input

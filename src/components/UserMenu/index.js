@@ -39,11 +39,13 @@ export default function UserMenu() {
 
   return (
     <>
-      <img src={Usuario}
-        alt='usuario-menu'
-        id='user-menu'
-        className='icon-usuario'
-        onClick={(e) => handleUserMenu(e)} />
+      <div className='flex-column'>
+        <img src={Usuario}
+          alt='usuario-menu'
+          id='user-menu'
+          className='icon-usuario'
+          onClick={(e) => handleUserMenu(e)} />
+      </div>
       <Popover
         id='menu-user'
         open={open}
@@ -64,6 +66,7 @@ export default function UserMenu() {
           </div>
         </div>
       </Popover>
+
     </>
   )
 }
