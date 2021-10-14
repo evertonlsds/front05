@@ -64,6 +64,10 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
     getClient();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedClientID])
+  useEffect(() => {
+    reset();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openModalEditClient])
 
 
   return (
@@ -71,12 +75,12 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
       {openModalEditClient &&
         <div className="modalEditClient">
           <div className="modalContatEditClient">
-                  <img src={CloseIcon}
-                    alt="close"
-                    className="closeIcon"
-                    onClick={() => setOpenModalEditClient(false)}
-                    />
-                  <div className="editClientFormDiv">
+            <img src={CloseIcon}
+              alt="close"
+              className="closeIcon"
+              onClick={() => setOpenModalEditClient(false)}
+            />
+            <div className="editClientFormDiv">
               <form className="formEditClient" onSubmit={handleSubmit(updateClient)}>
                 <div className="inputDivEditClient">
                   <label htmlFor="nome">Nome </label>
@@ -93,7 +97,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                     id="email"
                     type="text"
                     className={errors.email?.type === 'required' ? "input-error inputEditClient" : "inputEditClient"}
-                    placeholder={selectedClient.email}
+                    defaultValue={selectedClient.email}
                     {...register("email")} />
                 </div>
                 <div className="dualInputEditClient">
@@ -103,15 +107,15 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       mask="999.999.999-99"
                       name="cpf"
                       class={errors.cpf?.type === 'required' ? "input-error inputEditClient" : "inputEditClient"}
-                      placeholder={selectedClient.cpf} />
+                      defaultValue={selectedClient.cpf} />
                   </div>
                   <div className="inputDivEditClient">
                     <label htmlFor="telefone">Telefone</label>
                     <InputMasked control={control}
-                      mask="(999) 9999-9999"
+                      mask="(99) 9999-9999"
                       name="telefone"
                       class={errors.telefone?.type === 'required' ? "input-error inputEditClient" : "inputEditClient"}
-                      placeholder={selectedClient.telefone} />
+                      defaultValue={selectedClient.telefone} />
                   </div>
                 </div>
                 <div className="dualInputEditClient">
@@ -122,7 +126,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       type="text"
                       maxLength={9}
                       className="inputEditClient"
-                      placeholder={selectedClient.cep}
+                      defaultValue={selectedClient.cep}
                       {...register("cep")}
                     />
                   </div>
@@ -132,7 +136,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       id="logradouro"
                       type="text"
                       className="inputEditClient"
-                      placeholder={selectedClient.logradouro}
+                      defaultValue={selectedClient.logradouro}
                       {...register("logradouro")} />
                   </div>
                 </div>
@@ -143,7 +147,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       id="bairro"
                       type="text"
                       className="inputEditClient"
-                      placeholder={selectedClient.bairro}
+                      defaultValue={selectedClient.bairro}
                       {...register("bairro")} />
                   </div>
                   <div className="inputDivEditClient">
@@ -152,7 +156,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       id="cidade"
                       type="text"
                       className="inputEditClient"
-                      placeholder={selectedClient.cidade}
+                      defaultValue={selectedClient.cidade}
                       {...register("cidade")}
                     />
                   </div>
@@ -164,7 +168,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       id="complemento"
                       type="text"
                       className="inputEditClient"
-                      placeholder={selectedClient.complemento}
+                      defaultValue={selectedClient.complemento}
                       {...register("complemento")} />
                   </div>
                   <div className="inputDivEditClient">
@@ -173,7 +177,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                       id="referencia"
                       type="text"
                       className="inputEditClient"
-                      placeholder={selectedClient.referencia}
+                      defaultValue={selectedClient.referencia}
                       {...register("referencia")} />
                   </div>
                 </div>
@@ -184,9 +188,9 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
               </form>
             </div>
             <Loading carregando={carregando} />
-            </div>
           </div>
-        }
+        </div>
+      }
     </>
   )
 }
