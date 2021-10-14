@@ -123,10 +123,10 @@ function NewClient() {
               <div className="inputDiv">
                 <label htmlFor="telefone">Telefone</label>
                 <InputMasked control={control}
-                  mask="(999) 99999-9999"
+                  mask="(99) 99999-9999"
                   name="telefone"
                   class={errors.telefone?.type === 'required' ? "input-error inputNewClient" : "inputNewClient"}
-                  placeholder={errors.telefone ? "Campo obrigatório!" : "(DDD) 00000-0000"}
+                  placeholder={errors.telefone ? "Campo obrigatório!" : "(DD) 00000-0000"}
                   rules={{ required: true }} />
               </div>
             </div>

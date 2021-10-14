@@ -12,6 +12,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
   const [carregando, setCarregando] = useState(false)
 
   async function getClient() {
+    reset();
 
     const response = await fetch(`https://api-desafio-05.herokuapp.com/clientes/${selectedClientID}`, {
       method: 'GET',
@@ -56,7 +57,6 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
       setError(resposta);
       return;
     }
-    reset();
     setUpdateClientSuccess(true);
     setOpenModalEditClient(false);
   };
@@ -112,7 +112,7 @@ function ModalEditClient({ openModalEditClient, setOpenModalEditClient, selected
                   <div className="inputDivEditClient">
                     <label htmlFor="telefone">Telefone</label>
                     <InputMasked control={control}
-                      mask="(99) 9999-9999"
+                      mask="(99) 99999-9999"
                       name="telefone"
                       class={errors.telefone?.type === 'required' ? "input-error inputEditClient" : "inputEditClient"}
                       defaultValue={selectedClient.telefone} />
