@@ -22,6 +22,7 @@ export default function Clients() {
     const [updateClientSuccess, setUpdateClientSuccess] = useState(false);
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
+    const [sortByName, setSortByName] = useState(false);
 
     async function getClients() {
 
@@ -36,6 +37,10 @@ export default function Clients() {
 
         const resposta = await response.json();
 
+        if (sortByName) {
+            sortClientsByName(resposta.clientesDoUsuario);
+        }
+
         setClients(resposta.clientesDoUsuario);
     }
 
@@ -45,7 +50,15 @@ export default function Clients() {
     }, [])
     useEffect(() => {
         getClients();
-    }, [updateClientSuccess])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateClientSuccess]);
+
+    function sortClientsByName(clients) {
+        clients.sort(function (a, b) {
+            return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)
+        })
+    };
+
 
     return (
         <div className='flex-row'>
@@ -80,7 +93,10 @@ export default function Clients() {
                     setOpenModalClient={setOpenModalClient}
                     setOpenModalEditClient={setOpenModalEditClient}
                     setSelectedClientID={setSelectedClientID}
-                    selectedClientID={selectedClientID} />
+                    selectedClientID={selectedClientID}
+                    getClients={getClients}
+                    setSortByName={setSortByName}
+                    sortByName={sortByName} />
             </div>
 
         </div>

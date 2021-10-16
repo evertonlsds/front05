@@ -8,9 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import EmailIcon from '../../images/email-icon.svg'
 import PhoneIcon from '../../images/phone-icon.svg'
 import EditIcon from '../../images/edit-icon.svg';
+import ArrowDown from '../../images/arrow-sort-down.svg';
 import { Fragment } from 'react';
 
-export default function ClientTable({ clients, setOpenModalClient, setOpenModalEditClient, setSelectedClientID, selectedClientID }) {
+export default function ClientTable({ clients, setOpenModalClient, setOpenModalEditClient, setSelectedClientID, selectedClientID, sortByName, setSortByName, getClients }) {
 
     function handleModalClientOpen(client) {
         setOpenModalClient(true);
@@ -20,13 +21,18 @@ export default function ClientTable({ clients, setOpenModalClient, setOpenModalE
         setOpenModalEditClient(true);
         setSelectedClientID(client);
     }
+    function handleSortByName() {
+        setSortByName(!sortByName)
+        getClients();
+    }
+
 
     return (
         <TableContainer>
             <Table sx={{ minWidth: 1050 }} size="small" aria-label="clients table">
                 <TableHead className='container-legends'>
                     <TableRow>
-                        <TableCell className='legends'>Cliente</TableCell>
+                        <TableCell className='legends'>Cliente <img src={ArrowDown} alt='sort-arrow' onClick={() => handleSortByName()} style={{ 'cursor': 'pointer' }} /></TableCell>
                         <TableCell className='legends'>Cobranças Feitas</TableCell>
                         <TableCell className='legends'>Cobranças Recebidas</TableCell>
                         <TableCell className='legends'>Status</TableCell>

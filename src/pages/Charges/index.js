@@ -12,6 +12,7 @@ import ModalChargeEdit from '../../components/ModalChargeEdit';
 export default function Charges() {
     const [charges, setCharges] = useState([]);
     const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
+    const [chargesByName, setChargesByName] = useState(false);
 
     async function getCharges() {
 
@@ -26,6 +27,10 @@ export default function Charges() {
 
         const resposta = await response.json();
 
+        if (chargesByName) {
+            sortChargesByName(resposta.cobrancasDoUsuario);
+        }
+
         setCharges(resposta.cobrancasDoUsuario);
     }
 
@@ -34,11 +39,17 @@ export default function Charges() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    function sortChargesByName(charges) {
+        charges.sort(function (a, b) {
+            return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)
+        })
+    };
+
     return (
         <div className='flex-row'>
             <SideBar page='charges' />
             <div className='main-charges'>
-            <ModalChargeEdit/>
+                <ModalChargeEdit />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -46,7 +57,10 @@ export default function Charges() {
                     setOpenSuccessAlert={setUpdateProfileSuccess}
                     message="Perfil atualizado com sucesso!" />
                 <div className='cards-container2'>
-                    <ChargeTable charges={charges} />
+                    <ChargeTable charges={charges}
+                        setChargesByName={setChargesByName}
+                        chargesByName={chargesByName}
+                        getCharges={getCharges} />
                 </div>
             </div>
         </div>

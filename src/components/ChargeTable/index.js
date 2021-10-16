@@ -6,9 +6,11 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import ArrowDown from '../../images/arrow-sort-down.svg';
 
 
-export default function ChargeTable({ charges }) {
+export default function ChargeTable({ charges, chargesByName, setChargesByName, getCharges }) {
+
     function chargeStatusColor(status) {
         if (status === "PENDENTE") {
             return 'charge-status charge-status-blue'
@@ -20,13 +22,18 @@ export default function ChargeTable({ charges }) {
             return 'charge-status charge-status-red'
         }
     }
+    function handleSortChargesByName() {
+        setChargesByName(!chargesByName)
+        getCharges();
+    }
+
     return (
         <TableContainer>
             <Table sx={{ minWidth: 1050 }} size="small" aria-label="clients table">
                 <TableHead className='container-legends'>
                     <TableRow>
                         <TableCell className='legends'>ID</TableCell>
-                        <TableCell className='legends'>Cliente</TableCell>
+                        <TableCell className='legends'>Cliente  <img src={ArrowDown} alt='sort-arrow' onClick={() => handleSortChargesByName()} style={{ 'cursor': 'pointer' }} /></TableCell>
                         <TableCell className='legends'>Descrição</TableCell>
                         <TableCell className='legends'>Valor</TableCell>
                         <TableCell className='legends'>Status</TableCell>
