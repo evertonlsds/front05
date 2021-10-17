@@ -11,6 +11,7 @@ import SelectClient from '../../components/SelectClient';
 //import ErrorAlert from '../../components/ErrorAlert';
 //import ModalUser from '../../components/ModalUser';
 import InputValor from '../../components/InputValor';
+import Trash from '../../images/trash.svg';
 
 
 function ModalChargeEdit(){
@@ -61,8 +62,15 @@ function ModalChargeEdit(){
                                 <CustomDatePicker
                                     control={control}
                                 />
-                            </div>
+                                </div>
+                                
                         </div>
+                        <div className="trash">
+                                <img src={Trash} alt='trash'/>
+                                  <div className="balloon">
+                                    
+                                  </div>
+                                </div>
                         <div className="flex-row">
                             <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
                             <button className={isValid ? "btn-pink" : "btn-disabled"} disabled={!isValid} type="submit">Criar Cobrança</button>
