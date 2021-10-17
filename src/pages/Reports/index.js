@@ -29,6 +29,7 @@ export default function Reports() {
     const [openMenuStatus, setOpenMenuStatus] = useState(false);
     const [anchorMenuStatus, setAnchorMenuStatus] = useState(null);
     const [label, setLabel] = useState('');
+    const [sortByName, setSortByName] = useState(false);
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -120,6 +121,10 @@ export default function Reports() {
 
         const clientesFiltrados = resposta.clientesDoUsuario.filter(client => client.status === clientStatus);
 
+        if (sortByName) {
+            sortReport(clientesFiltrados);
+        }
+
         setClients(clientesFiltrados);
 
         if (!report) {
@@ -155,6 +160,10 @@ export default function Reports() {
 
         const cobrancasFiltradas = resposta.cobrancasDoUsuario.filter(cobranca => cobranca.status === chargeStatus);
 
+        if (sortByName) {
+            sortReport(cobrancasFiltradas);
+        }
+
         setCharges(cobrancasFiltradas);
     }
 
@@ -167,6 +176,12 @@ export default function Reports() {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [charges])
+
+    function sortReport(tipo) {
+        tipo.sort(function (a, b) {
+            return (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)
+        })
+    };
 
     return (
         <div className='flex-row'>
@@ -254,12 +269,18 @@ export default function Reports() {
                         setOpenModalClient={setOpenModalClient}
                         setOpenModalEditClient={setOpenModalEditClient}
                         setSelectedClientID={setSelectedClientID}
-                        selectedClientID={selectedClientID} />
+                        selectedClientID={selectedClientID}
+                        getClients={getClients}
+                        setSortByName={setSortByName}
+                        sortByName={sortByName} />
                 }
 
                 {
                     report === 'charges' &&
-                    <ChargeTable charges={charges} />
+                    <ChargeTable charges={charges}
+                        setChargesByName={setSortByName}
+                        chargesByName={sortByName}
+                        getCharges={getCharges} />
                 }
             </div>
         </div >
