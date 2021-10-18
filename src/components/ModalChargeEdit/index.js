@@ -117,6 +117,10 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     <InputValor
                                         control={control}
                                         defaultValue={selectedCharge.valor} />
+                                         <div className="trash">
+                                            <img src={Trash} alt='trash'/>
+                                            <a href ="/charges">Excuir cobrança</a>
+                                        </div>
                                 </div>
                                 <div className='flex-column'>
                                     <label htmlFor="vencimento">Vencimento</label>
@@ -125,15 +129,10 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                         defaultValue={selectedCharge.vencimento}
                                     />
                                 </div>
-
                             </div>
-                            <div className="trash">
-                                <img src={Trash} alt='trash' />
-                                <div className="balloon">
-
-                                </div>
-                            </div>
-                            <div className="flex-row">
+                           
+                            <div className="flex-row " >
+                            
                                 <button className="btn-white-pink" type='reset' onClick={() => reset()}>Cancelar</button>
                                 <button className="btn-pink" type="submit">Editar Cobrança</button>
                             </div>
