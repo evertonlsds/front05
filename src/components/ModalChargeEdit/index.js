@@ -12,7 +12,7 @@ import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
 
 
-function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess }) {
+function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess, clients }) {
 
 
     const { handleSubmit, register, control, formState: { errors }, reset } = useForm({ mode: "onChange" });
@@ -95,6 +95,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                 <SelectClient
                                     control={control}
                                     id="cliente"
+                                    clients={clients}
                                     defaultValue={selectedCharge.nome} />
                             </div>
                             <div className="input-div">

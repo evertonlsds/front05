@@ -119,6 +119,7 @@ export default function NewCharge() {
                                 <label htmlFor="vencimento">Vencimento</label>
                                 <CustomDatePicker
                                     control={control}
+                                    rules={{ required: true }}
                                 />
                             </div>
                         </div>

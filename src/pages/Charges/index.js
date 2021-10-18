@@ -20,6 +20,24 @@ export default function Charges() {
     const [updateChargeSuccess, setUpdateChargeSuccess] = useState(false);
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
+    const [clients, setClients] = useState([]);
+
+    async function getClients() {
+
+        const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
+            method: 'GET',
+            headers: {
+                'Content-Type': "application/json",
+                "charset": "utf-8",
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
+            },
+
+        });
+
+        const resposta = await response.json();
+
+        setClients(resposta.clientesDoUsuario);
+    }
 
     async function getCharges() {
 
@@ -45,6 +63,14 @@ export default function Charges() {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+    useEffect(() => {
+        getClients();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    useEffect(() => {
+        getCharges();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateChargeSuccess]);
 
     function sortChargesByName(charges) {
         charges.sort(function (a, b) {
@@ -63,7 +89,8 @@ export default function Charges() {
                     selectedCharge={selectedCharge}
                     setUpdateChargeSuccess={setUpdateChargeSuccess}
                     setOpenErrorAlert={setOpenErrorAlert}
-                    setError={setError} />
+                    setError={setError}
+                    clients={clients} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert

@@ -22,7 +22,7 @@ export default function CustomDatePicker(props) {
         <Controller
             name='vencimento'
             control={props.control}
-            rules={{ required: true }}
+            rules={props.rules}
             render={({ field: { onChange, onBlur, value, ref } }) => (<DatePicker
                 dateFormat="dd MMMM 'de' yyyy"
                 selected={value}
