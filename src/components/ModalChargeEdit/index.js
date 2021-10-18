@@ -1,29 +1,27 @@
 import './styles.css';
 import CloseIcon from '../../images/close.svg';
 import { useForm } from 'react-hook-form';
-//import { AuthContext } from '../../routes.js';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
 import SelectClient from '../../components/SelectClient';
-//import Loading from '../../components/Loading';
+import Loading from '../../components/Loading';
 //import SuccessAlert from '../../components/SuccessAlert';
 //import ErrorAlert from '../../components/ErrorAlert';
-//import ModalUser from '../../components/ModalUser';
 import InputValor from '../../components/InputValor';
 import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
 
 
-function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID }) {
+function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess }) {
 
 
     const { handleSubmit, register, control, formState: { errors }, reset } = useForm({ mode: "onChange" });
     const [selectedCharge, setSelectedCharge] = useState([]);
+    const [carregando, setCarregando] = useState(false)
 
     async function getCharge() {
-        console.log('comecei')
 
-        const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
+        const response = await fetch(`https://api-desafio-05.herokuapp.com/cobrancas/${selectedChargeID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': "application/json",
@@ -34,8 +32,36 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
 
         const resposta = await response.json();
 
-        setSelectedCharge(resposta.cobrancasDoUsuario.filter(cobranca => cobranca.id === selectedChargeID))
+        setSelectedCharge(resposta)
         console.log(selectedCharge)
+
+    }
+    async function updateCharge(dados) {
+        setCarregando(true);
+
+        const response = await fetch(`https://api-desafio-05.herokuapp.com/cobrancas/${selectedChargeID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': "application/json",
+                "charset": "utf-8",
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
+            },
+            body: JSON.stringify(dados)
+        });
+
+        const resposta = await response.json();
+
+        setSelectedCharge(resposta)
+        setCarregando(false);
+        console.log(selectedCharge)
+
+        if (!response.ok) {
+            setOpenErrorAlert(true);
+            setError(resposta);
+            return;
+        }
+        setUpdateChargeSuccess(true);
+        setOpenModalChargeEdit(false);
 
     }
 
@@ -63,7 +89,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                             className="closeIcon"
                             onClick={() => setOpenModalChargeEdit(false)}
                         />
-                        <form className="new-charge-form" onSubmit={handleSubmit()}>
+                        <form className="new-charge-form" onSubmit={handleSubmit(updateCharge)}>
                             <div className="input-div">
                                 <label htmlFor="cliente">Cliente</label>
                                 <SelectClient
@@ -78,7 +104,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     type="textfield"
                                     className={errors.descricao?.type === 'required' ? "input-error custom-input" : "custom-input"}
                                     placeholder={errors.descricao ? "Campo obrigatório!" : ""}
-                                    defaultValue={selectedCharge[0].descricao}
+                                    defaultValue={selectedCharge.descricao}
                                     {...register("descricao")}
                                 />
                                 <span className='description-alert'>A descrição informada será impressa no boleto.</span>
@@ -94,7 +120,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     <label htmlFor="valor">Valor</label>
                                     <InputValor
                                         control={control}
-                                        defaultValue={selectedCharge[0].valor} />
+                                        defaultValue={selectedCharge.valor} />
                                 </div>
                                 <div className='flex-column'>
                                     <label htmlFor="vencimento">Vencimento</label>
@@ -117,6 +143,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                             </div>
                         </form>
                     </div>
+                    <Loading carregando={carregando} />
                 </div>
 
             }

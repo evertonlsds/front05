@@ -90,7 +90,8 @@ export default function NewCharge() {
                             <label htmlFor="cliente">Cliente</label>
                             <SelectClient clients={clients}
                                 control={control}
-                                id="cliente" />
+                                id="cliente"
+                                rules={{ required: true }} />
                         </div>
                         <div className="input-div">
                             <label htmlFor="nome">Descrição</label>
@@ -111,7 +112,8 @@ export default function NewCharge() {
                             <div className='flex-column'>
                                 <label htmlFor="valor">Valor</label>
                                 <InputValor
-                                    control={control} />
+                                    control={control}
+                                    rules={{ required: true }} />
                             </div>
                             <div className='flex-column'>
                                 <label htmlFor="vencimento">Vencimento</label>

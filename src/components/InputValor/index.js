@@ -19,7 +19,7 @@ export default function InputValor(props) {
                     className="valor-input" />
             )}
             name="valor"
-            rules={{ required: true }}
+            rules={props.rules}
             control={props.control}
             defaultValue={props.defaultValue}
 

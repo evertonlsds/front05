@@ -4,6 +4,7 @@ import UserMenu from '../../components/UserMenu';
 import ModalUser from '../../components/ModalUser';
 import ChargeTable from '../../components/ChargeTable';
 import SuccessAlert from '../../components/SuccessAlert';
+import ErrorAlert from '../../components/ErrorAlert';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../routes.js';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
@@ -16,6 +17,9 @@ export default function Charges() {
     const [openModalChargeEdit, setOpenModalChargeEdit] = useState(false);
     const [selectedChargeID, setSelectedChargeID] = useState([]);
     const [selectedCharge, setSelectedCharge] = useState([]);
+    const [updateChargeSuccess, setUpdateChargeSuccess] = useState(false);
+    const [openErrorAlert, setOpenErrorAlert] = useState(false);
+    const [error, setError] = useState('');
 
     async function getCharges() {
 
@@ -56,13 +60,24 @@ export default function Charges() {
                     openModalChargeEdit={openModalChargeEdit}
                     setOpenModalChargeEdit={setOpenModalChargeEdit}
                     selectedChargeID={selectedChargeID}
-                    selectedCharge={selectedCharge} />
+                    selectedCharge={selectedCharge}
+                    setUpdateChargeSuccess={setUpdateChargeSuccess}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    setError={setError} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
                     openSuccessAlert={updateProfileSuccess}
                     setOpenSuccessAlert={setUpdateProfileSuccess}
                     message="Perfil atualizado com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={updateChargeSuccess}
+                    setOpenSuccessAlert={setUpdateChargeSuccess}
+                    message="Cobrança atualizada com sucesso!" />
+                <ErrorAlert
+                    openErrorAlert={openErrorAlert}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    error={error} />
                 <div className='cards-container2'>
                     <ChargeTable charges={charges}
                         setChargesByName={setChargesByName}
