@@ -12,6 +12,7 @@ import ErrorAlert from '../../components/ErrorAlert';
 import ChargeTable from '../../components/ChargeTable';
 import Arrow from '../../images/arrow.svg'
 import { Popover } from '@mui/material';
+import ModalChargeEdit from '../../components/ModalChargeEdit';
 
 
 export default function Reports() {
@@ -30,6 +31,11 @@ export default function Reports() {
     const [anchorMenuStatus, setAnchorMenuStatus] = useState(null);
     const [label, setLabel] = useState('');
     const [sortByName, setSortByName] = useState(false);
+    const [openModalChargeEdit, setOpenModalChargeEdit] = useState(false);
+    const [selectedChargeID, setSelectedChargeID] = useState([]);
+    const [updateChargeSuccess, setUpdateChargeSuccess] = useState(false);
+    const [selectedCharge, setSelectedCharge] = useState([]);
+    const [allClients, setAllClients] = useState([]);
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -119,6 +125,8 @@ export default function Reports() {
 
         const resposta = await response.json();
 
+        setAllClients(resposta.clientesDoUsuario);
+
         const clientesFiltrados = resposta.clientesDoUsuario.filter(client => client.status === clientStatus);
 
         if (sortByName) {
@@ -176,6 +184,10 @@ export default function Reports() {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [charges])
+    useEffect(() => {
+        getCharges();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [updateChargeSuccess]);
 
     function sortReport(tipo) {
         tipo.sort(function (a, b) {
@@ -194,6 +206,15 @@ export default function Reports() {
                     setUpdateClientSuccess={setUpdateClientSuccess}
                     setOpenErrorAlert={setOpenErrorAlert}
                     setError={setError} />
+                <ModalChargeEdit
+                    openModalChargeEdit={openModalChargeEdit}
+                    setOpenModalChargeEdit={setOpenModalChargeEdit}
+                    selectedChargeID={selectedChargeID}
+                    selectedCharge={selectedCharge}
+                    setUpdateChargeSuccess={setUpdateChargeSuccess}
+                    setOpenErrorAlert={setOpenErrorAlert}
+                    setError={setError}
+                    clients={allClients} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -280,7 +301,12 @@ export default function Reports() {
                     <ChargeTable charges={charges}
                         setChargesByName={setSortByName}
                         chargesByName={sortByName}
-                        getCharges={getCharges} />
+                        getCharges={getCharges}
+                        setOpenModalChargeEdit={setOpenModalChargeEdit}
+                        setSelectedChargeID={setSelectedChargeID}
+                        selectedChargeID={selectedChargeID}
+                        selectedCharge={selectedCharge}
+                        setSelectedCharge={setSelectedCharge} />
                 }
             </div>
         </div >

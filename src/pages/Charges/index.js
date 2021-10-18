@@ -57,6 +57,7 @@ export default function Charges() {
 
         if (chargesByName) {
             sortChargesByName(resposta.cobrancasDoUsuario);
+            sortChargesByName(searchedCharges);
         }
 
         if (!searched) {
@@ -77,7 +78,7 @@ export default function Charges() {
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateChargeSuccess]);
+    }, [updateChargeSuccess, chargesByName]);
 
     function sortChargesByName(charges) {
         charges.sort(function (a, b) {

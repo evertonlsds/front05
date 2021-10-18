@@ -28,8 +28,6 @@ export default function Clients() {
     const [searched, setSearched] = useState(false);
 
     async function getClients() {
-        console.log(searched);
-
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -44,6 +42,7 @@ export default function Clients() {
 
         if (sortByName) {
             sortClientsByName(resposta.clientesDoUsuario);
+            sortClientsByName(searchedClients);
         }
 
         if (!searched) {
@@ -56,11 +55,7 @@ export default function Clients() {
     useEffect(() => {
         getClients();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-    useEffect(() => {
-        getClients();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateClientSuccess]);
+    }, [updateClientSuccess, sortByName]);
 
     function sortClientsByName(clients) {
         clients.sort(function (a, b) {
