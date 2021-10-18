@@ -113,6 +113,7 @@ export default function Charges() {
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}
                     error={error} />
+                    <div className = "searchInput">
                 <SearchInput
                     table={'charges'}
                     charges={charges}
@@ -120,7 +121,9 @@ export default function Charges() {
                     getCharges={getCharges}
                     updateSuccess={updateChargeSuccess}
                     setSearched={setSearched}
+                    
                 />
+                </div>
                 <div className='cards-container2'>
                     <ChargeTable charges={searchedCharges}
                         setChargesByName={setChargesByName}
