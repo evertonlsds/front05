@@ -49,7 +49,7 @@
   flex-direction:column;
   padding-top: 5%;
 }
-.new-charge-form {
+.edit-charge-form {
     width: 958px;
     height: 556px;
     display: flex;

@@ -13,10 +13,10 @@ registerLocale('pt', pt)
 
 export default function CustomDatePicker(props) {
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-        <button className="datepicker" onClick={onClick} ref={ref}>
+        <div className="datepicker" type='text' onClick={onClick} ref={ref}>
             {value}
-            <img src={Calendar} alt='calendar' />
-        </button>));
+            <img src={Calendar} alt='calendar' className='calendar' />
+        </div>));
 
     return (
         <Controller

@@ -29,7 +29,6 @@ export default function ChargeTable({ charges, chargesByName, setChargesByName, 
     function handleModalEditChargeOpen(charge) {
         setOpenModalChargeEdit(true);
         setSelectedChargeID(charge);
-        console.log(selectedChargeID)
     }
 
 
