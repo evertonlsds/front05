@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import ArrowDown from '../../images/arrow-sort-down.svg';
 
 
-export default function ChargeTable({ charges, chargesByName, setChargesByName, getCharges }) {
+export default function ChargeTable({ charges, chargesByName, setChargesByName, getCharges, setOpenModalChargeEdit, setSelectedChargeID, selectedChargeID }) {
 
     function chargeStatusColor(status) {
         if (status === "PENDENTE") {
@@ -26,6 +26,12 @@ export default function ChargeTable({ charges, chargesByName, setChargesByName, 
         setChargesByName(!chargesByName)
         getCharges();
     }
+    function handleModalEditChargeOpen(charge) {
+        setOpenModalChargeEdit(true);
+        setSelectedChargeID(charge);
+        console.log(selectedChargeID)
+    }
+
 
     return (
         <TableContainer>
@@ -51,9 +57,11 @@ export default function ChargeTable({ charges, chargesByName, setChargesByName, 
                                 <TableCell className='linha' />
                                 <TableCell className='linha' />
                             </TableRow>
-                            <TableRow
-
-                                style={{ backgroundColor: '#FFFFFF' }}
+                            <TableRow onClick={(e) => handleModalEditChargeOpen(charge.id)}
+                                style={{ backgroundColor: '#FFFFFF', 'cursor': 'pointer' }}
+                                data-id={charge.id}
+                                value={charge.id}
+                                id={charge.id}
                             >
                                 <TableCell align="left" >
                                     <h3 className='charge-id'>#{charge.id}</h3>

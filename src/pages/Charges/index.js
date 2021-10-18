@@ -13,6 +13,9 @@ export default function Charges() {
     const [charges, setCharges] = useState([]);
     const { updateProfileSuccess, setUpdateProfileSuccess } = useContext(AuthContext);
     const [chargesByName, setChargesByName] = useState(false);
+    const [openModalChargeEdit, setOpenModalChargeEdit] = useState(false);
+    const [selectedChargeID, setSelectedChargeID] = useState([]);
+    const [selectedCharge, setSelectedCharge] = useState([]);
 
     async function getCharges() {
 
@@ -49,7 +52,11 @@ export default function Charges() {
         <div className='flex-row'>
             <SideBar page='charges' />
             <div className='main-charges'>
-                <ModalChargeEdit />
+                <ModalChargeEdit
+                    openModalChargeEdit={openModalChargeEdit}
+                    setOpenModalChargeEdit={setOpenModalChargeEdit}
+                    selectedChargeID={selectedChargeID}
+                    selectedCharge={selectedCharge} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -60,7 +67,12 @@ export default function Charges() {
                     <ChargeTable charges={charges}
                         setChargesByName={setChargesByName}
                         chargesByName={chargesByName}
-                        getCharges={getCharges} />
+                        getCharges={getCharges}
+                        setOpenModalChargeEdit={setOpenModalChargeEdit}
+                        setSelectedChargeID={setSelectedChargeID}
+                        selectedChargeID={selectedChargeID}
+                        selectedCharge={selectedCharge}
+                        setSelectedCharge={setSelectedCharge} />
                 </div>
             </div>
         </div>

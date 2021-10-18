@@ -88,7 +88,7 @@ function ModalClient({ openModalClient, setOpenModalClient, selectedClientID }) 
                             </div>
                             <img src={Line} alt='line' />
                             <div className='client-charges'>
-                                {selectedClient.cobrancas && selectedClient.cobrancas.map((cobranca) => (<ChargeCard cobranca={cobranca} />))}
+                                {selectedClient.cobrancas && selectedClient.cobrancas.map((cobranca) => (<ChargeCard cobranca={cobranca} key={cobranca.id} />))}
                             </div>
                         </div>
                     </div>
