@@ -9,6 +9,7 @@ import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../routes.js';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
 import SearchInput from '../../components/SearchInput';
+import Loading from '../../components/Loading';
 
 
 export default function Charges() {
@@ -24,6 +25,7 @@ export default function Charges() {
     const [clients, setClients] = useState([]);
     const [searched, setSearched] = useState(false);
     const [searchedCharges, setSearchedCharges] = useState([]);
+    const [carregando, setCarregando] = useState(false);
 
     async function getClients() {
 
@@ -43,6 +45,7 @@ export default function Charges() {
     }
 
     async function getCharges() {
+        setCarregando(true);
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/cobrancas", {
             method: 'GET',
@@ -65,12 +68,9 @@ export default function Charges() {
         }
 
         setCharges(resposta.cobrancasDoUsuario);
+        setCarregando(false)
     }
 
-    useEffect(() => {
-        getCharges();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
     useEffect(() => {
         getClients();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -113,19 +113,19 @@ export default function Charges() {
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}
                     error={error} />
-                    <div className = "searchInput">
-                <SearchInput
-                    table={'charges'}
-                    charges={charges}
-                    setSearchedCharges={setSearchedCharges}
-                    getCharges={getCharges}
-                    updateSuccess={updateChargeSuccess}
-                    setSearched={setSearched}
-                    
-                />
+                <div className="searchInput">
+                    <SearchInput
+                        table={'charges'}
+                        charges={charges}
+                        setSearchedCharges={setSearchedCharges}
+                        getCharges={getCharges}
+                        updateSuccess={updateChargeSuccess}
+                        setSearched={setSearched}
+
+                    />
                 </div>
                 <div className='cards-container2'>
-                    <ChargeTable charges={searchedCharges}
+                    {searchedCharges.length > 0 ? <ChargeTable charges={searchedCharges}
                         setChargesByName={setChargesByName}
                         chargesByName={chargesByName}
                         getCharges={getCharges}
@@ -133,9 +133,10 @@ export default function Charges() {
                         setSelectedChargeID={setSelectedChargeID}
                         selectedChargeID={selectedChargeID}
                         selectedCharge={selectedCharge}
-                        setSelectedCharge={setSelectedCharge} />
+                        setSelectedCharge={setSelectedCharge} /> : <p>Não foram encontradas cobranças</p>}
                 </div>
             </div>
+            <Loading carregando={carregando} />
         </div>
     )
 }

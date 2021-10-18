@@ -11,6 +11,7 @@ import SuccessAlert from '../../components/SuccessAlert';
 import ModalEditClient from '../../components/ModalEditClient';
 import ErrorAlert from '../../components/ErrorAlert';
 import SearchInput from '../../components/SearchInput';
+import Loading from '../../components/Loading';
 
 
 export default function Clients() {
@@ -26,8 +27,10 @@ export default function Clients() {
     const [sortByName, setSortByName] = useState(false);
     const [searchedClients, setSearchedClients] = useState([]);
     const [searched, setSearched] = useState(false);
+    const [carregando, setCarregando] = useState(false);
 
     async function getClients() {
+        setCarregando(true);
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -50,6 +53,7 @@ export default function Clients() {
         }
 
         setClients(resposta.clientesDoUsuario);
+        setCarregando(false);
     }
 
     useEffect(() => {
@@ -101,7 +105,7 @@ export default function Clients() {
                     />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                <ClientTable clients={searchedClients}
+                {searchedClients.length > 0 ? <ClientTable clients={searchedClients}
                     setOpenModalClient={setOpenModalClient}
                     setOpenModalEditClient={setOpenModalEditClient}
                     setSelectedClientID={setSelectedClientID}
@@ -109,8 +113,9 @@ export default function Clients() {
                     getClients={getClients}
                     setSortByName={setSortByName}
                     sortByName={sortByName}
-                />
+                /> : <p>Não foram encontrados clientes.</p>}
             </div>
+            <Loading carregando={carregando} />
 
         </div>
     )
