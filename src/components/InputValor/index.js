@@ -13,13 +13,15 @@ export default function InputValor(props) {
                     fixedDecimalScale={true}
                     decimalSeparator=","
                     onBlur={field.onBlur}
+                    defaultValue={props.defaultValue}
                     prefix="R$"
                     type='text'
                     className="valor-input" />
             )}
             name="valor"
-            rules={{ required: true }}
+            rules={props.rules}
             control={props.control}
+            defaultValue={props.defaultValue}
 
         />
     );

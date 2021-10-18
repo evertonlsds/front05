@@ -11,7 +11,7 @@ export default function SelectClient(props) {
     return (
         <Controller name='cliente_id'
             control={props.control}
-            rules={{ required: true }}
+            rules={props.rules}
             render={({ field: { value, onChange, ref } }) => (
                 <div className="select-status">
                     <select
