@@ -7,7 +7,7 @@
     justify-content: space-between;
     border: 1px solid #374952;
     border-radius: 8px;
-    width: 312px;
+    width: 272px;
     height: 40px;
     font-family: Montserrat;
     font-size: 14px;
@@ -16,6 +16,8 @@
     line-height: 15px;
     letter-spacing: 0.25px;
     text-align: left;
+    padding-right: 20px;
+    padding-left: 20px;
 }
 .react-datepicker-wrapper .react-datepicker__input-container {
     height: 40px;

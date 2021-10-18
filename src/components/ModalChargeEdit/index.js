@@ -5,8 +5,6 @@ import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
 import SelectClient from '../../components/SelectClient';
 import Loading from '../../components/Loading';
-//import SuccessAlert from '../../components/SuccessAlert';
-//import ErrorAlert from '../../components/ErrorAlert';
 import InputValor from '../../components/InputValor';
 import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
@@ -33,7 +31,6 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
         const resposta = await response.json();
 
         setSelectedCharge(resposta)
-        console.log(selectedCharge)
 
     }
     async function updateCharge(dados) {
@@ -53,7 +50,6 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
 
         setSelectedCharge(resposta)
         setCarregando(false);
-        console.log(selectedCharge)
 
         if (!response.ok) {
             setOpenErrorAlert(true);
@@ -89,14 +85,13 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                             className="closeIcon"
                             onClick={() => setOpenModalChargeEdit(false)}
                         />
-                        <form className="new-charge-form" onSubmit={handleSubmit(updateCharge)}>
+                        <form className="edit-charge-form" onSubmit={handleSubmit(updateCharge)}>
                             <div className="input-div">
                                 <label htmlFor="cliente">Cliente</label>
                                 <SelectClient
                                     control={control}
-                                    id="cliente"
-                                    clients={clients}
-                                    defaultValue={selectedCharge.nome} />
+                                    id="cliente_id"
+                                    clients={clients} />
                             </div>
                             <div className="input-div">
                                 <label htmlFor="nome">Descrição</label>
@@ -139,7 +134,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                 </div>
                             </div>
                             <div className="flex-row">
-                                <button className="btn-white-pink" onClick={() => reset()}>Cancelar</button>
+                                <button className="btn-white-pink" type='reset' onClick={() => reset()}>Cancelar</button>
                                 <button className="btn-pink" type="submit">Editar Cobrança</button>
                             </div>
                         </form>
