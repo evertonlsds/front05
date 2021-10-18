@@ -11,7 +11,7 @@ import EditIcon from '../../images/edit-icon.svg';
 import ArrowDown from '../../images/arrow-sort-down.svg';
 import { Fragment } from 'react';
 
-export default function ClientTable({ clients, setOpenModalClient, setOpenModalEditClient, setSelectedClientID, selectedClientID, sortByName, setSortByName, getClients }) {
+export default function ClientTable({ clients, searched, searchedClients, setOpenModalClient, setOpenModalEditClient, setSelectedClientID, selectedClientID, sortByName, setSortByName, getClients }) {
 
     function handleModalClientOpen(client) {
         setOpenModalClient(true);

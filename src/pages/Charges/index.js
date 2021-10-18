@@ -8,6 +8,7 @@ import ErrorAlert from '../../components/ErrorAlert';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../routes.js';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
+import SearchInput from '../../components/SearchInput';
 
 
 export default function Charges() {
@@ -21,6 +22,8 @@ export default function Charges() {
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
     const [clients, setClients] = useState([]);
+    const [searched, setSearched] = useState(false);
+    const [searchedCharges, setSearchedCharges] = useState([]);
 
     async function getClients() {
 
@@ -54,6 +57,10 @@ export default function Charges() {
 
         if (chargesByName) {
             sortChargesByName(resposta.cobrancasDoUsuario);
+        }
+
+        if (!searched) {
+            setSearchedCharges(resposta.cobrancasDoUsuario)
         }
 
         setCharges(resposta.cobrancasDoUsuario);
@@ -105,8 +112,16 @@ export default function Charges() {
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}
                     error={error} />
+                <SearchInput
+                    table={'charges'}
+                    charges={charges}
+                    setSearchedCharges={setSearchedCharges}
+                    getCharges={getCharges}
+                    updateSuccess={updateChargeSuccess}
+                    setSearched={setSearched}
+                />
                 <div className='cards-container2'>
-                    <ChargeTable charges={charges}
+                    <ChargeTable charges={searchedCharges}
                         setChargesByName={setChargesByName}
                         chargesByName={chargesByName}
                         getCharges={getCharges}

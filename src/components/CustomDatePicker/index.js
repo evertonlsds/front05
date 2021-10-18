@@ -4,7 +4,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import pt from 'date-fns/locale/pt';
 import { forwardRef } from 'react';
-import Calendar from '../../images/calendar.svg';
 import { Controller } from 'react-hook-form';
 
 
@@ -12,10 +11,10 @@ registerLocale('pt', pt)
 
 
 export default function CustomDatePicker(props) {
+
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <div className="datepicker" type='text' onClick={onClick} ref={ref}>
             {value}
-            <img src={Calendar} alt='calendar' className='calendar' />
         </div>));
 
     return (
@@ -28,7 +27,6 @@ export default function CustomDatePicker(props) {
                 selected={value}
                 value={value}
                 locale={pt}
-                defaultValue={props.defaultValue}
                 onChange={onChange}
                 popperPlacement="top-start"
                 customInput={<ExampleCustomInput />}

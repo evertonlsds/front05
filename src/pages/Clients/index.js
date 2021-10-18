@@ -10,6 +10,7 @@ import ModalUser from '../../components/ModalUser';
 import SuccessAlert from '../../components/SuccessAlert';
 import ModalEditClient from '../../components/ModalEditClient';
 import ErrorAlert from '../../components/ErrorAlert';
+import SearchInput from '../../components/SearchInput';
 
 
 export default function Clients() {
@@ -23,8 +24,12 @@ export default function Clients() {
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
     const [sortByName, setSortByName] = useState(false);
+    const [searchedClients, setSearchedClients] = useState([]);
+    const [searched, setSearched] = useState(false);
 
     async function getClients() {
+        console.log(searched);
+
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -39,6 +44,10 @@ export default function Clients() {
 
         if (sortByName) {
             sortClientsByName(resposta.clientesDoUsuario);
+        }
+
+        if (!searched) {
+            setSearchedClients(resposta.clientesDoUsuario)
         }
 
         setClients(resposta.clientesDoUsuario);
@@ -87,16 +96,25 @@ export default function Clients() {
                     error={error} />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
+                    <SearchInput
+                        table={'clients'}
+                        clients={clients}
+                        setSearchedClients={setSearchedClients}
+                        setSearched={setSearched}
+                        getClients={getClients}
+                        updateSuccess={updateClientSuccess}
+                    />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                <ClientTable clients={clients}
+                <ClientTable clients={searchedClients}
                     setOpenModalClient={setOpenModalClient}
                     setOpenModalEditClient={setOpenModalEditClient}
                     setSelectedClientID={setSelectedClientID}
                     selectedClientID={selectedClientID}
                     getClients={getClients}
                     setSortByName={setSortByName}
-                    sortByName={sortByName} />
+                    sortByName={sortByName}
+                />
             </div>
 
         </div>
