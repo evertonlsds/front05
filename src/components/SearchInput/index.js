@@ -3,22 +3,24 @@ import { useEffect } from 'react';
 
 
 
-export default function SearchInput({ charges, setCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateClientSuccess }) {
+export default function SearchInput({ charges, setSearchedCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateSuccess }) {
 
     useEffect(() => {
         searchByClick(document.getElementById("input-search").value);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateClientSuccess]);
+        // eslint-disable-next-line
+    }, [updateSuccess]);
 
     function searchByInput(e) {
         if (table === 'charges') {
             if (!e.target.value) {
+                setSearched(false);
                 getCharges();
             }
             if (e.keyCode === 13) {
                 const localCharges = [...charges];
                 const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value));
-                setCharges(chargesSearched);
+                setSearched(true);
+                setSearchedCharges(chargesSearched);
             }
         }
         if (table === 'clients') {
@@ -30,17 +32,30 @@ export default function SearchInput({ charges, setCharges, table, getCharges, cl
                 const clientsSearched = localClients.filter(client => client.nome.includes(e.target.value) || client.email.includes(e.target.value) || client.cpf.includes(e.target.value));
                 setSearched(true);
                 setSearchedClients(clientsSearched);
+                console.log(clientsSearched)
             }
         }
     }
     function searchByClick(value) {
         if (table === 'charges') {
             if (!value) {
+                setSearched(false);
                 getCharges();
             }
             const localCharges = [...charges];
             const chargesSearched = localCharges.filter(charge => charge.nome.includes(value));
-            setCharges(chargesSearched);
+            setSearched(true);
+            setSearchedCharges(chargesSearched);
+        }
+        if (table === 'clients') {
+            if (!value) {
+                setSearched(false);
+                getClients();
+            }
+            const localClients = [...clients];
+            const clientsSearched = localClients.filter(client => client.nome.includes(value) || client.email.includes(value) || client.cpf.includes(value));
+            setSearched(true);
+            setSearchedClients(clientsSearched);
         }
     }
 

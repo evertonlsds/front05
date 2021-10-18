@@ -28,6 +28,8 @@ export default function Clients() {
     const [searched, setSearched] = useState(false);
 
     async function getClients() {
+        console.log(searched);
+
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -42,6 +44,10 @@ export default function Clients() {
 
         if (sortByName) {
             sortClientsByName(resposta.clientesDoUsuario);
+        }
+
+        if (!searched) {
+            setSearchedClients(resposta.clientesDoUsuario)
         }
 
         setClients(resposta.clientesDoUsuario);
@@ -96,17 +102,19 @@ export default function Clients() {
                         setSearchedClients={setSearchedClients}
                         setSearched={setSearched}
                         getClients={getClients}
-                        updateClientSuccess={updateClientSuccess} />
+                        updateSuccess={updateClientSuccess}
+                    />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                <ClientTable clients={searched ? searchedClients : clients}
+                <ClientTable clients={searchedClients}
                     setOpenModalClient={setOpenModalClient}
                     setOpenModalEditClient={setOpenModalEditClient}
                     setSelectedClientID={setSelectedClientID}
                     selectedClientID={selectedClientID}
                     getClients={getClients}
                     setSortByName={setSortByName}
-                    sortByName={sortByName} />
+                    sortByName={sortByName}
+                />
             </div>
 
         </div>

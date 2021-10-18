@@ -22,6 +22,8 @@ export default function Charges() {
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
     const [clients, setClients] = useState([]);
+    const [searched, setSearched] = useState(false);
+    const [searchedCharges, setSearchedCharges] = useState([]);
 
     async function getClients() {
 
@@ -55,6 +57,10 @@ export default function Charges() {
 
         if (chargesByName) {
             sortChargesByName(resposta.cobrancasDoUsuario);
+        }
+
+        if (!searched) {
+            setSearchedCharges(resposta.cobrancasDoUsuario)
         }
 
         setCharges(resposta.cobrancasDoUsuario);
@@ -109,10 +115,13 @@ export default function Charges() {
                 <SearchInput
                     table={'charges'}
                     charges={charges}
-                    setCharges={setCharges}
-                    getCharges={getCharges} />
+                    setSearchedCharges={setSearchedCharges}
+                    getCharges={getCharges}
+                    updateSuccess={updateChargeSuccess}
+                    setSearched={setSearched}
+                />
                 <div className='cards-container2'>
-                    <ChargeTable charges={charges}
+                    <ChargeTable charges={searchedCharges}
                         setChargesByName={setChargesByName}
                         chargesByName={chargesByName}
                         getCharges={getCharges}
