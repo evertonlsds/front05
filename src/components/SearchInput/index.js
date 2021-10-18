@@ -11,28 +11,26 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
     }, [updateSuccess]);
 
     function searchByInput(e) {
-        if (table === 'charges') {
-            if (!e.target.value) {
-                setSearched(false);
-                getCharges();
-            }
-            if (e.keyCode === 13) {
+        if (e.keyCode === 13) {
+            if (table === 'charges') {
+                if (!e.target.value) {
+                    setSearched(false);
+                    getCharges();
+                }
                 const localCharges = [...charges];
                 const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value));
                 setSearched(true);
                 setSearchedCharges(chargesSearched);
             }
-        }
-        if (table === 'clients') {
-            if (!e.target.value) {
-                getClients();
-            }
-            if (e.keyCode === 13) {
+
+            if (table === 'clients') {
+                if (!e.target.value) {
+                    getClients();
+                }
                 const localClients = [...clients];
                 const clientsSearched = localClients.filter(client => client.nome.includes(e.target.value) || client.email.includes(e.target.value) || client.cpf.includes(e.target.value));
                 setSearched(true);
                 setSearchedClients(clientsSearched);
-                console.log(clientsSearched)
             }
         }
     }
