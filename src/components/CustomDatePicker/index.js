@@ -11,6 +11,7 @@ registerLocale('pt', pt)
 
 
 export default function CustomDatePicker(props) {
+
     const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
         <div className="datepicker" type='text' onClick={onClick} ref={ref}>
             {value}
@@ -26,7 +27,6 @@ export default function CustomDatePicker(props) {
                 selected={value}
                 value={value}
                 locale={pt}
-                defaultValue={props.defaultValue}
                 onChange={onChange}
                 popperPlacement="top-start"
                 customInput={<ExampleCustomInput />}

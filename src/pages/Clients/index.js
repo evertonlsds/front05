@@ -10,6 +10,7 @@ import ModalUser from '../../components/ModalUser';
 import SuccessAlert from '../../components/SuccessAlert';
 import ModalEditClient from '../../components/ModalEditClient';
 import ErrorAlert from '../../components/ErrorAlert';
+import SearchInput from '../../components/SearchInput';
 
 
 export default function Clients() {
@@ -23,6 +24,8 @@ export default function Clients() {
     const [openErrorAlert, setOpenErrorAlert] = useState(false);
     const [error, setError] = useState('');
     const [sortByName, setSortByName] = useState(false);
+    const [searchedClients, setSearchedClients] = useState([]);
+    const [searched, setSearched] = useState(false);
 
     async function getClients() {
 
@@ -87,9 +90,16 @@ export default function Clients() {
                     error={error} />
                 <div>
                     <button className="btn-white-pink" onClick={() => history.push('/newclient')}>Adicionar Cliente</button>
+                    <SearchInput
+                        table={'clients'}
+                        clients={clients}
+                        setSearchedClients={setSearchedClients}
+                        setSearched={setSearched}
+                        getClients={getClients}
+                        updateClientSuccess={updateClientSuccess} />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
-                <ClientTable clients={clients}
+                <ClientTable clients={searched ? searchedClients : clients}
                     setOpenModalClient={setOpenModalClient}
                     setOpenModalEditClient={setOpenModalEditClient}
                     setSelectedClientID={setSelectedClientID}
