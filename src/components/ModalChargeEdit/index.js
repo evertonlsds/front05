@@ -1,6 +1,6 @@
 import './styles.css';
 import CloseIcon from '../../images/close.svg';
-import Tooltip from '../../components/tooltip';
+import Tooltip from '../Tooltip';
 import { useForm } from 'react-hook-form';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
@@ -36,7 +36,6 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
     }
     async function updateCharge(dados) {
         setCarregando(true);
-        console.log(dados)
 
         const response = await fetch(`https://api-desafio-05.herokuapp.com/cobrancas/${selectedChargeID}`, {
             method: 'PUT',
@@ -84,7 +83,6 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
         }
         setDeleteChargeSuccess(true);
         setOpenModalChargeEdit(false);
-
     }
 
     useEffect(() => {
