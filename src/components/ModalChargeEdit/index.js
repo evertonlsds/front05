@@ -9,6 +9,7 @@ import InputValor from '../../components/InputValor';
 import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
 import TooltipChargeDelete from '../TooltipChargeDelete';
+import { Popover } from '@mui/material';
 
 
 function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess, clients, setDeleteChargeSuccess }) {
@@ -16,7 +17,9 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
 
     const { handleSubmit, register, control, formState: { errors }, reset } = useForm({ mode: "onChange" });
     const [selectedCharge, setSelectedCharge] = useState([]);
-    const [carregando, setCarregando] = useState(false)
+    const [carregando, setCarregando] = useState(false);
+    const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
+    const [anchorDeleteConfirmation, setAnchorDeleteConfirmation] = useState(null);
 
     async function getCharge() {
 
@@ -98,6 +101,11 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    function handleOpenDeleteConfirmation(event) {
+        setAnchorDeleteConfirmation(event.currentTarget)
+        setOpenDeleteConfirmation(true);
+    }
+
 
     return (
         <>
@@ -142,11 +150,22 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                         control={control}
                                         defaultValue={selectedCharge.valor} />
                                     <div className=" trash-container">
-                                        <div className="trash">
+                                        <div className="trash" onClick={(e) => handleOpenDeleteConfirmation(e)}>
                                             <img src={Trash} alt='trash' />
-                                            <a href="/charges">Excuir cobrança</a>
+                                            <p className='delete-charge-text'>Excluir cobrança</p>
                                         </div>
-                                        <TooltipChargeDelete deleteCharge={deleteCharge} />
+                                        <Popover
+                                            id='menu-user'
+                                            open={openDeleteConfirmation}
+                                            onClose={() => setOpenDeleteConfirmation(false)}
+                                            anchorEl={anchorDeleteConfirmation}
+                                            anchorOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'right',
+                                            }}>
+                                            <TooltipChargeDelete setOpenDeleteConfirmation={setOpenDeleteConfirmation}
+                                                deleteCharge={deleteCharge} />
+                                        </Popover>
                                     </div>
                                 </div>
                                 <div className='flex-column'>
