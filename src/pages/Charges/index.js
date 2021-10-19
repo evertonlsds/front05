@@ -26,6 +26,7 @@ export default function Charges() {
     const [searched, setSearched] = useState(false);
     const [searchedCharges, setSearchedCharges] = useState([]);
     const [carregando, setCarregando] = useState(false);
+    const [deleteChargeSuccess, setDeleteChargeSuccess] = useState(false);
 
     async function getClients() {
 
@@ -78,7 +79,7 @@ export default function Charges() {
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateChargeSuccess, chargesByName]);
+    }, [updateChargeSuccess, chargesByName, deleteChargeSuccess]);
 
     function sortChargesByName(charges) {
         charges.sort(function (a, b) {
@@ -98,7 +99,8 @@ export default function Charges() {
                     setUpdateChargeSuccess={setUpdateChargeSuccess}
                     setOpenErrorAlert={setOpenErrorAlert}
                     setError={setError}
-                    clients={clients} />
+                    clients={clients}
+                    setDeleteChargeSuccess={setDeleteChargeSuccess} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -109,6 +111,10 @@ export default function Charges() {
                     openSuccessAlert={updateChargeSuccess}
                     setOpenSuccessAlert={setUpdateChargeSuccess}
                     message="Cobrança atualizada com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={deleteChargeSuccess}
+                    setOpenSuccessAlert={setDeleteChargeSuccess}
+                    message="Cobrança excluída com sucesso!" />
                 <ErrorAlert
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}

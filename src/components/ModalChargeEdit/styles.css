@@ -51,6 +51,7 @@
 }
 .edit-charge-form {
     width: 958px;
+    height: 556px;
     display: flex;
     flex-direction: column;
     align-items: center;
