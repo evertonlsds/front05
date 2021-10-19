@@ -153,15 +153,14 @@ export default function Reports() {
 
         const clientesFiltrados = resposta.clientesDoUsuario.filter(client => client.status === clientStatus);
 
-        if (!searched) {
-            setSearchedClients(clientesFiltrados)
-            setClients(clientesFiltrados);
-        }
-
-
         if (sortByName) {
             sortReport(clientesFiltrados);
             sortReport(searchedClients);
+        }
+
+        if (!searched) {
+            setSearchedClients(clientesFiltrados)
+            setClients(clientesFiltrados);
         }
 
         setCarregando(false);
@@ -173,7 +172,7 @@ export default function Reports() {
     useEffect(() => {
         getClients();
         // eslint-disable-next-line
-    }, [searched, updateClientSuccess, clientStatus])
+    }, [searched, updateClientSuccess, clientStatus, sortByName])
 
     async function getCharges() {
 
@@ -205,7 +204,7 @@ export default function Reports() {
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [searched, updateChargeSuccess, deleteChargeSuccess, chargeStatus])
+    }, [searched, updateChargeSuccess, deleteChargeSuccess, chargeStatus, sortByName])
 
     function sortReport(tipo) {
         tipo.sort(function (a, b) {
@@ -310,7 +309,7 @@ export default function Reports() {
                             </div>
                         </Popover>
                     </div>
-                    <SearchInput
+                    {report === 'charges' ? <SearchInput
                         table={'reports'}
                         charges={charges}
                         clients={clients}
@@ -320,34 +319,46 @@ export default function Reports() {
                         getClients={getClients}
                         updateSuccess={updateChargeSuccess}
                         setSearched={setSearched}
-                        placeholder={'Procurar por Nome ou ID'} />
+                        placeholder={'Procurar por Nome ou ID'} /> :
+                        <SearchInput
+                            table={'reports'}
+                            charges={charges}
+                            clients={clients}
+                            setSearchedClients={setSearchedClients}
+                            setSearchedCharges={setSearchedCharges}
+                            getCharges={getCharges}
+                            getClients={getClients}
+                            updateSuccess={updateChargeSuccess}
+                            setSearched={setSearched}
+                            placeholder={'Procurar por Nome, email ou CPF'} />}
                     <ModalClient
                         openModalClient={openModalClient}
                         setOpenModalClient={setOpenModalClient}
                         selectedClientID={selectedClientID} />
                 </div>
                 {
-                    report === 'clients' && <ClientTable clients={searchedClients}
-                        setOpenModalClient={setOpenModalClient}
-                        setOpenModalEditClient={setOpenModalEditClient}
-                        setSelectedClientID={setSelectedClientID}
-                        selectedClientID={selectedClientID}
-                        getClients={getClients}
-                        setSortByName={setSortByName}
-                        sortByName={sortByName} />
+                    report === 'clients' && (searchedClients.length > 0 ?
+                        <ClientTable clients={searchedClients}
+                            setOpenModalClient={setOpenModalClient}
+                            setOpenModalEditClient={setOpenModalEditClient}
+                            setSelectedClientID={setSelectedClientID}
+                            selectedClientID={selectedClientID}
+                            getClients={getClients}
+                            setSortByName={setSortByName}
+                            sortByName={sortByName} /> : <p>Não foram encontrados clientes.</p>)
                 }
 
                 {
-                    report === 'charges' &&
-                    <ChargeTable charges={searchedCharges}
-                        setChargesByName={setSortByName}
-                        chargesByName={sortByName}
-                        getCharges={getCharges}
-                        setOpenModalChargeEdit={setOpenModalChargeEdit}
-                        setSelectedChargeID={setSelectedChargeID}
-                        selectedChargeID={selectedChargeID}
-                        selectedCharge={selectedCharge}
-                        setSelectedCharge={setSelectedCharge} />
+                    report === 'charges' && (searchedCharges.length > 0 ?
+                        <ChargeTable charges={searchedCharges}
+                            setChargesByName={setSortByName}
+                            chargesByName={sortByName}
+                            getCharges={getCharges}
+                            setOpenModalChargeEdit={setOpenModalChargeEdit}
+                            setSelectedChargeID={setSelectedChargeID}
+                            selectedChargeID={selectedChargeID}
+                            selectedCharge={selectedCharge}
+                            setSelectedCharge={setSelectedCharge} /> : <p>Não foram encontradas cobranças.</p>)
                 }
             </div>
             <Loading carregando={carregando} />

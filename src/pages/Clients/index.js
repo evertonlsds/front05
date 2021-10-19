@@ -43,13 +43,15 @@ export default function Clients() {
 
         const resposta = await response.json();
 
-        if (sortByName) {
-            sortClientsByName(resposta.clientesDoUsuario);
-            sortClientsByName(searchedClients);
-        }
+
 
         if (!searched) {
             setSearchedClients(resposta.clientesDoUsuario)
+        }
+
+        if (sortByName) {
+            sortClientsByName(resposta.clientesDoUsuario);
+            sortClientsByName(searchedClients);
         }
 
         setClients(resposta.clientesDoUsuario);
