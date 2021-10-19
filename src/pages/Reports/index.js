@@ -14,6 +14,7 @@ import Arrow from '../../images/arrow.svg'
 import { Popover } from '@mui/material';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
 import SearchInput from '../../components/SearchInput';
+import Loading from '../../components/Loading';
 
 
 export default function Reports() {
@@ -41,6 +42,7 @@ export default function Reports() {
     const [searchedCharges, setSearchedCharges] = useState([]);
     const [deleteChargeSuccess, setDeleteChargeSuccess] = useState(false);
     const [searchedClients, setSearchedClients] = useState([]);
+    const [carregando, setCarregando] = useState(false);
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -69,12 +71,14 @@ export default function Reports() {
         setOpenMenuStatus(true);
     }
     function handleEmDiaClick() {
+        setSearched(false);
         setClientStatus('EM DIA');
         setOpenMenuStatus(false);
         setLabel("EM DIA");
         getClients();
     }
     function handleInadimplenteClick() {
+        setSearched(false);
         setClientStatus('INADIMPLENTE');
         setOpenMenuStatus(false);
         setLabel("INADIMPLENTES")
@@ -121,6 +125,8 @@ export default function Reports() {
     }
 
     async function getClients() {
+        console.log('getclients')
+        setCarregando(true);
 
         if (!report) {
             setReport('clients')
@@ -131,7 +137,6 @@ export default function Reports() {
         if (!label) {
             setStatusLabel();
         }
-
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -148,10 +153,18 @@ export default function Reports() {
 
         const clientesFiltrados = resposta.clientesDoUsuario.filter(client => client.status === clientStatus);
 
-        if (sortByName) {
-            sortReport(clientesFiltrados);
+        if (!searched) {
+            setSearchedClients(clientesFiltrados)
+            setClients(clientesFiltrados);
         }
 
+
+        if (sortByName) {
+            sortReport(clientesFiltrados);
+            sortReport(searchedClients);
+        }
+
+        setCarregando(false);
         setClients(clientesFiltrados);
 
 
@@ -159,13 +172,8 @@ export default function Reports() {
 
     useEffect(() => {
         getClients();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getClients();
         // eslint-disable-next-line
-    }, [clients])
+    }, [searched, updateClientSuccess, clientStatus])
 
     async function getCharges() {
 
@@ -188,7 +196,6 @@ export default function Reports() {
         }
 
         if (!searched) {
-            console.log('searched false')
             setSearchedCharges(cobrancasFiltradas)
             setCharges(cobrancasFiltradas);
         }
@@ -320,7 +327,7 @@ export default function Reports() {
                         selectedClientID={selectedClientID} />
                 </div>
                 {
-                    report === 'clients' && <ClientTable clients={clients}
+                    report === 'clients' && <ClientTable clients={searchedClients}
                         setOpenModalClient={setOpenModalClient}
                         setOpenModalEditClient={setOpenModalEditClient}
                         setSelectedClientID={setSelectedClientID}
@@ -343,6 +350,7 @@ export default function Reports() {
                         setSelectedCharge={setSelectedCharge} />
                 }
             </div>
+            <Loading carregando={carregando} />
         </div >
     )
 }

@@ -12,7 +12,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
 
     function searchByInput(e) {
         if (e.keyCode === 13) {
-            if (table === 'charges' || 'reports') {
+            if (table !== 'clients') {
                 if (!e.target.value) {
                     setSearched(false);
                     getCharges();
@@ -23,7 +23,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                 setSearchedCharges(chargesSearched);
             }
 
-            if (table === 'clients' || 'reports') {
+            if (table !== 'charges') {
                 if (!e.target.value) {
                     getClients();
                 }
@@ -35,7 +35,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
         }
     }
     function searchByClick(value) {
-        if (table === 'charges' || 'reports') {
+        if (table !== 'clients') {
             if (!value) {
                 setSearched(false);
                 getCharges();
@@ -45,7 +45,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
             setSearched(true);
             setSearchedCharges(chargesSearched);
         }
-        if (table === 'clients' || 'reports') {
+        if (table !== 'charges') {
             if (!value) {
                 setSearched(false);
                 getClients();
