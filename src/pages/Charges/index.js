@@ -127,7 +127,7 @@ export default function Charges() {
                         getCharges={getCharges}
                         updateSuccess={updateChargeSuccess}
                         setSearched={setSearched}
-                        placeholder={'Procurar por Nome ou ID'}
+                        placeholder={'Procurar por nome, email, cpf ou ID'}
                     />
                 </div>
                 <div className='cards-container2'>
