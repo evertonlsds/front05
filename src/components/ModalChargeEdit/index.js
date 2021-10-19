@@ -1,6 +1,6 @@
 import './styles.css';
 import CloseIcon from '../../images/close.svg';
-import Tooltip from '../Tooltip';
+import Tooltip from '../../components/Tooltip';
 import { useForm } from 'react-hook-form';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
