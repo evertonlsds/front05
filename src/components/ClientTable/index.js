@@ -22,7 +22,7 @@ export default function ClientTable({ clients, setOpenModalClient, setOpenModalE
         setSelectedClientID(client);
     }
     function handleSortByName() {
-        setSortByName(!sortByName)
+        setSortByName(!sortByName);
         getClients();
     }
 

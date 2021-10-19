@@ -5,6 +5,7 @@
     display: grid;
     place-items:center;
     position: relative;
+    margin: 0%;
 }
 
 .tooltip .seta{
@@ -18,9 +19,6 @@
     border-right:10px solid #F8F8F8;
 }
 
-.tooltip button, p{
-    margin: 0%;
-}
 .buttons{
     display: flex;
     gap: 7px ;
@@ -35,6 +33,7 @@
     border: 0;
     height: auto;
     cursor: pointer;
+    margin: 0%;
 }
 
 .button-no{
@@ -45,7 +44,9 @@
     border: 0;
     height: auto;
     cursor: pointer;
+    margin: 0%;
 }
 .tooltip p{
     margin-bottom: 2px;
+    margin: 0%;
 }
