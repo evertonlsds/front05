@@ -18,7 +18,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                     getCharges();
                 }
                 const localCharges = [...charges];
-                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value) || charge.id === Number(e.target.value));
+                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value) || charge.cpf.includes(e.target.value) || charge.email.includes(e.target.value) || charge.id === Number(e.target.value));
                 setSearched(true);
                 setSearchedCharges(chargesSearched);
             }
@@ -41,7 +41,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                 getCharges();
             }
             const localCharges = [...charges];
-            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value) || charge.id === Number(value));
+            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value) || charge.cpf.includes(value) || charge.email.includes(value) || charge.id === Number(value));
             setSearched(true);
             setSearchedCharges(chargesSearched);
         }

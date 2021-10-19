@@ -319,7 +319,7 @@ export default function Reports() {
                         getClients={getClients}
                         updateSuccess={updateChargeSuccess}
                         setSearched={setSearched}
-                        placeholder={'Procurar por Nome ou ID'} /> :
+                        placeholder={'Procurar por nome, email, cpf ou ID'} /> :
                         <SearchInput
                             table={'reports'}
                             charges={charges}
@@ -330,7 +330,7 @@ export default function Reports() {
                             getClients={getClients}
                             updateSuccess={updateChargeSuccess}
                             setSearched={setSearched}
-                            placeholder={'Procurar por Nome, email ou CPF'} />}
+                            placeholder={'Procurar por nome, email ou CPF'} />}
                     <ModalClient
                         openModalClient={openModalClient}
                         setOpenModalClient={setOpenModalClient}
