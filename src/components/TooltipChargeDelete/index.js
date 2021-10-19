@@ -1,7 +1,7 @@
 import './styles.css';
 
 
-function Tooltip({ deleteCharge }) {
+function TooltipChargeDelete({ deleteCharge }) {
   return (
     <div className="tooltip">
       <div className="seta"></div>
@@ -18,4 +18,4 @@ function Tooltip({ deleteCharge }) {
 
 
 
-export default Tooltip;
+export default TooltipChargeDelete;

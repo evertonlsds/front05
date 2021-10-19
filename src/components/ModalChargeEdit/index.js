@@ -1,6 +1,5 @@
 import './styles.css';
 import CloseIcon from '../../images/close.svg';
-import Tooltip from '../../components/Tooltip';
 import { useForm } from 'react-hook-form';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
@@ -9,6 +8,7 @@ import Loading from '../../components/Loading';
 import InputValor from '../../components/InputValor';
 import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
+import TooltipChargeDelete from '../TooltipChargeDelete';
 
 
 function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess, clients, setDeleteChargeSuccess }) {
@@ -146,7 +146,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                             <img src={Trash} alt='trash' />
                                             <a href="/charges">Excuir cobrança</a>
                                         </div>
-                                        <Tooltip deleteCharge={deleteCharge} />
+                                        <TooltipChargeDelete deleteCharge={deleteCharge} />
                                     </div>
                                 </div>
                                 <div className='flex-column'>
