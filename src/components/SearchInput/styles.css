@@ -31,8 +31,9 @@
     box-sizing: border-box;
     border-radius: 8px;
     height: 40px;
+    padding-left: 24px;
 }
-.search-input ::placeholder {
+.search-input::placeholder {
     font-family: Montserrat;
     font-size: 12px;
     font-style: normal;

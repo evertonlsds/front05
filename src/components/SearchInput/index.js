@@ -62,7 +62,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
             <input type='text'
                 className='search-input'
                 id="input-search" onKeyDown={(e) => searchByInput(e)}
-                placeholder='Procurar por Nome, E-mail ou CPF'></input>
+                placeholder='Procurar por Nome, E-mail ou CPF' />
             <button className='search-button'
                 onClick={(e) => searchByClick(document.getElementById("input-search").value)}>BUSCAR</button>
         </div>
