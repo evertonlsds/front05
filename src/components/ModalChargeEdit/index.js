@@ -11,7 +11,7 @@ import Trash from '../../images/trash.svg';
 import { useEffect, useState } from 'react';
 
 
-function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess, clients }) {
+function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selectedChargeID, setOpenErrorAlert, setError, setUpdateChargeSuccess, clients, setDeleteChargeSuccess }) {
 
 
     const { handleSubmit, register, control, formState: { errors }, reset } = useForm({ mode: "onChange" });
@@ -36,6 +36,7 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
     }
     async function updateCharge(dados) {
         setCarregando(true);
+        console.log(dados)
 
         const response = await fetch(`https://api-desafio-05.herokuapp.com/cobrancas/${selectedChargeID}`, {
             method: 'PUT',
@@ -58,6 +59,30 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
             return;
         }
         setUpdateChargeSuccess(true);
+        setOpenModalChargeEdit(false);
+
+    }
+    async function deleteCharge() {
+        setCarregando(true);
+
+        const response = await fetch(`https://api-desafio-05.herokuapp.com/cobrancas/${selectedChargeID}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': "application/json",
+                "charset": "utf-8",
+                'Authorization': `Bearer ${localStorage.getItem('token')} `
+            },
+        });
+
+        const resposta = await response.json();
+        setCarregando(false);
+
+        if (!response.ok) {
+            setOpenErrorAlert(true);
+            setError(resposta);
+            return;
+        }
+        setDeleteChargeSuccess(true);
         setOpenModalChargeEdit(false);
 
     }
@@ -118,13 +143,13 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     <InputValor
                                         control={control}
                                         defaultValue={selectedCharge.valor} />
-                                        <div className=" trash-container">
-                                         <div className="trash">
-                                            <img src={Trash} alt='trash'/>
-                                            <a href ="/charges">Excuir cobrança</a>
+                                    <div className=" trash-container">
+                                        <div className="trash">
+                                            <img src={Trash} alt='trash' />
+                                            <a href="/charges">Excuir cobrança</a>
                                         </div>
-                                            <Tooltip/>
-                                        </div>
+                                        <Tooltip deleteCharge={deleteCharge} />
+                                    </div>
                                 </div>
                                 <div className='flex-column'>
                                     <label htmlFor="vencimento">Vencimento</label>
@@ -134,16 +159,14 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     />
                                 </div>
                             </div>
-                           
                             <div className="flex-row " >
-                            
                                 <button className="btn-white-pink" type='reset' onClick={() => reset()}>Cancelar</button>
                                 <button className="btn-pink" type="submit">Editar Cobrança</button>
                             </div>
                         </form>
                     </div>
                     <Loading carregando={carregando} />
-                </div>
+                </div >
 
             }
         </>
