@@ -1,5 +1,6 @@
 import './styles.css';
 import CloseIcon from '../../images/close.svg';
+import Tooltip from '../../components/tooltip';
 import { useForm } from 'react-hook-form';
 import CustomDatePicker from '../../components/CustomDatePicker';
 import SelectStatus from '../../components/SelectStatus';
@@ -117,9 +118,12 @@ function ModalChargeEdit({ setOpenModalChargeEdit, openModalChargeEdit, selected
                                     <InputValor
                                         control={control}
                                         defaultValue={selectedCharge.valor} />
+                                        <div className=" trash-container">
                                          <div className="trash">
                                             <img src={Trash} alt='trash'/>
                                             <a href ="/charges">Excuir cobrança</a>
+                                        </div>
+                                            <Tooltip/>
                                         </div>
                                 </div>
                                 <div className='flex-column'>

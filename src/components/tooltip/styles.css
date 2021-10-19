@@ -1,0 +1,51 @@
+.tooltip{
+    background-color: #F8F8F8;
+    filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.15));
+    padding: 10px 20px;
+    display: grid;
+    place-items:center;
+    position: relative;
+}
+
+.tooltip .seta{
+    position: absolute;
+    top:20px;
+    left: -10px; 
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent; 
+    border-right:10px solid #F8F8F8;
+}
+
+.tooltip button, p{
+    margin: 0%;
+}
+.buttons{
+    display: flex;
+    gap: 7px ;
+    
+}
+
+.button-yes{
+    background-color:#3A9FF1;
+    border-radius: 4px;
+    padding: 2px 10px;
+    color: white;
+    border: 0;
+    height: auto;
+    cursor: pointer;
+}
+
+.button-no{
+    background: #FF576B;
+    border-radius: 4px;  
+    color: white;
+    padding: 2px 10px;
+    border: 0;
+    height: auto;
+    cursor: pointer;
+}
+.tooltip p{
+    margin-bottom: 2px;
+}
