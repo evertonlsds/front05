@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 
 
-export default function SearchInput({ charges, setSearchedCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateSuccess }) {
+export default function SearchInput({ charges, setSearchedCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateSuccess, placeholder }) {
 
     useEffect(() => {
         searchByClick(document.getElementById("input-search").value);
@@ -18,7 +18,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                     getCharges();
                 }
                 const localCharges = [...charges];
-                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value));
+                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value) || charge.id === Number(e.target.value));
                 setSearched(true);
                 setSearchedCharges(chargesSearched);
             }
@@ -41,7 +41,8 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                 getCharges();
             }
             const localCharges = [...charges];
-            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value));
+            console.log(localCharges)
+            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value) || charge.id === Number(value));
             setSearched(true);
             setSearchedCharges(chargesSearched);
         }
@@ -62,7 +63,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
             <input type='text'
                 className='search-input'
                 id="input-search" onKeyDown={(e) => searchByInput(e)}
-                placeholder='Procurar por Nome, E-mail ou CPF' />
+                placeholder={placeholder} />
             <button className='search-button'
                 onClick={(e) => searchByClick(document.getElementById("input-search").value)}>BUSCAR</button>
         </div>

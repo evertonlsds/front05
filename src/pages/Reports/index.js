@@ -13,6 +13,7 @@ import ChargeTable from '../../components/ChargeTable';
 import Arrow from '../../images/arrow.svg'
 import { Popover } from '@mui/material';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
+import SearchInput from '../../components/SearchInput';
 
 
 export default function Reports() {
@@ -283,7 +284,11 @@ export default function Reports() {
                             </div>
                         </Popover>
                     </div>
-                    <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
+                    <SearchInput />
+                    <ModalClient
+                        openModalClient={openModalClient}
+                        setOpenModalClient={setOpenModalClient}
+                        selectedClientID={selectedClientID} />
                 </div>
                 {
                     report === 'clients' && <ClientTable clients={clients}

@@ -102,6 +102,7 @@ export default function Clients() {
                         setSearched={setSearched}
                         getClients={getClients}
                         updateSuccess={updateClientSuccess}
+                        placeholder={'Procurar por Nome, E-mail ou CPF'}
                     />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
