@@ -12,7 +12,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
 
     function searchByInput(e) {
         if (e.keyCode === 13) {
-            if (table === 'charges') {
+            if (table === 'charges' || 'reports') {
                 if (!e.target.value) {
                     setSearched(false);
                     getCharges();
@@ -23,7 +23,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
                 setSearchedCharges(chargesSearched);
             }
 
-            if (table === 'clients') {
+            if (table === 'clients' || 'reports') {
                 if (!e.target.value) {
                     getClients();
                 }
@@ -35,18 +35,17 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
         }
     }
     function searchByClick(value) {
-        if (table === 'charges') {
+        if (table === 'charges' || 'reports') {
             if (!value) {
                 setSearched(false);
                 getCharges();
             }
             const localCharges = [...charges];
-            console.log(localCharges)
             const chargesSearched = localCharges.filter(charge => charge.nome.includes(value) || charge.id === Number(value));
             setSearched(true);
             setSearchedCharges(chargesSearched);
         }
-        if (table === 'clients') {
+        if (table === 'clients' || 'reports') {
             if (!value) {
                 setSearched(false);
                 getClients();

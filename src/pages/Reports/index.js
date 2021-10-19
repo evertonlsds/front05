@@ -37,6 +37,10 @@ export default function Reports() {
     const [updateChargeSuccess, setUpdateChargeSuccess] = useState(false);
     const [selectedCharge, setSelectedCharge] = useState([]);
     const [allClients, setAllClients] = useState([]);
+    const [searched, setSearched] = useState(false);
+    const [searchedCharges, setSearchedCharges] = useState([]);
+    const [deleteChargeSuccess, setDeleteChargeSuccess] = useState(false);
+    const [searchedClients, setSearchedClients] = useState([]);
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -77,16 +81,19 @@ export default function Reports() {
         getClients();
     }
     function handlePendentesClick() {
+        setSearched(false);
         setChargeStatus('PENDENTE');
         setOpenMenuStatus(false);
         setLabel("PENDENTES");
     }
     function handleVencidasClick() {
+        setSearched(false);
         setChargeStatus('VENCIDA');
         setOpenMenuStatus(false);
         setLabel("VENCIDAS");
     }
     function handlePagasClick() {
+        setSearched(false);
         setChargeStatus('PAGO');
         setOpenMenuStatus(false);
         setLabel("PAGAS");
@@ -115,6 +122,17 @@ export default function Reports() {
 
     async function getClients() {
 
+        if (!report) {
+            setReport('clients')
+        }
+        if (!clientStatus) {
+            setClientStatus('EM DIA')
+        }
+        if (!label) {
+            setStatusLabel();
+        }
+
+
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
             headers: {
@@ -136,12 +154,7 @@ export default function Reports() {
 
         setClients(clientesFiltrados);
 
-        if (!report) {
-            setReport('clients')
-        }
-        if (!label) {
-            setStatusLabel();
-        }
+
     }
 
     useEffect(() => {
@@ -171,24 +184,21 @@ export default function Reports() {
 
         if (sortByName) {
             sortReport(cobrancasFiltradas);
+            sortReport(searchedCharges);
         }
 
-        setCharges(cobrancasFiltradas);
+        if (!searched) {
+            console.log('searched false')
+            setSearchedCharges(cobrancasFiltradas)
+            setCharges(cobrancasFiltradas);
+        }
+
     }
 
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getCharges();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [charges])
-    useEffect(() => {
-        getCharges();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateChargeSuccess]);
+    }, [searched, updateChargeSuccess, deleteChargeSuccess, chargeStatus])
 
     function sortReport(tipo) {
         tipo.sort(function (a, b) {
@@ -215,7 +225,8 @@ export default function Reports() {
                     setUpdateChargeSuccess={setUpdateChargeSuccess}
                     setOpenErrorAlert={setOpenErrorAlert}
                     setError={setError}
-                    clients={allClients} />
+                    clients={allClients}
+                    setDeleteChargeSuccess={setDeleteChargeSuccess} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -226,6 +237,14 @@ export default function Reports() {
                     openSuccessAlert={updateClientSuccess}
                     setOpenSuccessAlert={setUpdateClientSuccess}
                     message="Cliente atualizado com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={updateChargeSuccess}
+                    setOpenSuccessAlert={setUpdateChargeSuccess}
+                    message="Cobrança atualizada com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={deleteChargeSuccess}
+                    setOpenSuccessAlert={setDeleteChargeSuccess}
+                    message="Cobrança excluída com sucesso!" />
                 <ErrorAlert
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}
@@ -284,7 +303,17 @@ export default function Reports() {
                             </div>
                         </Popover>
                     </div>
-                    <SearchInput />
+                    <SearchInput
+                        table={'reports'}
+                        charges={charges}
+                        clients={clients}
+                        setSearchedClients={setSearchedClients}
+                        setSearchedCharges={setSearchedCharges}
+                        getCharges={getCharges}
+                        getClients={getClients}
+                        updateSuccess={updateChargeSuccess}
+                        setSearched={setSearched}
+                        placeholder={'Procurar por Nome ou ID'} />
                     <ModalClient
                         openModalClient={openModalClient}
                         setOpenModalClient={setOpenModalClient}
@@ -303,7 +332,7 @@ export default function Reports() {
 
                 {
                     report === 'charges' &&
-                    <ChargeTable charges={charges}
+                    <ChargeTable charges={searchedCharges}
                         setChargesByName={setSortByName}
                         chargesByName={sortByName}
                         getCharges={getCharges}
