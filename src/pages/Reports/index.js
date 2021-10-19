@@ -13,6 +13,8 @@ import ChargeTable from '../../components/ChargeTable';
 import Arrow from '../../images/arrow.svg'
 import { Popover } from '@mui/material';
 import ModalChargeEdit from '../../components/ModalChargeEdit';
+import SearchInput from '../../components/SearchInput';
+import Loading from '../../components/Loading';
 
 
 export default function Reports() {
@@ -36,6 +38,11 @@ export default function Reports() {
     const [updateChargeSuccess, setUpdateChargeSuccess] = useState(false);
     const [selectedCharge, setSelectedCharge] = useState([]);
     const [allClients, setAllClients] = useState([]);
+    const [searched, setSearched] = useState(false);
+    const [searchedCharges, setSearchedCharges] = useState([]);
+    const [deleteChargeSuccess, setDeleteChargeSuccess] = useState(false);
+    const [searchedClients, setSearchedClients] = useState([]);
+    const [carregando, setCarregando] = useState(false);
 
     function handleOpenMenuReport(event) {
         setAnchorMenuReport(event.currentTarget)
@@ -64,28 +71,33 @@ export default function Reports() {
         setOpenMenuStatus(true);
     }
     function handleEmDiaClick() {
+        setSearched(false);
         setClientStatus('EM DIA');
         setOpenMenuStatus(false);
         setLabel("EM DIA");
         getClients();
     }
     function handleInadimplenteClick() {
+        setSearched(false);
         setClientStatus('INADIMPLENTE');
         setOpenMenuStatus(false);
         setLabel("INADIMPLENTES")
         getClients();
     }
     function handlePendentesClick() {
+        setSearched(false);
         setChargeStatus('PENDENTE');
         setOpenMenuStatus(false);
         setLabel("PENDENTES");
     }
     function handleVencidasClick() {
+        setSearched(false);
         setChargeStatus('VENCIDA');
         setOpenMenuStatus(false);
         setLabel("VENCIDAS");
     }
     function handlePagasClick() {
+        setSearched(false);
         setChargeStatus('PAGO');
         setOpenMenuStatus(false);
         setLabel("PAGAS");
@@ -113,6 +125,18 @@ export default function Reports() {
     }
 
     async function getClients() {
+        console.log('getclients')
+        setCarregando(true);
+
+        if (!report) {
+            setReport('clients')
+        }
+        if (!clientStatus) {
+            setClientStatus('EM DIA')
+        }
+        if (!label) {
+            setStatusLabel();
+        }
 
         const response = await fetch("https://api-desafio-05.herokuapp.com/clientes", {
             method: 'GET',
@@ -131,27 +155,24 @@ export default function Reports() {
 
         if (sortByName) {
             sortReport(clientesFiltrados);
+            sortReport(searchedClients);
         }
 
+        if (!searched) {
+            setSearchedClients(clientesFiltrados)
+            setClients(clientesFiltrados);
+        }
+
+        setCarregando(false);
         setClients(clientesFiltrados);
 
-        if (!report) {
-            setReport('clients')
-        }
-        if (!label) {
-            setStatusLabel();
-        }
+
     }
 
     useEffect(() => {
         getClients();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getClients();
         // eslint-disable-next-line
-    }, [clients])
+    }, [searched, updateClientSuccess, clientStatus, sortByName])
 
     async function getCharges() {
 
@@ -170,24 +191,20 @@ export default function Reports() {
 
         if (sortByName) {
             sortReport(cobrancasFiltradas);
+            sortReport(searchedCharges);
         }
 
-        setCharges(cobrancasFiltradas);
+        if (!searched) {
+            setSearchedCharges(cobrancasFiltradas)
+            setCharges(cobrancasFiltradas);
+        }
+
     }
 
     useEffect(() => {
         getCharges();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    useEffect(() => {
-        getCharges();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [charges])
-    useEffect(() => {
-        getCharges();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [updateChargeSuccess]);
+    }, [searched, updateChargeSuccess, deleteChargeSuccess, chargeStatus, sortByName])
 
     function sortReport(tipo) {
         tipo.sort(function (a, b) {
@@ -214,7 +231,8 @@ export default function Reports() {
                     setUpdateChargeSuccess={setUpdateChargeSuccess}
                     setOpenErrorAlert={setOpenErrorAlert}
                     setError={setError}
-                    clients={allClients} />
+                    clients={allClients}
+                    setDeleteChargeSuccess={setDeleteChargeSuccess} />
                 <UserMenu />
                 <ModalUser />
                 <SuccessAlert
@@ -225,6 +243,14 @@ export default function Reports() {
                     openSuccessAlert={updateClientSuccess}
                     setOpenSuccessAlert={setUpdateClientSuccess}
                     message="Cliente atualizado com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={updateChargeSuccess}
+                    setOpenSuccessAlert={setUpdateChargeSuccess}
+                    message="Cobrança atualizada com sucesso!" />
+                <SuccessAlert
+                    openSuccessAlert={deleteChargeSuccess}
+                    setOpenSuccessAlert={setDeleteChargeSuccess}
+                    message="Cobrança excluída com sucesso!" />
                 <ErrorAlert
                     openErrorAlert={openErrorAlert}
                     setOpenErrorAlert={setOpenErrorAlert}
@@ -283,32 +309,59 @@ export default function Reports() {
                             </div>
                         </Popover>
                     </div>
-                    <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
+                    {report === 'charges' ? <SearchInput
+                        table={'reports'}
+                        charges={charges}
+                        clients={clients}
+                        setSearchedClients={setSearchedClients}
+                        setSearchedCharges={setSearchedCharges}
+                        getCharges={getCharges}
+                        getClients={getClients}
+                        updateSuccess={updateChargeSuccess}
+                        setSearched={setSearched}
+                        placeholder={'Procurar por Nome ou ID'} /> :
+                        <SearchInput
+                            table={'reports'}
+                            charges={charges}
+                            clients={clients}
+                            setSearchedClients={setSearchedClients}
+                            setSearchedCharges={setSearchedCharges}
+                            getCharges={getCharges}
+                            getClients={getClients}
+                            updateSuccess={updateChargeSuccess}
+                            setSearched={setSearched}
+                            placeholder={'Procurar por Nome, email ou CPF'} />}
+                    <ModalClient
+                        openModalClient={openModalClient}
+                        setOpenModalClient={setOpenModalClient}
+                        selectedClientID={selectedClientID} />
                 </div>
                 {
-                    report === 'clients' && <ClientTable clients={clients}
-                        setOpenModalClient={setOpenModalClient}
-                        setOpenModalEditClient={setOpenModalEditClient}
-                        setSelectedClientID={setSelectedClientID}
-                        selectedClientID={selectedClientID}
-                        getClients={getClients}
-                        setSortByName={setSortByName}
-                        sortByName={sortByName} />
+                    report === 'clients' && (searchedClients.length > 0 ?
+                        <ClientTable clients={searchedClients}
+                            setOpenModalClient={setOpenModalClient}
+                            setOpenModalEditClient={setOpenModalEditClient}
+                            setSelectedClientID={setSelectedClientID}
+                            selectedClientID={selectedClientID}
+                            getClients={getClients}
+                            setSortByName={setSortByName}
+                            sortByName={sortByName} /> : <p>Não foram encontrados clientes.</p>)
                 }
 
                 {
-                    report === 'charges' &&
-                    <ChargeTable charges={charges}
-                        setChargesByName={setSortByName}
-                        chargesByName={sortByName}
-                        getCharges={getCharges}
-                        setOpenModalChargeEdit={setOpenModalChargeEdit}
-                        setSelectedChargeID={setSelectedChargeID}
-                        selectedChargeID={selectedChargeID}
-                        selectedCharge={selectedCharge}
-                        setSelectedCharge={setSelectedCharge} />
+                    report === 'charges' && (searchedCharges.length > 0 ?
+                        <ChargeTable charges={searchedCharges}
+                            setChargesByName={setSortByName}
+                            chargesByName={sortByName}
+                            getCharges={getCharges}
+                            setOpenModalChargeEdit={setOpenModalChargeEdit}
+                            setSelectedChargeID={setSelectedChargeID}
+                            selectedChargeID={selectedChargeID}
+                            selectedCharge={selectedCharge}
+                            setSelectedCharge={setSelectedCharge} /> : <p>Não foram encontradas cobranças.</p>)
                 }
             </div>
+            <Loading carregando={carregando} />
         </div >
     )
 }

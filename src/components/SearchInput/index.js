@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 
 
-export default function SearchInput({ charges, setSearchedCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateSuccess }) {
+export default function SearchInput({ charges, setSearchedCharges, table, getCharges, clients, setSearchedClients, setSearched, getClients, updateSuccess, placeholder }) {
 
     useEffect(() => {
         searchByClick(document.getElementById("input-search").value);
@@ -12,18 +12,18 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
 
     function searchByInput(e) {
         if (e.keyCode === 13) {
-            if (table === 'charges') {
+            if (table !== 'clients') {
                 if (!e.target.value) {
                     setSearched(false);
                     getCharges();
                 }
                 const localCharges = [...charges];
-                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value));
+                const chargesSearched = localCharges.filter(charge => charge.nome.includes(e.target.value) || charge.id === Number(e.target.value));
                 setSearched(true);
                 setSearchedCharges(chargesSearched);
             }
 
-            if (table === 'clients') {
+            if (table !== 'charges') {
                 if (!e.target.value) {
                     getClients();
                 }
@@ -35,17 +35,17 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
         }
     }
     function searchByClick(value) {
-        if (table === 'charges') {
+        if (table !== 'clients') {
             if (!value) {
                 setSearched(false);
                 getCharges();
             }
             const localCharges = [...charges];
-            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value));
+            const chargesSearched = localCharges.filter(charge => charge.nome.includes(value) || charge.id === Number(value));
             setSearched(true);
             setSearchedCharges(chargesSearched);
         }
-        if (table === 'clients') {
+        if (table !== 'charges') {
             if (!value) {
                 setSearched(false);
                 getClients();
@@ -62,7 +62,7 @@ export default function SearchInput({ charges, setSearchedCharges, table, getCha
             <input type='text'
                 className='search-input'
                 id="input-search" onKeyDown={(e) => searchByInput(e)}
-                placeholder='Procurar por Nome, E-mail ou CPF'></input>
+                placeholder={placeholder} />
             <button className='search-button'
                 onClick={(e) => searchByClick(document.getElementById("input-search").value)}>BUSCAR</button>
         </div>

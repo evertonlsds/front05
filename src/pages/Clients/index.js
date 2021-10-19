@@ -43,13 +43,15 @@ export default function Clients() {
 
         const resposta = await response.json();
 
-        if (sortByName) {
-            sortClientsByName(resposta.clientesDoUsuario);
-            sortClientsByName(searchedClients);
-        }
+
 
         if (!searched) {
             setSearchedClients(resposta.clientesDoUsuario)
+        }
+
+        if (sortByName) {
+            sortClientsByName(resposta.clientesDoUsuario);
+            sortClientsByName(searchedClients);
         }
 
         setClients(resposta.clientesDoUsuario);
@@ -102,6 +104,7 @@ export default function Clients() {
                         setSearched={setSearched}
                         getClients={getClients}
                         updateSuccess={updateClientSuccess}
+                        placeholder={'Procurar por Nome, E-mail ou CPF'}
                     />
                     <ModalClient openModalClient={openModalClient} setOpenModalClient={setOpenModalClient} selectedClientID={selectedClientID} />
                 </div>
