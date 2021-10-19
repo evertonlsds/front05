@@ -11,6 +11,8 @@ cursor: pointer;
 .label-div {
     display: flex;
     column-gap: 10px;
+    margin-top: 80px;
+
 }
 .report-menu {
     all: unset;
